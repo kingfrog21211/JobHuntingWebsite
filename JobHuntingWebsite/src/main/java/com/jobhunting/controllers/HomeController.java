@@ -36,31 +36,31 @@ public class HomeController {
         return "index";
     }
     
-    @RequestMapping("/job")
-    public String job(Model model, @RequestParam(value = "careerId", required = false) Integer careerId){
-        if (careerId != null) {
-            model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobByCareerId(careerId));
-        }
-        else
-            model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJob());
-//        if (careerId != null){
-//            model.addAttribute("JDs", this.jdService.getJdByNganhNgheId(careerId));
-//        
-//            if (viTriTuyenDungKW != null && !viTriTuyenDungKW.isEmpty())
-//                model.addAttribute("JDs", this.jdService.getJdByViTriTuyenDung(viTriTuyenDungKW));
-//
-//            if (chucDanhId != null)
-//                model.addAttribute("JDs", this.jdService.getJdByChucDanh(chucDanhId));
-//
-//            if (diaDiemId != null)
-//                model.addAttribute("JDs", this.jdService.getJdByDiaDiem(diaDiemId));
+//    @RequestMapping("/job")
+//    public String job(Model model, @RequestParam(value = "careerId", required = false) Integer careerId){
+//        if (careerId != null) {
+//            model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobByCareerId(careerId));
 //        }
-//        else if (careerId == null //&& 
-//                viTriTuyenDungKW == null &&
-//                chucDanhId == null &&
-//                diaDiemId == null)
-//                )
-//                model.addAttribute("JDs", this.jdService.getJdList());
-        return "job";
-    }
+//        else
+//            model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJob());
+////        if (careerId != null){
+////            model.addAttribute("JDs", this.jdService.getJdByNganhNgheId(careerId));
+////        
+////            if (viTriTuyenDungKW != null && !viTriTuyenDungKW.isEmpty())
+////                model.addAttribute("JDs", this.jdService.getJdByViTriTuyenDung(viTriTuyenDungKW));
+////
+////            if (chucDanhId != null)
+////                model.addAttribute("JDs", this.jdService.getJdByChucDanh(chucDanhId));
+////
+////            if (diaDiemId != null)
+////                model.addAttribute("JDs", this.jdService.getJdByDiaDiem(diaDiemId));
+////        }
+////        else if (careerId == null //&& 
+////                viTriTuyenDungKW == null &&
+////                chucDanhId == null &&
+////                diaDiemId == null)
+////                )
+////                model.addAttribute("JDs", this.jdService.getJdList());
+//        return "job";
+//    }
 }
