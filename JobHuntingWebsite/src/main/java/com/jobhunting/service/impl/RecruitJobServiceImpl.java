@@ -27,8 +27,8 @@ public class RecruitJobServiceImpl implements RecruitJobService{
     }
 
     @Override
-    public List<RecruitJob> getRecruitJobByCareerId(Integer careerId) {
-        return this.recruitJobRepository.getRecruitJobByCareerId(careerId);
+    public List<RecruitJob> getRecruitJobByProfessionId(Integer professionId) {
+        return this.recruitJobRepository.getRecruitJobByProfessionId(professionId);
     }
     
 }

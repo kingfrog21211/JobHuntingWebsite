@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jobhunting.service;
+package com.jobhunting.repository;
 
-import com.jobhunting.pojo.RecruitJob;
+import com.jobhunting.pojo.City;
 import java.util.List;
 
 /**
  *
  * @author Asus
  */
-public interface RecruitJobService {
-    List<RecruitJob> getRecruitJob();
-    List<RecruitJob> getRecruitJobByProfessionId(Integer professionId);
+public interface CityRepository {
+    List<City> getCity();
 }

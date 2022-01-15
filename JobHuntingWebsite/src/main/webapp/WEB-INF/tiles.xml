@@ -25,4 +25,12 @@ and open the template in the editor.
         <put-attribute name="title" value="Jobs - JOB HUNTING" />
         <put-attribute name="content" value="/WEB-INF/pages/job.jsp" />
     </definition>
+    <definition name="company" extends="baseLayout">
+        <put-attribute name="title" value="Company - JOB HUNTING" />
+        <put-attribute name="content" value="/WEB-INF/pages/company.jsp" />
+    </definition>
+    <definition name="profession" extends="baseLayout">
+        <put-attribute name="title" value="Profession - JOB HUNTING" />
+        <put-attribute name="content" value="/WEB-INF/pages/profession.jsp" />
+    </definition>
 </tiles-definitions>

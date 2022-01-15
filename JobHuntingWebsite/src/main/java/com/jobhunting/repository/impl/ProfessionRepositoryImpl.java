@@ -5,9 +5,9 @@
  */
 package com.jobhunting.repository.impl;
 
+import com.jobhunting.pojo.Profession;
 import com.jobhunting.pojo.RecruitJob;
-import com.jobhunting.pojo.WorkType;
-import com.jobhunting.repository.RecruitJobRepository;
+import com.jobhunting.repository.ProfessionRepository;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -25,29 +25,29 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class RecruitJobRepositoryImpl implements RecruitJobRepository{
+public class ProfessionRepositoryImpl implements ProfessionRepository{
     @Autowired
     public LocalSessionFactoryBean sessionFactory;
-    
+
     @Override
-    public List<RecruitJob> getRecruitJob() {
+    public List<Profession> getProfessions() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM RecruitJob");
+        Query q = session.createQuery("FROM Profession");
         
         return q.getResultList();
     }
 
     @Override
-    public List<RecruitJob> getRecruitJobByProfessionId(Integer professionId) {
+    public List<Profession> getProfessionByCareerId(Integer careerId) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<RecruitJob> query = builder.createQuery(RecruitJob.class);
-        Root root = query.from(RecruitJob.class);
+        CriteriaQuery<Profession> query = builder.createQuery(Profession.class);
+        Root root = query.from(Profession.class);
         query = query.select(root);
         
-        query = query.where(builder.equal(root.get("professionId"), professionId));
+        query = query.where(builder.equal(root.get("careerId"), careerId));
         
-        query = query.orderBy(builder.desc(root.get("recruitJobId")));
+        query = query.orderBy(builder.desc(root.get("professionId")));
         
         Query q = session.createQuery(query);
         return q.getResultList();

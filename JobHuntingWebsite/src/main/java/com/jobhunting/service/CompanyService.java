@@ -5,14 +5,14 @@
  */
 package com.jobhunting.service;
 
-import com.jobhunting.pojo.RecruitJob;
+import com.jobhunting.pojo.Recruit;
 import java.util.List;
 
 /**
  *
  * @author Asus
  */
-public interface RecruitJobService {
-    List<RecruitJob> getRecruitJob();
-    List<RecruitJob> getRecruitJobByProfessionId(Integer professionId);
+public interface CompanyService {
+    List<Recruit> getCompany();
+    Recruit getCompanyByRecruitId(Integer recruitId);
 }

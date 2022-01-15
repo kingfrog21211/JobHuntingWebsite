@@ -46,7 +46,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Candidate.findByStatus", query = "SELECT c FROM Candidate c WHERE c.status = :status"),
     @NamedQuery(name = "Candidate.findByPhone", query = "SELECT c FROM Candidate c WHERE c.phone = :phone"),
     @NamedQuery(name = "Candidate.findByEmail", query = "SELECT c FROM Candidate c WHERE c.email = :email"),
-    @NamedQuery(name = "Candidate.findByBirthofdate", query = "SELECT c FROM Candidate c WHERE c.birthofdate = :birthofdate")})
+    @NamedQuery(name = "Candidate.findByDateOfBirth", query = "SELECT c FROM Candidate c WHERE c.dateOfBirth = :dateOfBirth")})
 public class Candidate implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,9 +55,7 @@ public class Candidate implements Serializable {
     @Basic(optional = false)
     @Column(name = "candidateId")
     private Integer candidateId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @Size(max = 100)
     @Column(name = "avatar")
     private String avatar;
     @Basic(optional = false)
@@ -65,7 +63,9 @@ public class Candidate implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "fullName")
     private String fullName;
-    @Size(max = 5)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 6)
     @Column(name = "gender")
     private String gender;
     @Lob
@@ -99,13 +99,11 @@ public class Candidate implements Serializable {
     private String email;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "birthofdate")
+    @Column(name = "dateOfBirth")
     @Temporal(TemporalType.DATE)
-    private Date birthofdate;
-    @Basic(optional = false)
-    @NotNull
+    private Date dateOfBirth;
     @Lob
-    @Size(min = 1, max = 65535)
+    @Size(max = 65535)
     @Column(name = "pathCV")
     private String pathCV;
     @Lob
@@ -135,16 +133,15 @@ public class Candidate implements Serializable {
         this.candidateId = candidateId;
     }
 
-    public Candidate(Integer candidateId, String avatar, String fullName, String address, boolean status, String phone, String email, Date birthofdate, String pathCV) {
+    public Candidate(Integer candidateId, String fullName, String gender, String address, boolean status, String phone, String email, Date dateOfBirth) {
         this.candidateId = candidateId;
-        this.avatar = avatar;
         this.fullName = fullName;
+        this.gender = gender;
         this.address = address;
         this.status = status;
         this.phone = phone;
         this.email = email;
-        this.birthofdate = birthofdate;
-        this.pathCV = pathCV;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public Integer getCandidateId() {
@@ -227,12 +224,12 @@ public class Candidate implements Serializable {
         this.email = email;
     }
 
-    public Date getBirthofdate() {
-        return birthofdate;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setBirthofdate(Date birthofdate) {
-        this.birthofdate = birthofdate;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getPathCV() {

@@ -13,7 +13,9 @@
         <br><br>
         <div class="heading_container">
             <h2>Recommended jobs <br>
-                <span>15000+ Job Available For you</span>
+                <c:if test="${recruitJobs.size()==1}"><span>1 Job Available For you</span></c:if>
+                <c:if test="${recruitJobs.size()!=1}"><span>${recruitJobs.size()} Jobs Available For you</span></c:if>
+                <c:if test="${recruitJobs.size()==0}"><span>0 Job Available now</span></c:if>
             </h2>
         </div>
 
@@ -23,7 +25,7 @@
                     <div class="content layout_padding2-top">
                         <!-- career -->
                         <c:forEach items="${careers}" var="c">
-                            <c:url value="/job" var="action">
+                            <c:url value="/profession" var="action">
                                 <c:param name="careerId" value="${c.careerId}"/>
                             </c:url>
                             <div class="box">

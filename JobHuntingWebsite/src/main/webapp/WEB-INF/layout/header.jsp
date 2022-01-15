@@ -29,6 +29,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/job"/>"> Jobs </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/profession"/>"> Professions </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/company"/>"/> Companies </a>
+                    </li>
                 </ul>
                 
                 <ul class="user_option navbar-nav">
@@ -77,7 +83,7 @@
                       for you
                     </h1>
                     <div>
-                      <a href="<c:url value="/job"/>">Read More</a>
+                      <a href="<c:url value="/job"/>">FIND JOB</a>
                     </div>
                   </div>
                 </div>
@@ -96,11 +102,11 @@
                   <div class="detail-box">
                     <h1>
                       Find a <br>
-                      Perfect job <br>
+                      Perfect company <br>
                       for you
                     </h1>
                     <div>
-                      <a href="<c:url value="/job"/>">Read More</a>
+                      <a href="<c:url value="/company"/>">FIND COMPANY</a>
                     </div>
                   </div>
                 </div>
@@ -177,29 +183,40 @@
             <form action="">
               <div class="form_container">
                 <div class="box b-1">
-                    <input name="viTriTuyenDungKW" type="text" class="form-control" placeholder="Job title" required="off">
+                    <input name="titles" type="text" class="form-control" placeholder="Job title" required="off">
                     <c:url value="/job" var="action">
                         <c:param name="titles" value="titles"/>
                     </c:url>
                 </div>
-                <div class="box b-2">
-                    <select name="diaDiemid" path="diaDiemid" class="form-control" required="false">
-                        <option hidden="true" selected="">City</option>
-                        <c:forEach items="${cities}" var="c">
-                            <option value="${c.cityId}">${c.cityName}</option>
+                <div class="box b-3">
+                    <select name="professionId" path="professionId" class="form-control" required="false">
+                        <option hidden="true" selected="">Profession</option>
+                        <c:forEach items="${professions}" var="c">
+                            <option value="${c.professionId}">${c.professionName}</option>
                             <c:url value="/job" var="action">
-                                <c:param name="cityId" value="${c.cityId}"/>
+                                <c:param name="professionId" value="${c.professionId}"/>
                             </c:url>
                         </c:forEach>
                     </select>
                 </div>
                 <div class="box b-3">
-                    <select name="careerId" path="careerId" class="form-control" required="false">
-                        <option hidden="true" selected="">Career</option>
-                        <c:forEach items="${careers}" var="c">
-                            <option value="${c.careerId}">${c.careerName}</option>
+                    <select name="workTypeId" path="workTypeId" class="form-control" required="false">
+                        <option hidden="true" selected="">Work type</option>
+                        <c:forEach items="${workTypes}" var="c">
+                            <option value="${c.workTypeId}">${c.workTypeName}</option>
                             <c:url value="/job" var="action">
-                                <c:param name="careerId" value="${c.careerId}"/>
+                                <c:param name="workTypeId" value="${c.workTypeId}"/>
+                            </c:url>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="box b-2">
+                    <select name="cityId" path="cityId" class="form-control" required="false">
+                        <option hidden="true" selected="">City</option>
+                        <c:forEach items="${cities}" var="c">
+                            <option value="${c.cityId}">${c.cityName}</option>
+                            <c:url value="/job" var="action">
+                                <c:param name="cityId" value="${c.cityId}"/>
                             </c:url>
                         </c:forEach>
                     </select>

@@ -48,8 +48,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "RecruitJob.findByEmailContact", query = "SELECT r FROM RecruitJob r WHERE r.emailContact = :emailContact"),
     @NamedQuery(name = "RecruitJob.findByNameContact", query = "SELECT r FROM RecruitJob r WHERE r.nameContact = :nameContact"),
     @NamedQuery(name = "RecruitJob.findByPhoneContact", query = "SELECT r FROM RecruitJob r WHERE r.phoneContact = :phoneContact"),
-    @NamedQuery(name = "RecruitJob.findByStatus", query = "SELECT r FROM RecruitJob r WHERE r.status = :status"),
-    @NamedQuery(name = "RecruitJob.findBySalary", query = "SELECT r FROM RecruitJob r WHERE r.salary = :salary")})
+    @NamedQuery(name = "RecruitJob.findByStatus", query = "SELECT r FROM RecruitJob r WHERE r.status = :status")})
 public class RecruitJob implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -89,10 +88,8 @@ public class RecruitJob implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "workPlace")
     private String workPlace;
-    @Basic(optional = false)
-    @NotNull
     @Lob
-    @Size(min = 1, max = 65535)
+    @Size(max = 65535)
     @Column(name = "benefit")
     private String benefit;
     @Basic(optional = false)
@@ -110,9 +107,7 @@ public class RecruitJob implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "emailContact")
     private String emailContact;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "nameContact")
     private String nameContact;
     @Basic(optional = false)
@@ -124,10 +119,6 @@ public class RecruitJob implements Serializable {
     @NotNull
     @Column(name = "status")
     private boolean status;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "salary")
-    private int salary;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recruitJobId")
     private Set<SaveJob> saveJobSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recruitJobId")
@@ -158,7 +149,7 @@ public class RecruitJob implements Serializable {
         this.recruitJobId = recruitJobId;
     }
 
-    public RecruitJob(Integer recruitJobId, String title, String position, int amount, String require, String description, String workPlace, String benefit, Date postDate, Date expirationDate, String emailContact, String nameContact, String phoneContact, boolean status, int salary) {
+    public RecruitJob(Integer recruitJobId, String title, String position, int amount, String require, String description, String workPlace, Date postDate, Date expirationDate, String emailContact, String phoneContact, boolean status) {
         this.recruitJobId = recruitJobId;
         this.title = title;
         this.position = position;
@@ -166,14 +157,11 @@ public class RecruitJob implements Serializable {
         this.require = require;
         this.description = description;
         this.workPlace = workPlace;
-        this.benefit = benefit;
         this.postDate = postDate;
         this.expirationDate = expirationDate;
         this.emailContact = emailContact;
-        this.nameContact = nameContact;
         this.phoneContact = phoneContact;
         this.status = status;
-        this.salary = salary;
     }
 
     public Integer getRecruitJobId() {
@@ -286,14 +274,6 @@ public class RecruitJob implements Serializable {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public int getSalary() {
-        return salary;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
     }
 
     @XmlTransient
