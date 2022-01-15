@@ -13,7 +13,7 @@
         <div class="heading_container">
             <h2>Recommended jobs <br>
                 <c:if test="${recruitJobs.size()==1}"><span>1 Job Available For you</span></c:if>
-                <c:if test="${recruitJobs.size()!=1}"><span>${recruitJobs.size()} Jobs Available For you</span></c:if>
+                <c:if test="${recruitJobs.size()>1}"><span>${recruitJobs.size()} Jobs Available For you</span></c:if>
                 <c:if test="${recruitJobs.size()==0}"><span>0 Job Available now</span></c:if>
             </h2>
         </div>

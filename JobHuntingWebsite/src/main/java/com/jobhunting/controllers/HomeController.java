@@ -10,6 +10,8 @@ import com.jobhunting.service.CityService;
 import com.jobhunting.service.CompanyService;
 import com.jobhunting.service.ProfessionService;
 import com.jobhunting.service.RecruitJobService;
+import com.jobhunting.service.SalaryService;
+import com.jobhunting.service.WorkTypeService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +38,10 @@ public class HomeController {
     private CityService cityService;
     @Autowired
     private ProfessionService professionService;
+    @Autowired
+    private WorkTypeService workTypeService;
+    @Autowired
+    private SalaryService salaryService;
     
     @ModelAttribute
     public void addAttribute(Model model, HttpSession session){
@@ -44,6 +50,8 @@ public class HomeController {
         model.addAttribute("cities", this.cityService.getCity());
         model.addAttribute("companies", this.companyService.getCompany());
         model.addAttribute("professions", this.professionService.getProfessions());
+        model.addAttribute("workTypes", this.workTypeService.getWorkType());
+        model.addAttribute("salary", this.salaryService.getSalary());
     }
     
     @RequestMapping("/")
@@ -55,9 +63,11 @@ public class HomeController {
     public String job(Model model, @RequestParam(value = "titles", required = false) String titles,
                                     @RequestParam(value = "cityId", required = false) Integer cityId,
                                     @RequestParam(value = "professionId", required = false) Integer professionId,
-                                    @RequestParam(value = "workTypeId", required = false) Integer workTypeId){
-        if ((titles!=null && !titles.isEmpty()) || cityId!=null || professionId!=null || workTypeId!=null) {
-            model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobByProfessionId(professionId));
+                                    @RequestParam(value = "workTypeId", required = false) Integer workTypeId,
+                                    @RequestParam(value = "salaryId", required = false) Integer salaryId){
+        
+        if ((titles!=null && !titles.isEmpty()) || cityId!=null || professionId!=null || workTypeId!=null || salaryId!=null) {
+            model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobBySearching(titles, cityId, professionId, workTypeId, salaryId));
         }
         else{
             model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJob());

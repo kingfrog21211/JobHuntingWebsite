@@ -15,4 +15,5 @@ import java.util.List;
 public interface RecruitJobRepository {
     List<RecruitJob> getRecruitJob();
     List<RecruitJob> getRecruitJobByProfessionId(Integer professionId);
+    List<RecruitJob> getRecruitJobBySearching(String titles, Integer cityId, Integer professionId, Integer workTypeId, Integer salaryId);
 }

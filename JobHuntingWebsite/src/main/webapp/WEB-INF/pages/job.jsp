@@ -14,7 +14,7 @@
             <div class="heading_container">
                 <h2>Recommended jobs <br>
                     <c:if test="${recruitJobs.size()==1}"><span>1 Job Available For you</span></c:if>
-                    <c:if test="${recruitJobs.size()!=1}"><span>${recruitJobs.size()} Jobs Available For you</span></c:if>
+                    <c:if test="${recruitJobs.size()>1}"><span>${recruitJobs.size()} Jobs Available For you</span></c:if>
                     <c:if test="${recruitJobs.size()==0}"><span>0 Job Available now</span></c:if>
                 </h2>
             </div>
@@ -33,8 +33,8 @@
                                 <!-- logo -->
                                 <div class="logo">
                                     <div class="logo-wrapper" data-controller="tooltip" title="" data-bs-original-title="">
-                                        <c:forEach items="${companies}" var="c">
-                                            <c:if test="${c.recruitId == rj.recruitId}">
+                                        <%--<c:forEach items="${companies}" var="c">--%>
+                                            <c:when test="${companies.recruitId == rj.recruitId}">
                                                 <c:if test="${c.logo!=null}">
                                                     <a target="_blank" href="<c:url value="/company"/>">
                                                         <img src="${c.logo}" alt="${c.companyName}"/>
@@ -43,8 +43,8 @@
                                                 <c:if test="${c.logo == null}">
                                                     <img src="../../images/icon.png" alt="${c.companyName}"/>
                                                 </c:if>
-                                            </c:if>
-                                        </c:forEach>
+                                            </c:when>
+                                        <%--</c:forEach>--%>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -70,16 +70,11 @@
                                             <!-- salary -->
                                             <div class="svg-icon svg-icon--rounded">
                                                 <box-icon name='dollar-circle' color='#ff9f01' ></box-icon>
-                                                <c:if test="${rj.salaryId == null}">
-                                                    <div class="svg-icon__text">Wage agreement</div>
-                                                </c:if>
-                                                <c:if test="${rj.salaryId != null}">
-                                                    <c:forEach items="${salaries}" var="s">
-                                                        <c:if test="${s.salaryId == rj.salaryId}">
-                                                            <div class="svg-icon__text">${s.salaryValue}</div>
-                                                        </c:if>
-                                                    </c:forEach>
-                                                </c:if>
+                                                <c:forEach items="${salaries}" var="s">
+                                                    <c:if test="${s.salaryId == rj.salaryId}">
+                                                        <div class="svg-icon__text">${s.salaryValue}</div>
+                                                    </c:if>
+                                                </c:forEach>
                                             </div>
                                             <!-- city -->
                                             <div class="">

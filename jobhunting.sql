@@ -301,7 +301,7 @@ CREATE TABLE `salary` (
 
 LOCK TABLES `salary` WRITE;
 /*!40000 ALTER TABLE `salary` DISABLE KEYS */;
-INSERT INTO `salary` VALUES (2,'Từ 1 đến 3 triệu'),(3,'Từ 3 đến 5 triệu'),(4,'Từ 5 đến 7 triệu'),(5,'Từ 7 đến 10 triệu'),(6,'Trên 10 triệu');
+INSERT INTO `salary` VALUES (2,'Từ 1 đến 3 triệu'),(3,'Từ 3 đến 5 triệu'),(4,'Từ 5 đến 7 triệu'),(5,'Từ 7 đến 10 triệu'),(6,'Trên 10 triệu'),(7,'Mức lương thỏa thuận');
 /*!40000 ALTER TABLE `salary` ENABLE KEYS */;
 UNLOCK TABLES;
 

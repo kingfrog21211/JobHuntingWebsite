@@ -52,5 +52,22 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
         Query q = session.createQuery(query);
         return q.getResultList();
     }
+
+    @Override
+    public List<RecruitJob> getRecruitJobBySearching(String titles, Integer cityId, Integer professionId, Integer workTypeId, Integer salaryId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<RecruitJob> query = builder.createQuery(RecruitJob.class);
+        Root root = query.from(RecruitJob.class);
+        query.select(root);
+        query.where(builder.equal(root.get("title"), titles), 
+                    builder.equal(root.get("cityId"), cityId), 
+                    builder.equal(root.get("professionId"), professionId), 
+                    builder.equal(root.get("workTypeId"), workTypeId), 
+                    builder.equal(root.get("salaryId"), salaryId));
+        query.orderBy(builder.desc(root.get("recruitJobId")));
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
     
 }

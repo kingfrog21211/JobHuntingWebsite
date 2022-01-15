@@ -124,12 +124,12 @@
                 <div class="col-md-4 offset-md-1">
                   <div class="detail-box">
                     <h1>
-                      Find a <br>
-                      Perfect job <br>
-                      for you
+                      Explore <br>
+                      Many type of <br>
+                      Professions
                     </h1>
                     <div>
-                      <a href="<c:url value="/job"/>">Read More</a>
+                      <a href="<c:url value="/profession"/>">See now</a>
                     </div>
                   </div>
                 </div>
@@ -141,7 +141,7 @@
               </div>
             </div>
           </div>
-          <div class="carousel-item ">
+<!--          <div class="carousel-item ">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-md-4 offset-md-1">
@@ -152,7 +152,7 @@
                       for you
                     </h1>
                     <div>
-                      <a href="<c:url value="/job"/>">Read More</a>
+                      <a href=""/>">Read More</a>
                     </div>
                   </div>
                 </div>
@@ -163,7 +163,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="sr-only">Previous</span>
@@ -183,46 +183,50 @@
             <form action="">
               <div class="form_container">
                 <div class="box b-1">
-                    <input name="titles" type="text" class="form-control" placeholder="Job title" required="off">
-                    <c:url value="/job" var="action">
-                        <c:param name="titles" value="titles"/>
-                    </c:url>
+                    <input autocomplete="on" name="titles" type="text" class="form-control" placeholder="Job title" >
                 </div>
                 <div class="box b-3">
-                    <select name="professionId" path="professionId" class="form-control" required="false">
-                        <option hidden="true" selected="">Profession</option>
+                    <select autocomplete="on" name="professionId" path="professionId" class="form-control" disable">
+                        <option value="">Profession</option>
                         <c:forEach items="${professions}" var="c">
                             <option value="${c.professionId}">${c.professionName}</option>
-                            <c:url value="/job" var="action">
-                                <c:param name="professionId" value="${c.professionId}"/>
-                            </c:url>
                         </c:forEach>
                     </select>
                 </div>
                 <div class="box b-3">
-                    <select name="workTypeId" path="workTypeId" class="form-control" required="false">
-                        <option hidden="true" selected="">Work type</option>
+                    <select autocomplete="on" name="workTypeId" path="workTypeId" class="form-control" disable>
+                        <option value="">Work type</option>
                         <c:forEach items="${workTypes}" var="c">
                             <option value="${c.workTypeId}">${c.workTypeName}</option>
-                            <c:url value="/job" var="action">
-                                <c:param name="workTypeId" value="${c.workTypeId}"/>
-                            </c:url>
                         </c:forEach>
                     </select>
                 </div>
                 <div class="box b-2">
-                    <select name="cityId" path="cityId" class="form-control" required="false">
-                        <option hidden="true" selected="">City</option>
+                    <select autocomplete="on" name="cityId" path="cityId" class="form-control" disable>
+                        <option value="">City</option>
                         <c:forEach items="${cities}" var="c">
                             <option value="${c.cityId}">${c.cityName}</option>
-                            <c:url value="/job" var="action">
-                                <c:param name="cityId" value="${c.cityId}"/>
-                            </c:url>
                         </c:forEach>
                     </select>
                 </div>
+                <div class="box b-2">
+                    <select autocomplete="on" name="salaryId" path="salaryId" class="form-control">
+                        <option value="">Salary</option>
+                        <c:forEach items="${salary}" var="c">
+                            <option value="${c.salaryId}">${c.salaryValue}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                  
                 <div class="btn-box">
-                    <button onclick="location.href='<c:url value="/job"/>'" type="submit">Search</button>
+                    <c:url value="/job" var="action">
+                        <c:param name="titles" value="titles"/>
+                        <c:param name="professionId" value="professionId"/>
+                        <c:param name="workTypeId" value="workTypeId"/>
+                        <c:param name="cityId" value="cityId"/>
+                        <c:param name="salaryId" value="salaryId"/>
+                    </c:url>
+                    <button formaction="${action}" type="submit">Search</button>
                 </div>
               </div>
             </form>

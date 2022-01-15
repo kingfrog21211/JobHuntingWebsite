@@ -13,7 +13,7 @@
         <div class="heading_container">
             <h2>Recommended companies <br>
                 <c:if test="${companies.size()==1}"><span>1 Company here</span></c:if>
-                <c:if test="${companies.size()!=1}"><span>${companies.size()} Companies here</span></c:if>
+                <c:if test="${companies.size()>1}"><span>${companies.size()} Companies here</span></c:if>
             </h2>
         </div>
 
