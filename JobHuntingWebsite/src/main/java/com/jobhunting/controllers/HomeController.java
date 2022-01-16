@@ -8,6 +8,7 @@ package com.jobhunting.controllers;
 import com.jobhunting.service.CareerService;
 import com.jobhunting.service.CityService;
 import com.jobhunting.service.CompanyService;
+import com.jobhunting.service.ExperienceService;
 import com.jobhunting.service.ProfessionService;
 import com.jobhunting.service.RecruitJobService;
 import com.jobhunting.service.SalaryService;
@@ -42,6 +43,8 @@ public class HomeController {
     private WorkTypeService workTypeService;
     @Autowired
     private SalaryService salaryService;
+    @Autowired
+    private ExperienceService experienceService;
     
     @ModelAttribute
     public void addAttribute(Model model, HttpSession session){
@@ -52,6 +55,7 @@ public class HomeController {
         model.addAttribute("professions", this.professionService.getProfessions());
         model.addAttribute("workTypes", this.workTypeService.getWorkType());
         model.addAttribute("salary", this.salaryService.getSalary());
+        model.addAttribute("experiences", this.experienceService.getExperiences());
     }
     
     @RequestMapping("/")
@@ -68,6 +72,9 @@ public class HomeController {
         
         if ((titles!=null && !titles.isEmpty()) || cityId!=null || professionId!=null || workTypeId!=null || salaryId!=null) {
             model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobBySearching(titles, cityId, professionId, workTypeId, salaryId));
+        }
+        if (professionId!=null) {
+            model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobByProfessionId(professionId));
         }
         else{
             model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJob());

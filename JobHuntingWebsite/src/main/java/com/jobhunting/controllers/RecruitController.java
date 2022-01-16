@@ -30,8 +30,8 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class RecruitController {
-    @Autowired
-    private Cloudinary cloudinary;
+//    @Autowired
+//    private Cloudinary cloudinary;
     
     @GetMapping("/recruit-addRecruitJob")
     public String list(Model model){
@@ -41,12 +41,13 @@ public class RecruitController {
     
     @PostMapping("/recruit-addRecruitJob")
     public String add(@ModelAttribute(value = "recruitJob") RecruitJob recruitJob){
-        try {
-            this.cloudinary.uploader().upload(recruitJob.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
-            return "redirect:/job";
-        } catch (IOException ex) {
-            System.err.println("ADD RECRUIT JOB " + ex.getMessage());
-        }
+//        try {
+//            Map r = this.cloudinary.uploader().upload(recruitJob.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+//            String img = (String) r.get("secure_url");
+//            return "redirect:/job";
+//        } catch (IOException ex) {
+//            System.err.println("ADD RECRUIT JOB " + ex.getMessage());
+//        }
         return "recruit-addRecruitJob";
     }
 }

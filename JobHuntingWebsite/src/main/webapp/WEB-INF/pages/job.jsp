@@ -33,18 +33,25 @@
                                 <!-- logo -->
                                 <div class="logo">
                                     <div class="logo-wrapper" data-controller="tooltip" title="" data-bs-original-title="">
-                                        <%--<c:forEach items="${companies}" var="c">--%>
-                                            <c:when test="${companies.recruitId == rj.recruitId}">
+                                        
+                                        <c:forEach items="${companies}" var="c">
+                                            
+                                            <c:if test="${c.recruitId == rj.recruitId}">
                                                 <c:if test="${c.logo!=null}">
                                                     <a target="_blank" href="<c:url value="/company"/>">
-                                                        <img src="${c.logo}" alt="${c.companyName}"/>
+                                                        <param name="recruitId" value="${rj.recruitId}"/>
+                                                        <img src="${c.logo}" alt="${c.companyName}" data-controller="lazyload" class=" ls-is-cached lazyloaded" style="height: 65px; width: 65px"/>
                                                     </a>
                                                 </c:if>
                                                 <c:if test="${c.logo == null}">
-                                                    <img src="../../images/icon.png" alt="${c.companyName}"/>
+                                                    <a target="_blank" href="<c:url value="/company"/>">
+                                                        <param name="recruitId" value="${rj.recruitId}"/>
+                                                        <img src="/images/icon.png" alt="${c.companyName}" data-controller="lazyload" class=" ls-is-cached lazyloaded" style="height: 65px; width: 65px"/>
+                                                    </a>
                                                 </c:if>
-                                            </c:when>
-                                        <%--</c:forEach>--%>
+                                            </c:if>
+                                        </c:forEach>
+                                        
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -61,28 +68,34 @@
                                             </h3>
                                             <!-- company -->
                                             <h4>
+                                                
                                                 <c:forEach items="${companies}" var="c">
                                                     <c:if test="${c.recruitId == rj.recruitId}">
                                                         <a href="" style="color: #000000"> ${c.companyName} </a>
                                                     </c:if>
                                                 </c:forEach>
+                                                        
                                             </h4>
                                             <!-- salary -->
                                             <div class="svg-icon svg-icon--rounded">
                                                 <box-icon name='dollar-circle' color='#ff9f01' ></box-icon>
+                                                
                                                 <c:forEach items="${salaries}" var="s">
                                                     <c:if test="${s.salaryId == rj.salaryId}">
                                                         <div class="svg-icon__text">${s.salaryValue}</div>
                                                     </c:if>
                                                 </c:forEach>
+                                                        
                                             </div>
                                             <!-- city -->
                                             <div class="">
+                                                
                                                 <c:forEach items="${cities}" var="city">
                                                     <c:if test="${city.cityId == rj.cityId}">
                                                         <div class="city">${city.cityName}</div>
                                                     </c:if>
                                                 </c:forEach>
+                                                        
                                             </div>
                                         </div>
                                     </div>

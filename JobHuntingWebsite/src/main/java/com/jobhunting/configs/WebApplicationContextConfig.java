@@ -50,7 +50,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer{
     
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
-        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
+        registry.addResourceHandler("/images/**").addResourceLocations("/webapp/images/");
     }
     
     @Bean
