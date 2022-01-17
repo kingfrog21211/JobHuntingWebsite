@@ -143,9 +143,6 @@ public class RecruitJob implements Serializable {
     @JoinColumn(name = "workTypeId", referencedColumnName = "workTypeId")
     @ManyToOne(optional = false)
     private WorkType workTypeId;
-    
-    @Transient
-    private MultipartFile file;
 
     public RecruitJob() {
     }
@@ -370,20 +367,6 @@ public class RecruitJob implements Serializable {
     @Override
     public String toString() {
         return "com.jobhunting.pojo.RecruitJob[ recruitJobId=" + recruitJobId + " ]";
-    }
-
-    /**
-     * @param file the file to set
-     */
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
-
-    /**
-     * @return the file
-     */
-    public MultipartFile getFile() {
-        return file;
     }
     
 }

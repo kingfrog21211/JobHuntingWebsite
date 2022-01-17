@@ -417,6 +417,7 @@ a:focus {
 .job_section .job_board {
   -webkit-transition: none;
   transition: none;
+  position: relative;
 }
 
 .job_section .content-box .content {
@@ -491,6 +492,23 @@ a:focus {
 
 .job_section .content-box .btn-box a:hover {
   background-color: #e78f00;
+}
+
+.job_box{
+/*  width: 200px;
+  height: 200px;*/
+  background-color: #ff9f01;
+  margin: 0px 10px 20px 10px;
+/*  text-align: center;*/
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+/*  padding: 15px;
+  border-radius: 25px;*/
 }
 
 .feature_section {
@@ -784,13 +802,8 @@ a:focus {
 
 /*job section*/
 .job--selected .job_content {
-    border: 1px solid #ea2635;
+    border: 2px solid #ff9f01;
     border-radius: 3px;
-    position: relative;
-}
-
-.job .job_content {
-    padding: 15px 0 13px 0;
 }
 
 .job .job_content {
@@ -903,7 +916,6 @@ img, svg {
 }
 
 .title {
-    color: #000000;
     line-height: 35.2px;
     font-size: 32px;
     margin-top: 20px;
@@ -911,6 +923,7 @@ img, svg {
 }
 .job .job_content .details .city {
     padding-top: 8px;
+    margin-bottom: 5px; 
 }
 .job .job_content .job-bottom .tag-list .distance-time-job-posted {
     margin-top: 7px;

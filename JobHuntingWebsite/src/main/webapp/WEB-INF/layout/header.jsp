@@ -30,9 +30,6 @@
                         <a class="nav-link" href="<c:url value="/job"/>"> Jobs </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/profession"/>"> Professions </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/company"/>"/> Companies </a>
                     </li>
                 </ul>
