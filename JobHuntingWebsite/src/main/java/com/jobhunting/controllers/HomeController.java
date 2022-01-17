@@ -99,6 +99,11 @@ public class HomeController {
 //                model.addAttribute("JDs", this.jdService.getJdList());
         return "job";
     }
+    @RequestMapping("/jobDetail")
+    public String jobDetail(Model model, @RequestParam(value = "recruitJobId") Integer recruitJobId){
+        model.addAttribute("jobDetails", this.recruitJobService.getJobDetail(recruitJobId));
+        return "jobDetail";
+    }
     
     @RequestMapping("/company")
     public String company(Model model, @RequestParam(value = "recruitId", required = false) Integer recruitId ){
@@ -118,5 +123,10 @@ public class HomeController {
         else
             model.addAttribute("professions", this.professionService.getProfessions());
         return "profession";
+    }
+    
+    @RequestMapping("/register")
+    public String register(Model model){
+        return "register";
     }
 }

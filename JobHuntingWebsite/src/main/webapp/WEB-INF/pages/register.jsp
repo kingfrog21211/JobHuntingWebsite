@@ -4,6 +4,7 @@
     Author     : Asus
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +12,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Register Form Validator</title>
+        <title>Register Form - JOB HUNTING</title>
 	<style>
             .bootstrapiso .tooltip {
               font-size: 14px;
@@ -27,7 +28,7 @@
                 font-family: 'Poppins', sans-serif;
             }
             body {
-                background: linear-gradient(120deg, #3ca7ee, #9b408f);
+                background: linear-gradient( #eee, #252525, #ff9f01);
                 height: 100vh;
                 overflow: hidden;
             }
@@ -168,8 +169,8 @@
                     <span></span>
                     <small></small>
                 </div>
-                <input type="submit" value="Login">
-                <div class="signup_link">Already a member? <a href="#">Log in</a> or <a href="#">Go back</a></div>
+                <input style=" text-align:center " type="submit" value="Login">
+                <div class="signup_link">Already a member? <a href="<c:url value="/"/>"> Go back to Login</a></div>
             </form>
         </div>
         <script src="app.js"></script>

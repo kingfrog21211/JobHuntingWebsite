@@ -41,7 +41,7 @@
                         <span>Login</span> </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#registerModal"> 
+                      <a class="nav-link" href="<c:url value="/register"/>" data-toggle="" data-target=""> 
                         <img src="images/register.png" alt="">
                       <span>Register</span></a>
                   </li>
@@ -277,7 +277,7 @@
     <!-- end login form -->
     
     <!-- register form -->
-    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header border-bottom-0">
@@ -325,6 +325,6 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
     <!-- end register form -->
     

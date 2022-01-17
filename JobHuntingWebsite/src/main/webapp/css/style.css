@@ -372,7 +372,6 @@ a:focus {
   display: inline-block;
   padding: 14px 35px;
   background-color: #ff9f01;
-  color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: none;
@@ -916,7 +915,6 @@ img, svg {
 }
 
 .title {
-    color: #ff9f01;
     line-height: 35.2px;
     font-size: 32px;
     margin-top: 20px;
