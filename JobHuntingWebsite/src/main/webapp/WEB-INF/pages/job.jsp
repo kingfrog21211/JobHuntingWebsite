@@ -9,7 +9,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
     <!-- job section -->
-    <section class="job_section layout_padding">
+    <section class="job_section layout_padding" style="margin-left: 50px; margin-right: 50px">
         <div class="container">
             <div class="heading_container">
                 <h2>Recommended jobs <br>
@@ -24,33 +24,34 @@
                     There are not any job that you want now, please come back later!!!
                 </div>
             </c:if>
+                
+            <noscript>
+                <iframe height='0' src='//www.googletagmanager.com/ns.html?id=GTM-5DSLL8' style='display:none;visibility:hidden' width='0'></iframe>
+            </noscript>
             
-            <div class="tab-content" id="myTabContent">
+            <div style="margin: 20px auto 0; display: grid; grid-template-columns: 600px 1fr; background-color: #fff" id="search-results">
+                
+                <div class="tab-content" id="myTabContent" style="background: white; border-right: 1px solid #e9e9e9; overflow: scroll;position: sticky;top: 60px;height: calc(100vh - 60px);">
                 <div class="job_board tab-pane fade show active" id="jb-1" role="tabpanel" aria-labelledby="jb-1-tab">
                     <c:forEach items="${recruitJobs}" var="rj">
-                        <div class="job">
+                        <div class="job" style="background-color: #ff9f01; border-radius: 20px">
                             <div class="job_content">
                                 <!-- logo -->
                                 <div class="logo">
                                     <div class="logo-wrapper" data-controller="tooltip" title="" data-bs-original-title="">
                                         
-                                        <c:forEach items="${companies}" var="c">
-                                            
-                                            <c:if test="${c.recruitId == rj.recruitId}">
-                                                <c:if test="${c.logo!=null}">
-                                                    <a target="_blank" href="<c:url value="/company"/>">
-                                                        <param name="recruitId" value="${rj.recruitId}"/>
-                                                        <img src="${c.logo}" alt="${c.companyName}" data-controller="lazyload" class=" ls-is-cached lazyloaded" style="height: 65px; width: 65px"/>
-                                                    </a>
-                                                </c:if>
-                                                <c:if test="${c.logo == null}">
-                                                    <a target="_blank" href="<c:url value="/company"/>">
-                                                        <param name="recruitId" value="${rj.recruitId}"/>
-                                                        <img src="/images/icon.png" alt="${c.companyName}" data-controller="lazyload" class=" ls-is-cached lazyloaded" style="height: 65px; width: 65px"/>
-                                                    </a>
-                                                </c:if>
-                                            </c:if>
-                                        </c:forEach>
+                                        <c:if test="${rj[4]!=null}">
+                                            <a target="_blank" href="<c:url value="/company/${rj[0]}"/>">
+                                                <param name="recruitId" value="${rj[0]}"/>
+                                                <img src="${rj[4]}" alt="${rj[5]}" data-controller="lazyload" class=" ls-is-cached lazyloaded" title="${rj[5]}" style="height: 65px; width: 65px"/>
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${rj[4] == null}">
+                                            <a target="_blank" href="<c:url value="/company/${rj[0]}"/>">
+                                                <param name="recruitId" value="${rj[0]}"/>
+                                                <img src="https://res.cloudinary.com/tcme212/image/upload/v1642397265/icon_eif3gg.png" alt="${rj[5]}" data-controller="lazyload" class=" ls-is-cached lazyloaded" title="${rj[5]}" style="height: 65px; width: 65px"/>
+                                            </a>
+                                        </c:if>
                                         
                                     </div>
                                     <div class="clearfix"></div>
@@ -64,38 +65,20 @@
                                         <div class="details">
                                             <!-- job -->
                                             <h3 class="title">
-                                                <a href=""><b>${rj.title}</b></a>
+                                                <a href=""><b>${rj[1]}</b></a>
                                             </h3>
                                             <!-- company -->
                                             <h4>
-                                                
-                                                <c:forEach items="${companies}" var="c">
-                                                    <c:if test="${c.recruitId == rj.recruitId}">
-                                                        <a href="" style="color: #000000"> ${c.companyName} </a>
-                                                    </c:if>
-                                                </c:forEach>
-                                                        
+                                                <a href="<c:url value="/company/${rj[0]}"/>" style="color: #000000"> ${rj[5]} </a>
                                             </h4>
                                             <!-- salary -->
                                             <div class="svg-icon svg-icon--rounded">
-                                                <box-icon name='dollar-circle' color='#ff9f01' ></box-icon>
-                                                
-                                                <c:forEach items="${salaries}" var="s">
-                                                    <c:if test="${s.salaryId == rj.salaryId}">
-                                                        <div class="svg-icon__text">${s.salaryValue}</div>
-                                                    </c:if>
-                                                </c:forEach>
-                                                        
+                                                <box-icon name='dollar-circle' color='green' ></box-icon>
+                                                <div class="svg-icon__text" color='green'>${rj[6]}</div>        
                                             </div>
                                             <!-- city -->
                                             <div class="">
-                                                
-                                                <c:forEach items="${cities}" var="city">
-                                                    <c:if test="${city.cityId == rj.cityId}">
-                                                        <div class="city">${city.cityName}</div>
-                                                    </c:if>
-                                                </c:forEach>
-                                                        
+                                                <div class="city">${rj[7]}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -103,17 +86,26 @@
                                     <!-- update time -->
                                     <div class="job-bottom">
                                         <div class="tag-list">
-                                            <span>Post date: ${rj.postDate}</span> &emsp;
-                                            <span>Expiration Date: ${rj.expirationDate}</span>
+                                            <span>Post date: ${rj[2]}</span> &emsp;
+                                            <span>Expiration Date: ${rj[3]}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- job description -->
                             </div>
                         </div>
+                        <br>
                     </c:forEach>
                 </div>
             </div>
+               
+                <div style="position: relative; margin-right: 20%">
+                    <div style="padding: 0 10px;">
+                        
+                    </div>
+                </div>
+            </div>
+                
         </div>
     </section>
   <!-- end job section -->
