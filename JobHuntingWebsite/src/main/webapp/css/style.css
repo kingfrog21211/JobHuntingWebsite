@@ -916,6 +916,7 @@ img, svg {
 }
 
 .title {
+    color: #ff9f01;
     line-height: 35.2px;
     font-size: 32px;
     margin-top: 20px;

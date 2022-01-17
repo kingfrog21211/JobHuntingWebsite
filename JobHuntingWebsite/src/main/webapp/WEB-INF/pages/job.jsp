@@ -47,7 +47,9 @@
                     <c:forEach items="${recruitJobs}" var="rj">
                         <div class="job job--selected" style="background-color: #252525;" data-action="click->search--job-selection#select" data-controller="search--job-selection" data-search--job-selection-auto-select-value="1" data-search--job-selection-job-url-value="/it-jobs/senior-up-devops-engineer-nashtech-4930/content">
                             <div class="job_content" style="position: relative">
-                                <i class='bx bx-heart' id="heart" style='color:#ffffff; right: 20px; top: 20px; font-size: 25px; position: absolute;'></i>
+                                <span style="font-size: 25px;color:#ffffff;position: absolute;top: 20px;right: 20px;cursor: pointer; z-index: 2;">
+                                    <i class='bx bx-heart' id="heart"></i>
+                                </span>
                                 <!-- logo -->
                                 <div class="logo">
                                     <div class="logo-wrapper" data-controller="tooltip" title="" data-bs-original-title="">
@@ -77,12 +79,11 @@
                                         <div class="details">
                                             <!-- job -->
                                             <h3 class="title">
-                                                <c:url value="/job/${rj[0]}" var="action">
+                                                
                                                     <a href="${action}">
-                                                        <param name="recruitJobId" value="${rj[0]}">
+<!--                                                        <param name="recruitJobId" value="">-->
                                                         <strong style="color: #ff9f01">${rj[1]}</strong>
                                                     </a>
-                                                </c:url>
                                             </h3>
                                             <!-- company -->
                                             <h4>
