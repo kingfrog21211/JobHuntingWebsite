@@ -71,63 +71,82 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
     }
 
     @Override
-    public List<RecruitJob> getRecruitJobByProfessionId(Integer professionId) {
+    public List<RecruitJob> getRecruitJobBySearching(Integer cityId, Integer professionId, Integer workTypeId, Integer salaryId) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<RecruitJob> query = builder.createQuery(RecruitJob.class);
-        Root root = query.from(RecruitJob.class);
-        query = query.select(root);
-        
-//        Root rootSalary = query.from(Salary.class);
-//        Root rootCity = query.from(City.class);
-//        Root rootRecruit = query.from(Recruit.class);
-//        query.multiselect(root.get("recruitJobId"), 
-//                            rootRecruit.get("logo"), 
-//                            rootRecruit.get("companyName"), 
-//                            root.get("title"),
-//                            rootSalary.get("salaryValue"), 
-//                            rootCity.get("cityName"));
-        
-        query = query.where(builder.equal(root.get("professionId"), professionId));
-        
-        query = query.orderBy(builder.desc(root.get("recruitJobId")));
-        
-        Query q = session.createQuery(query);
-        return q.getResultList();
-    }
-
-    @Override
-    public List<RecruitJob> getRecruitJobBySearching(String titles, Integer cityId, Integer professionId, Integer workTypeId, Integer salaryId) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<RecruitJob> query = builder.createQuery(RecruitJob.class);
+        CriteriaQuery<Object> query = builder.createQuery(Object.class);
         Root root = query.from(RecruitJob.class);
         
         Root rootSalary = query.from(Salary.class);
         Root rootCity = query.from(City.class);
+        Root rootRecruit = query.from(Recruit.class);
+        Root rootExp = query.from(Experience.class);
         Root rootWorkType = query.from(WorkType.class);
         Root rootProfession = query.from(Profession.class);
-        Root rootRecruit = query.from(Recruit.class);
 
         Predicate preSalary = builder.equal(rootSalary.get("salaryId"), root.get("salaryId"));
         Predicate preCity = builder.equal(rootCity.get("cityId"), root.get("cityId"));
-        Predicate preProfession = builder.equal(rootProfession.get("professionId"), root.get("professionId"));
+        Predicate preRecruit = builder.equal(rootRecruit.get("recruitId"), root.get("recruitId"));
+        Predicate preExp = builder.equal(rootExp.get("experienceId"), root.get("experienceId"));
         Predicate preWorkType = builder.equal(rootWorkType.get("workTypeId"), root.get("workTypeId"));
-
-        //hien thi tren page Jobs
-        query.multiselect(root.get("recruitJobId"), 
-                            rootRecruit.get("logo"), 
+        Predicate preProfession = builder.equal(rootProfession.get("professionId"), root.get("professionId"));
+        
+        query.multiselect(rootRecruit.get("logo"), 
                             rootRecruit.get("companyName"), 
-                            root.get("title"),
                             rootSalary.get("salaryValue"), 
-                            rootCity.get("cityName"));
-        if (titles!=null && !titles.isEmpty()) {
-            Predicate p1 = builder.like(root.get("title").as(String.class), String.format("%%%s%%", titles));
-            Predicate p2 = builder.like(root.get("cityId").as(String.class), String.format("%%%s%%", cityId));
-            Predicate p3 = builder.like(root.get("professionId").as(String.class), String.format("%%%s%%", professionId));
-            Predicate p4 = builder.like(root.get("workTypeId").as(String.class), String.format("%%%s%%", workTypeId));
-            Predicate p5 = builder.like(root.get("salaryId").as(String.class), String.format("%%%s%%", salaryId));
-            query.where(builder.and(p1,p2,p3,p4,p5));
+                            rootCity.get("cityName"),
+                            rootWorkType.get("workTypeName"),
+                            rootProfession.get("professionId"),
+                            root.get("recruitJobId"), root.get("title"),root.get("position"), root.get("amount"), root.get("require"), root.get("description"), root.get("workPlace"), root.get("benefit"), root.get("postDate"), root.get("expirationDate"), root.get("emailContact"), root.get("nameContact"), root.get("phoneContact"), root.get("status"),
+                            root.get("recruitId"), rootExp.get("experienceId"));
+        
+        if (cityId!=null && professionId==null && workTypeId==null && salaryId==null) {
+            Predicate p2 = builder.equal(root.get("cityId"), cityId);
+            query.where(builder.and(p2,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }
+        else if (cityId==null && professionId!=null && workTypeId==null && salaryId==null) {
+            Predicate p3 = builder.equal(root.get("professionId"),professionId);
+            query.where(builder.and(p3,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }
+        else if (cityId==null && professionId==null && workTypeId!=null && salaryId==null) {
+            Predicate p4 = builder.equal(root.get("workTypeId"), workTypeId);
+            query.where(builder.and(p4,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }  
+        else if (cityId==null && professionId==null && workTypeId==null && salaryId!=null) {
+            Predicate p5 = builder.equal(root.get("salaryId"),salaryId);
+            query.where(builder.and(p5,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }
+        else if (cityId!=null && professionId!=null && workTypeId==null && salaryId==null) {
+            Predicate p2 = builder.equal(root.get("cityId"), cityId);
+            Predicate p3 = builder.equal(root.get("professionId"),professionId);
+            query.where(builder.and(p2,p3,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }
+        else if (cityId!=null && professionId==null && workTypeId!=null && salaryId==null) {
+            Predicate p2 = builder.equal(root.get("cityId"), cityId);
+            Predicate p4 = builder.equal(root.get("workTypeId"), workTypeId);
+            query.where(builder.and(p2,p4,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }
+        else if (cityId!=null && professionId==null && workTypeId==null && salaryId!=null) {
+            Predicate p2 = builder.equal(root.get("cityId"), cityId);
+            Predicate p5 = builder.equal(root.get("salaryId"),salaryId);
+            query.where(builder.and(p2,p5,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }
+        else if (cityId==null && professionId!=null && workTypeId!=null && salaryId==null) {
+            Predicate p3 = builder.equal(root.get("professionId"),professionId);
+            Predicate p4 = builder.equal(root.get("workTypeId"), workTypeId);
+            query.where(builder.and(p3,p4,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }
+        else if (cityId==null && professionId==null && workTypeId!=null && salaryId!=null) {
+            Predicate p4 = builder.equal(root.get("workTypeId"), workTypeId);
+            Predicate p5 = builder.equal(root.get("salaryId"),salaryId);
+            query.where(builder.and(p4,p5,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }
+        else if (cityId!=null && professionId!=null && workTypeId!=null && salaryId!=null){
+            Predicate p2 = builder.equal(root.get("cityId"),cityId);
+            Predicate p3 = builder.equal(root.get("professionId"), professionId);
+            Predicate p4 = builder.equal(root.get("workTypeId"), workTypeId);
+            Predicate p5 = builder.equal(root.get("salaryId"), salaryId);
+            query.where(builder.and(p2,p3,p4,p5,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
         }
         query.orderBy(builder.desc(root.get("recruitJobId")));
         Query q = session.createQuery(query);
@@ -139,6 +158,7 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
         return this.sessionFactory.getObject().getCurrentSession().get(RecruitJob.class, id);
     }
     
+    @Override
     public Object getJobDetail(Integer id){
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();

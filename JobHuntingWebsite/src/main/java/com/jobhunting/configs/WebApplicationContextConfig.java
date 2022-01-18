@@ -18,6 +18,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.context.MessageSource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 
 /**
  *
@@ -50,7 +52,10 @@ public class WebApplicationContextConfig implements WebMvcConfigurer{
     
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
-        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
+        registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
+        registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
+        registry.addResourceHandler("/fonts/**").addResourceLocations("/resources/fonts/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
     }
     
     @Bean
@@ -69,5 +74,13 @@ public class WebApplicationContextConfig implements WebMvcConfigurer{
                 "secure",true
         ));
         return c;
+    }
+    
+    @Bean
+    public MessageSource messageSource(){
+        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+        source.setBasename("messages");
+        return source;
+        
     }
 }

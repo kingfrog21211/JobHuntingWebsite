@@ -179,11 +179,11 @@
           <div class="col-lg-8 offset-lg-1 col-md-9 offset-md-1">
             <form action="">
               <div class="form_container">
-                <div class="box b-1">
-                    <input autocomplete="on" name="titles" type="text" class="form-control" placeholder="Job title" >
-                </div>
+<!--                <div class="box b-1">
+                    <input name="titles" type="text" class="form-control" placeholder="Job title" >
+                </div>-->
                 <div class="box b-3">
-                    <select autocomplete="on" name="professionId" path="professionId" class="form-control" disable">
+                    <select autocomplete="on" name="professionId" path="professionId" class="form-control">
                         <option value="">Profession</option>
                         <c:forEach items="${professions}" var="c">
                             <option value="${c.professionId}">${c.professionName}</option>
@@ -191,7 +191,7 @@
                     </select>
                 </div>
                 <div class="box b-3">
-                    <select autocomplete="on" name="workTypeId" path="workTypeId" class="form-control" disable>
+                    <select autocomplete="on" name="workTypeId" path="workTypeId" class="form-control">
                         <option value="">Work type</option>
                         <c:forEach items="${workTypes}" var="c">
                             <option value="${c.workTypeId}">${c.workTypeName}</option>
@@ -199,7 +199,7 @@
                     </select>
                 </div>
                 <div class="box b-2">
-                    <select autocomplete="on" name="cityId" path="cityId" class="form-control" disable>
+                    <select autocomplete="on" name="cityId" path="cityId" class="form-control">
                         <option value="">City</option>
                         <c:forEach items="${cities}" var="c">
                             <option value="${c.cityId}">${c.cityName}</option>

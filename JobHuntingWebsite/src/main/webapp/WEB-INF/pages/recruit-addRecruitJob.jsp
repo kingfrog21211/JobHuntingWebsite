@@ -13,7 +13,7 @@
 <section class="job_section layout_padding">
     <div class="container">
         <div class="heading_container">
-            <h2>ADD NEW RECRUIT JOB</h2>
+            <h2 class="title">ADD NEW RECRUIT JOB</h2>
         </div>
     </div>
     <form:form autocomplete="on" method="post" action="${action}" modelAttribute="recruitJob" enctype="multipart/form-data" style="margin-left:15%; margin-right:20%">

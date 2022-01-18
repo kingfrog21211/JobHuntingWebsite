@@ -44,12 +44,10 @@
             <!-- HEADER -->
             <tiles:insertAttribute name="header"/>
         </div>
-
             <!-- CONTENT -->
             <tiles:insertAttribute name="content"/>
 
             <!-- FOOTER -->
             <tiles:insertAttribute name="footer"/>
-        
     </body>
 </html>

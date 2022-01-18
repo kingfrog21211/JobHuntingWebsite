@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -69,34 +70,12 @@ public class HomeController {
                                     @RequestParam(value = "professionId", required = false) Integer professionId,
                                     @RequestParam(value = "workTypeId", required = false) Integer workTypeId,
                                     @RequestParam(value = "salaryId", required = false) Integer salaryId){
-        
-        if ((titles!=null && !titles.isEmpty()) || cityId!=null || professionId!=null || workTypeId!=null || salaryId!=null) {
-            model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobBySearching(titles, cityId, professionId, workTypeId, salaryId));
-        }
-        if (professionId!=null) {
-            model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobByProfessionId(professionId));
+        if (cityId!=null || professionId!=null || workTypeId!=null || salaryId!=null) {
+            model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobBySearching(cityId, professionId, workTypeId, salaryId));
         }
         else{
             model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJob());
         }
-//        if (careerId != null){
-//            model.addAttribute("JDs", this.jdService.getJdByNganhNgheId(careerId));
-//        
-//            if (viTriTuyenDungKW != null && !viTriTuyenDungKW.isEmpty())
-//                model.addAttribute("JDs", this.jdService.getJdByViTriTuyenDung(viTriTuyenDungKW));
-//
-//            if (chucDanhId != null)
-//                model.addAttribute("JDs", this.jdService.getJdByChucDanh(chucDanhId));
-//
-//            if (diaDiemId != null)
-//                model.addAttribute("JDs", this.jdService.getJdByDiaDiem(diaDiemId));
-//        }
-//        else if (careerId == null //&& 
-//                viTriTuyenDungKW == null &&
-//                chucDanhId == null &&
-//                diaDiemId == null)
-//                )
-//                model.addAttribute("JDs", this.jdService.getJdList());
         return "job";
     }
     @RequestMapping("/jobDetail")
