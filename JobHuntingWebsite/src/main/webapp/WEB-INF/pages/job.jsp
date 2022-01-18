@@ -51,15 +51,16 @@
                                 <!-- logo -->
                                 <div class="logo">
                                     <div class="logo-wrapper" data-controller="tooltip" title="" data-bs-original-title="">
+                                        <c:url value="/companyDetail" var="action">
+                                            <c:param name="recruitId" value="${rj[20]}"/>
+                                        </c:url>
                                         <c:if test="${rj[0]!=null}">
-                                            <a target="_blank" href="<c:url value="/company/${rj[6]}"/>">
-                                                <param name="recruitId" value="${rj[6]}"/>
+                                            <a href="${action}" target="_blank">
                                                 <img src="${rj[0]}" alt="${rj[1]}" data-controller="lazyload" class=" ls-is-cached lazyloaded" title="${rj[1]}" style="height: 65px; width: 65px"/>
                                             </a>
                                         </c:if>
                                         <c:if test="${rj[0] == null}">
-                                            <a target="_blank" href="<c:url value="/company/${rj[6]}"/>">
-                                                <param name="recruitId" value="${rj[6]}"/>
+                                            <a href="${action}" target="_blank">
                                                 <img src="https://res.cloudinary.com/tcme212/image/upload/v1642397265/icon_eif3gg.png" alt="${rj[1]}" data-controller="lazyload" class=" ls-is-cached lazyloaded" title="${rj[1]}" style="height: 65px; width: 65px"/>
                                             </a>
                                         </c:if>
@@ -76,13 +77,16 @@
                                                 <c:url value="/jobDetail" var="action">
                                                     <c:param name="recruitJobId" value="${rj[6]}"/>
                                                 </c:url>
-                                                <a href="${action}" target="iframe_jobDetail">
-                                                    <strong style="color: #ff9f01">${rj[7]}</strong>
+                                                <a style="color: #ff9f01" href="${action}" target="iframe_jobDetail">
+                                                    <strong >${rj[7]}</strong>
                                                 </a>
                                             </h3>
                                             <!-- company -->
                                             <h4>
-                                                <a href="<c:url value="/company/${rj[20]}"/>" style="color: #fff"> ${rj[1]} </a>
+                                                <c:url value="/companyDetail" var="action">
+                                                    <c:param name="recruitId" value="${rj[20]}"/>
+                                                </c:url>
+                                                <a href="${action}" target="_blank" style="color: #fff">${rj[1]} </a>
                                             </h4>
                                             <!-- salary -->
                                             <div class="svg-icon svg-icon--rounded">

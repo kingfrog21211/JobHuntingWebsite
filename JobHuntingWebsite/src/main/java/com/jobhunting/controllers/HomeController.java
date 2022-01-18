@@ -65,11 +65,18 @@ public class HomeController {
     }
     
     @RequestMapping("/job")
-    public String job(Model model, @RequestParam(value = "titles", required = false) String titles,
+    public String job(Model model, @RequestParam(value = "recruitId", required = false) Integer recruitId,
                                     @RequestParam(value = "cityId", required = false) Integer cityId,
                                     @RequestParam(value = "professionId", required = false) Integer professionId,
                                     @RequestParam(value = "workTypeId", required = false) Integer workTypeId,
-                                    @RequestParam(value = "salaryId", required = false) Integer salaryId){
+                                    @RequestParam(value = "salaryId", required = false) Integer salaryId,
+                                    @RequestParam(value = "kw")String kw){
+        if (kw!=null&&!kw.isEmpty()) {
+            model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobByKW(kw));
+        }else
+        if (recruitId!=null) {
+            model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobByRecruitId(recruitId));
+        } else
         if (cityId!=null || professionId!=null || workTypeId!=null || salaryId!=null) {
             model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobBySearching(cityId, professionId, workTypeId, salaryId));
         }
@@ -82,6 +89,12 @@ public class HomeController {
     public String jobDetail(Model model, @RequestParam(value = "recruitJobId") Integer recruitJobId){
         model.addAttribute("jobDetails", this.recruitJobService.getJobDetail(recruitJobId));
         return "jobDetail";
+    }
+    
+    @RequestMapping("/companyDetail")
+    public String companyDetail(Model model, @RequestParam(value = "recruitId") Integer companyId){
+        model.addAttribute("companyDetails", this.companyService.getCompanyByRecruitId(companyId));
+        return "companyDetail";
     }
     
     @RequestMapping("/company")

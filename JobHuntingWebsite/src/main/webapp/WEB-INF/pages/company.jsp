@@ -23,12 +23,12 @@
                     <div class="content layout_padding2-top">
                         <!-- career -->
                         <c:forEach items="${companies}" var="c">
-                            <c:url value="/company" var="action">
+                            <c:url value="/companyDetail" var="action">
                                 <c:param name="recruitId" value="${c.recruitId}"/>
                             </c:url>
                             <div class="box">
                                 <h3>${c.companyName}</h3>
-                                <a href="">See information</a>
+                                <a href="${action}">See information</a>
                             </div>
                         </c:forEach>
                         <!-- career -->

@@ -40,5 +40,15 @@ public class RecruitJobServiceImpl implements RecruitJobService{
     public Object getJobDetail(Integer intgr) {
         return this.recruitJobRepository.getJobDetail(intgr);
     }
+
+    @Override
+    public List<RecruitJob> getRecruitJobByRecruitId(Integer intgr) {
+        return this.recruitJobRepository.getRecruitJobByRecruitId(intgr);
+    }
+
+    @Override
+    public List<RecruitJob> getRecruitJobByKW(String string) {
+        return this.recruitJobRepository.getRecruitJobByKW(string);
+    }
     
 }

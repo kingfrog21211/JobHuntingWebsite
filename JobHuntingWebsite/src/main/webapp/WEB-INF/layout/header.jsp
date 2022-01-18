@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 <div class="hero_area">
 <!-- header section strats -->
     <header class="header_section">
@@ -22,16 +22,22 @@
           <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
               
-                <ul class="navbar-nav  ">
+                <ul style="margin-right: 10px" class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="<c:url value="/"/>"> Home <span class="sr-only">(current)</span></a>
+                        <a style="margin-top: 10px" class="nav-link" href="<c:url value="/"/>"> Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/job"/>"> Jobs </a>
+                        <a style="margin-top: 10px" class="nav-link" href="<c:url value="/job"/>"> Jobs </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/company"/>"/> Companies </a>
+                        <a style="margin-top: 10px" class="nav-link" href="<c:url value="/company"/>"/> Companies </a>
                     </li>
+                    
+                    <c:url value="/job" var="action"/>
+                    <form class="form-inline" action="${action}">
+                        <input class="form-control mr-sm-2" style="margin-right: 4px" type="text" name="kw" placeholder="Search for job title">
+                        <button type="submit" style="background-color: #000"><i class='bx bx-search' style='color: #e2e6ea; margin-top: 10px'></i></button>
+                    </form>
                 </ul>
                 
                 <ul class="user_option navbar-nav">
@@ -217,7 +223,6 @@
                   
                 <div class="btn-box">
                     <c:url value="/job" var="action">
-                        <c:param name="titles" value="titles"/>
                         <c:param name="professionId" value="professionId"/>
                         <c:param name="workTypeId" value="workTypeId"/>
                         <c:param name="cityId" value="cityId"/>

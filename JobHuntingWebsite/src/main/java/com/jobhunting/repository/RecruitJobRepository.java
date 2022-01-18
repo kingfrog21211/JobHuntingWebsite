@@ -17,4 +17,6 @@ public interface RecruitJobRepository {
     List<RecruitJob> getRecruitJobBySearching(Integer cityId, Integer professionId, Integer workTypeId, Integer salaryId);
     RecruitJob getRecruitJobById(Integer id);
     Object getJobDetail(Integer id);
+    List<RecruitJob> getRecruitJobByRecruitId(Integer recruitId);
+    List<RecruitJob> getRecruitJobByKW(String kw);
 }
