@@ -20,6 +20,8 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 /**
  *
@@ -82,5 +84,17 @@ public class WebApplicationContextConfig implements WebMvcConfigurer{
         source.setBasename("messages");
         return source;
         
+    }
+
+    @Override
+    public Validator getValidator() {
+        return validator();
+    }
+    
+    @Bean
+    public LocalValidatorFactoryBean validator(){
+        LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
+        v.setValidationMessageSource(messageSource());
+        return v;
     }
 }

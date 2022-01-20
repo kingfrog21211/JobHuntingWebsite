@@ -29,6 +29,9 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.persistence.Transient;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -60,34 +63,35 @@ public class RecruitJob implements Serializable {
     @Column(name = "recruitJobId")
     private Integer recruitJobId;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @NotNull(message = "This field must not be null")
+    @Size(min = 1, max = 45, message = "{recruitJob.title.lengthErr}")
     @Column(name = "title")
     private String title;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @NotNull(message = "This field must not be null")
+    @Size(min = 1, max = 45, message = "{recruitJob.position.lengthErr}")
     @Column(name = "position")
     private String position;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "This field must not be null")
     @Column(name = "amount")
+    @Min(value = 1, message = "{recruitJob.amount.minErr}")
     private int amount;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "This field must not be null")
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "require")
     private String require;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "This field must not be null")
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "description")
     private String description;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @NotNull(message = "This field must not be null")
+    @Size(min = 1, max = 100, message = "Nơi làm việc tối thiểu 1 ký tự, tối đa 100 ký tự")
     @Column(name = "workPlace")
     private String workPlace;
     @Lob
@@ -105,17 +109,19 @@ public class RecruitJob implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date expirationDate;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "This field must not be null")
     @Size(min = 1, max = 50)
     @Column(name = "emailContact")
+    @Email(message = "{recruitJob.emailErr}")
     private String emailContact;
     @Size(max = 45)
     @Column(name = "nameContact")
     private String nameContact;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
+    @NotNull(message = "This field must not be null")
+    @Size(min = 1, max = 15, message = "recruitJob.phoneContact.digitsErr")
     @Column(name = "phoneContact")
+    @Digits(fraction = 1, integer = 15, message = "{recruitJob.phoneContact.digitsErr}")
     private String phoneContact;
     @Basic(optional = false)
     @NotNull

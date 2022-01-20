@@ -40,7 +40,7 @@
                     </form>
                 </ul>
                 
-                <ul class="user_option navbar-nav">
+                <ul class="user_option navbar-nav" style="margin-left: 15px">
                   <li class="nav-item">
                     <a class="nav-link" href="" data-toggle="modal" data-target="#loginModal"> 
                         <img src="images/login.png" alt=""> 

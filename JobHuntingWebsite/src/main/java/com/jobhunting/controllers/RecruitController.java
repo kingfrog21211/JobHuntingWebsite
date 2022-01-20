@@ -9,6 +9,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.jobhunting.pojo.RecruitJob;
 import com.jobhunting.pojo.RecruitJob_;
+import com.jobhunting.service.RecruitJobService;
 import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Level;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,6 +35,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RecruitController {
 //    @Autowired
 //    private Cloudinary cloudinary;
+    @Autowired
+    private RecruitJobService recruitJobService;
+    
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder){
+//        binder.setValidator(productNameValidator);
+//    }
     
     @GetMapping("/recruit-addRecruitJob")
     public String list(Model model){
@@ -40,13 +50,16 @@ public class RecruitController {
     }
     
     @PostMapping("/recruit-addRecruitJob")
-    public String add(@ModelAttribute(value = "recruitJob") RecruitJob recruitJob){
+    public String add(@ModelAttribute(value = "recruitJob") @Valid RecruitJob recruitJob, BindingResult result){
+        if (!result.hasErrors()){
+            return "job";
+        }
 //        try {
 //            Map r = this.cloudinary.uploader().upload(recruitJob.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
 //            String img = (String) r.get("secure_url");
 //            return "redirect:/job";
 //        } catch (IOException ex) {
-//            System.err.println("ADD RECRUIT JOB " + ex.getMessage());
+//            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
         return "recruit-addRecruitJob";
     }

@@ -8,7 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
+<html lang="en">
 <c:url value="/recruit-addRecruitJob" var="action"/>
 <section class="job_section layout_padding">
     <div class="container">
@@ -17,28 +17,34 @@
         </div>
     </div>
     <form:form autocomplete="on" method="post" action="${action}" modelAttribute="recruitJob" enctype="multipart/form-data" style="margin-left:15%; margin-right:20%">
+        <form:errors path="*" cssClass="alert alert-danger" element="div"/>
         <div class="form-group">
             <label for="title">Job Title</label>
             <form:input type="text" id="title" path="title" cssClass="form-control"/>
+            <form:errors path="title" cssClass="text-danger" element="div"/>
         </div>
         <div class="form-group" style="column-count: 2">
             <div>
                 <label for="position">Position</label>
                 <form:input type="text" id="position" path="position" cssClass="form-control"/>
+                <form:errors path="position" cssClass="text-danger" element="div"/>
             </div>
             <div>
                 <label for="amount">Amount</label>
                 <form:input type="number" id="amount" path="amount" cssClass="form-control"/>
+                <form:errors path="amount" cssClass="text-danger" element="div"/>
             </div>
         </div>
         <div class="form-group" style="column-count: 2">
             <div class="form-group">
                 <label for="require" style="color: orangered">Job Requirement</label>
                 <form:textarea id="require" path="require" cssClass="form-control"/>
+                <form:errors path="require" cssClass="text-danger" element="div"/>
             </div>
             <div class="form-group">
                 <label for="description" style="color: orangered">Job Description</label>
                 <form:textarea id="description" path="description" cssClass="form-control"/>
+                <form:errors path="description" cssClass="text-danger" element="div"/>
             </div>
         </div>
         <div class="form-group" style="column-count: 2">
@@ -84,6 +90,7 @@
             <div class="form-group">
                 <label for="emailContact">Email Contact</label>
                 <form:input type="email" id="emailContact" path="emailContact" cssClass="form-control"/>
+                <form:errors path="emailContact" cssClass="text-danger" element="div"/>
             </div>
             <div class="form-group">
                 <label for="nameContact">Name Contact</label>
@@ -92,6 +99,7 @@
             <div class="form-group">
                 <label for="phoneContact">Phone Contact</label>
                 <form:input type="text" id="phoneContact" path="phoneContact" cssClass="form-control"/>
+                <form:errors path="phoneContact" cssClass="text-danger" element="div"/>
             </div>
         </div>  
         <div class="form-group" style="column-count: 3">
@@ -106,14 +114,17 @@
             <div class="form-group">
                 <label for="workPlace">Work Place</label>
                 <form:input type="text" id="workPlace" path="workPlace" cssClass="form-control"/>
+                <form:errors path="workPlace" cssClass="text-danger" element="div"/>
             </div>
             <div class="form-group">
                 <label for="expirationDate">Expiration Date</label>
                 <form:input type="date" id="expirationDate" path="expirationDate" cssClass="form-control"/>
+                <form:errors path="expirationDate" cssClass="text-danger" element="div"/>
             </div>
         </div>
         <div class="form-group">
             <input type="submit" value="Add Recruit Job" class="btn" style="background-color: #ff9f01; display: table; clear: both; margin-left: 85%">
         </div>
     </form:form>
-</section>
+</section
+</html>

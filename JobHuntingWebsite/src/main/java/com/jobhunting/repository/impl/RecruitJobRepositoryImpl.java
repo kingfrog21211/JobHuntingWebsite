@@ -141,6 +141,30 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
             Predicate p5 = builder.equal(root.get("salaryId"),salaryId);
             query.where(builder.and(p4,p5,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
         }
+        else if (cityId!=null && professionId!=null && workTypeId!=null && salaryId==null) {
+            Predicate p2 = builder.equal(root.get("cityId"), cityId);
+            Predicate p3 = builder.equal(root.get("professionId"),professionId);
+            Predicate p4 = builder.equal(root.get("workTypeId"), workTypeId);
+            query.where(builder.and(p2,p3,p4,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }
+        else if (cityId!=null && professionId!=null && workTypeId==null && salaryId!=null) {
+            Predicate p2 = builder.equal(root.get("cityId"), cityId);
+            Predicate p3 = builder.equal(root.get("professionId"),professionId);
+            Predicate p5 = builder.equal(root.get("salaryId"),salaryId);
+            query.where(builder.and(p2,p3,p5,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }
+        else if (cityId!=null && professionId==null && workTypeId!=null && salaryId!=null) {
+            Predicate p2 = builder.equal(root.get("cityId"), cityId);
+            Predicate p4 = builder.equal(root.get("workTypeId"), workTypeId);
+            Predicate p5 = builder.equal(root.get("salaryId"),salaryId);
+            query.where(builder.and(p2,p4,p5,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }
+        else if (cityId==null && professionId!=null && workTypeId!=null && salaryId!=null) {
+            Predicate p3 = builder.equal(root.get("professionId"),professionId);
+            Predicate p4 = builder.equal(root.get("workTypeId"), workTypeId);
+            Predicate p5 = builder.equal(root.get("salaryId"),salaryId);
+            query.where(builder.and(p3,p4,p5,preSalary, preCity, preRecruit,preExp,preWorkType,preProfession));
+        }
         else if (cityId!=null && professionId!=null && workTypeId!=null && salaryId!=null){
             Predicate p2 = builder.equal(root.get("cityId"),cityId);
             Predicate p3 = builder.equal(root.get("professionId"), professionId);

@@ -70,7 +70,7 @@ public class HomeController {
                                     @RequestParam(value = "professionId", required = false) Integer professionId,
                                     @RequestParam(value = "workTypeId", required = false) Integer workTypeId,
                                     @RequestParam(value = "salaryId", required = false) Integer salaryId,
-                                    @RequestParam(value = "kw")String kw){
+                                    @RequestParam(value = "kw", required = false)String kw){
         if (kw!=null&&!kw.isEmpty()) {
             model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJobByKW(kw));
         }else

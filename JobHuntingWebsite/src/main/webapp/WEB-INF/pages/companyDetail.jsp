@@ -12,7 +12,7 @@
         <div style="border-color: #000; border-style: outset; border-width: 3px">
             <div style="background: linear-gradient(white,#ff9f01,white); display: grid; grid-template-columns: 270px 1fr;height: content-box" >
                 <!--logo-->
-                <div style="background-color: white;width: 250px;height: 250px; border-color: #ff9f01; border-style: outset; margin: 10px">
+                <div style="background-color: white;width: 250px;height: 250px; border-color: #ff9f01; border-style: outset; margin: 20px">
                     <c:if test="${companyDetails.logo != null}">
                         <img style="max-width: 100%" src="${companyDetails.logo}" alt="${companyDetails.companyName}" title="${companyDetails.companyName}"/>
                     </c:if>
