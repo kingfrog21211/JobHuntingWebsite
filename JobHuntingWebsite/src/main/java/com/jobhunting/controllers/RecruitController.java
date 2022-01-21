@@ -26,20 +26,29 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 
 /**
  *
  * @author Asus
  */
 @Controller
+@ControllerAdvice
 public class RecruitController {
     @Autowired
     private RecruitJobService recruitJobService;
     
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder){
-//        binder.setValidator(productNameValidator);
-//    }
+    @ModelAttribute
+    public void addAttribute(Model model, HttpSession session){
+        model.addAttribute("recruitJob", this.recruitJobService.getRecruitJob());
+    }
+    
+    @GetMapping("/recruit-RecruitJob")  //chua loc theo RecruitId
+    public String listJob(Model model){
+        model.addAttribute("recruitJob", this.recruitJobService.getRecruitJob());
+        return "recruit-RecruitJob";
+    }
     
     @GetMapping("/recruit-addRecruitJob")
     public String list(Model model){
@@ -52,7 +61,7 @@ public class RecruitController {
         
         if (!result.hasErrors()){
             if (this.recruitJobService.addOrUpdate(recruitJob)==true)
-                return "redirect:/job";
+                return "redirect:/recruit-RecruitJob";
             else
                 model.addAttribute("errMsg", "System has something wrong!!!");
         }
