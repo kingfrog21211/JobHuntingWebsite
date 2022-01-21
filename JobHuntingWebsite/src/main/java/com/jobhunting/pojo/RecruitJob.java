@@ -30,9 +30,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.persistence.Transient;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -63,35 +65,35 @@ public class RecruitJob implements Serializable {
     @Column(name = "recruitJobId")
     private Integer recruitJobId;
     @Basic(optional = false)
-    @NotNull(message = "This field must not be null")
+    @NotNull(message = "{recruitJob.nullErr}")
     @Size(min = 1, max = 45, message = "{recruitJob.title.lengthErr}")
     @Column(name = "title")
     private String title;
     @Basic(optional = false)
-    @NotNull(message = "This field must not be null")
+    @NotNull(message = "{recruitJob.nullErr}")
     @Size(min = 1, max = 45, message = "{recruitJob.position.lengthErr}")
     @Column(name = "position")
     private String position;
     @Basic(optional = false)
-    @NotNull(message = "This field must not be null")
+    @NotNull(message = "{recruitJob.nullErr}")
     @Column(name = "amount")
     @Min(value = 1, message = "{recruitJob.amount.minErr}")
     private int amount;
     @Basic(optional = false)
-    @NotNull(message = "This field must not be null")
+    @NotNull(message = "{recruitJob.nullErr}")
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "require")
     private String require;
     @Basic(optional = false)
-    @NotNull(message = "This field must not be null")
+    @NotNull(message = "{recruitJob.nullErr}")
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "description")
     private String description;
     @Basic(optional = false)
-    @NotNull(message = "This field must not be null")
-    @Size(min = 1, max = 100, message = "Nơi làm việc tối thiểu 1 ký tự, tối đa 100 ký tự")
+    @NotNull(message = "{recruitJob.nullErr}")
+    @Size(min = 1, max = 100)
     @Column(name = "workPlace")
     private String workPlace;
     @Lob
@@ -104,24 +106,26 @@ public class RecruitJob implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date postDate;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{recruitJob.nullErr}")
     @Column(name = "expirationDate")
     @Temporal(TemporalType.DATE)
+    @FutureOrPresent
     private Date expirationDate;
     @Basic(optional = false)
-    @NotNull(message = "This field must not be null")
-    @Size(min = 1, max = 50)
+    @NotNull(message = "{recruitJob.nullErr}")
+    @Size(min = 1, max = 50, message = "{recruitJob.emailErr}")
     @Column(name = "emailContact")
-    @Email(message = "{recruitJob.emailErr}")
+    @Email
     private String emailContact;
     @Size(max = 45)
     @Column(name = "nameContact")
     private String nameContact;
     @Basic(optional = false)
-    @NotNull(message = "This field must not be null")
-    @Size(min = 1, max = 15, message = "recruitJob.phoneContact.digitsErr")
+    @NotNull(message = "{recruitJob.phoneContact.digitsErr}")
+    @Size(min = 1, max = 15)
+    @Digits(fraction = 1,integer = 15)
     @Column(name = "phoneContact")
-    @Digits(fraction = 1, integer = 15, message = "{recruitJob.phoneContact.digitsErr}")
+//    @Phone(message = "{recruitJob.phoneContact.digitsErr}")
     private String phoneContact;
     @Basic(optional = false)
     @NotNull

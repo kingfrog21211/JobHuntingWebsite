@@ -33,8 +33,6 @@ import java.util.logging.Logger;
  */
 @Controller
 public class RecruitController {
-//    @Autowired
-//    private Cloudinary cloudinary;
     @Autowired
     private RecruitJobService recruitJobService;
     
@@ -50,17 +48,14 @@ public class RecruitController {
     }
     
     @PostMapping("/recruit-addRecruitJob")
-    public String add(@ModelAttribute(value = "recruitJob") @Valid RecruitJob recruitJob, BindingResult result){
+    public String add(Model model, @ModelAttribute(value = "recruitJob") @Valid RecruitJob recruitJob, BindingResult result){
+        
         if (!result.hasErrors()){
-            return "job";
+            if (this.recruitJobService.addOrUpdate(recruitJob)==true)
+                return "redirect:/job";
+            else
+                model.addAttribute("errMsg", "System has something wrong!!!");
         }
-//        try {
-//            Map r = this.cloudinary.uploader().upload(recruitJob.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
-//            String img = (String) r.get("secure_url");
-//            return "redirect:/job";
-//        } catch (IOException ex) {
-//            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         return "recruit-addRecruitJob";
     }
 }

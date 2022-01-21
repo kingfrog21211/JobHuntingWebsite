@@ -23,15 +23,15 @@
                 
                 <!--info-->
                 <div style="overflow-y: scroll; position: sticky; height: 500px">
-                    <div style="margin: 20px 30px;width: 600px">
+                    <div style="margin: 20px 50px;width: 600px">
                         <div class="title" style=" font-size: 40px; font-weight: 700">${companyDetails.companyName}</div>
-                        <div class="svg-icon__text">Founded year: ${companyDetails.foundedYear}</div><br>
+                        <div class="svg-icon__text">Since ${companyDetails.foundedYear}</div><br>
                         <div class="svg-icon">
                             <box-icon name='current-location' ></box-icon>
                             <div class="svg-icon__text">${companyDetails.address}</div>        
                         </div><br>
-                        <div class="svg-icon__text">${companyDetails.website}</div><br>
-                        <div class="svg-icon__text">${companyDetails.email}</div><br>
+                        <div class="svg-icon__text"><strong>Website:</strong> ${companyDetails.website}</div><br>
+                        <div class="svg-icon__text"><strong>Email:</strong> ${companyDetails.email}</div><br>
                         <p>${companyDetails.about}</p>
                     </div>
                 </div>

@@ -7,6 +7,12 @@ package com.jobhunting.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.jobhunting.formatter.CityFormatter;
+import com.jobhunting.formatter.DateFormatter;
+import com.jobhunting.formatter.ExperienceFormatter;
+import com.jobhunting.formatter.ProfessionFormatter;
+import com.jobhunting.formatter.SalaryFormatter;
+import com.jobhunting.formatter.WorkTypeFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +26,7 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
@@ -97,4 +104,16 @@ public class WebApplicationContextConfig implements WebMvcConfigurer{
         v.setValidationMessageSource(messageSource());
         return v;
     }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new SalaryFormatter());
+        registry.addFormatter(new ExperienceFormatter());
+        registry.addFormatter(new WorkTypeFormatter());
+        registry.addFormatter(new ProfessionFormatter());
+        registry.addFormatter(new CityFormatter());
+        registry.addFormatter(new DateFormatter());
+    }
+    
+    
 }

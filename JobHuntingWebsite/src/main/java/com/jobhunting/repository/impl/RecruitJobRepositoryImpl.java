@@ -289,5 +289,18 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
         Query q = session.createQuery(query);
         return q.getResultList();
     }
+
+    @Override
+    public boolean addOrUpdate(RecruitJob rj) {
+        Session session =  this.sessionFactory.getObject().getCurrentSession();
+        try{
+            session.save(rj);
+            return true;
+        }catch(Exception ex){
+            System.err.println("==ADD PRODUCT ERROR== "+ ex.getMessage());
+            ex.printStackTrace();
+        }
+        return false;
+    }
     
 }
