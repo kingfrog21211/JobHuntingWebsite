@@ -20,4 +20,5 @@ public interface RecruitJobService {
     List<RecruitJob> getRecruitJobByRecruitId(Integer recruitId);
     List<RecruitJob> getRecruitJobByKW(String kw);
     boolean addOrUpdate(RecruitJob rj);
+    boolean deleteRecruitJob(Integer id);
 }

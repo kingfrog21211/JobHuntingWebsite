@@ -38,12 +38,12 @@
     <div class="alert-danger">${errMsg}</div>
 </c:if>
 <section style="margin-top: 70px; margin-left: 10px; margin-right: 10px">
-    <div class="container">
+    <!--<div class="container">-->
         <!--tieu de-->
         <div class="heading_container">
             <h2 class="title"><strong>MANAGE RECRUIT JOB</strong></h2>
         </div>
-        <div style="border-color: #000; border-style: outset; border-width: 3px; max-height: 600px;display: flex; flex-direction: column-reverse; overflow: scroll">
+        <div style="display: flex; flex-direction: column-reverse; overflow: scroll">
             <!--content-->            
             <c:if test="${recruitJob.size() == null}">
                 <div class="alert alert-danger">
@@ -106,6 +106,7 @@
                                            value="Modify" 
                                            style="background-color: black; color: white; width: 80px"/>
                                     <input type="button" 
+                                           onclick="deleteRecruitJob(${c[6]})"
                                            value="Delete" 
                                            style="background-color: #ff9f01; color: black; width: 80px; margin-top: 5px"/>
                                 </td>
@@ -117,7 +118,7 @@
         <!--button-->
         <div class="form-group">
             <input onclick="location.href='<c:url value="/recruit-addRecruitJob"/>'" type="submit" value="Add new Job" class="title" style="background-color: chartreuse; display: table; clear: both; margin-left: 41%; margin-right: 50% ">
-            
+            <br>
         </div>
-    </div>
+    <!--</div>-->
 </section>

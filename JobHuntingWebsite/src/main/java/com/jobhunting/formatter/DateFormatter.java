@@ -23,9 +23,9 @@ public class DateFormatter implements Formatter<Object>{
 
     @Override
     public Object parse(String text, Locale locale) throws ParseException {
-        long miliseconds = System.currentTimeMillis();
-        Date d = new Date(miliseconds);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        long miliseconds = System.currentTimeMillis();
+        Date d = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         d = simpleDateFormat.parse(text);
         return d;
     }

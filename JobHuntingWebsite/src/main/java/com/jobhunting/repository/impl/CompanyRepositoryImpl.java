@@ -9,6 +9,7 @@ import com.jobhunting.pojo.Recruit;
 import com.jobhunting.repository.CompanyRepository;
 import java.util.List;
 import javax.persistence.Query;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -37,5 +38,4 @@ public class CompanyRepositoryImpl implements CompanyRepository{
     public Recruit getCompanyByRecruitId(Integer recruitId) {
         return this.sessionFactory.getObject().getCurrentSession().get(Recruit.class, recruitId);
     }
-    
 }

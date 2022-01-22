@@ -19,6 +19,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -296,9 +297,20 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
         try{
             session.save(rj);
             return true;
-        }catch(Exception ex){
-            System.err.println("==ADD PRODUCT ERROR== "+ ex.getMessage());
+        }catch(HibernateException ex){
             ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteRecruitJob(RecruitJob r) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.delete(r);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println("MESSAGE: " + ex.getMessage());
         }
         return false;
     }

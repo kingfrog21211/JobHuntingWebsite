@@ -8,6 +8,7 @@ package com.jobhunting.configs;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.jobhunting.formatter.CityFormatter;
+import com.jobhunting.formatter.CompanyFormatter;
 import com.jobhunting.formatter.DateFormatter;
 import com.jobhunting.formatter.ExperienceFormatter;
 import com.jobhunting.formatter.ProfessionFormatter;
@@ -113,6 +114,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer{
         registry.addFormatter(new ProfessionFormatter());
         registry.addFormatter(new CityFormatter());
         registry.addFormatter(new DateFormatter());
+        registry.addFormatter(new CompanyFormatter());
     }
     
     

@@ -33,6 +33,7 @@
         <link rel="stylesheet" href="css/login-demo.css">
         <script src="js/jquery-3.4.1.min.js"></script>
         <script src="js/bootstrap.js"></script>
+        <script src="js/main.js"></script>
         <script src="https://unpkg.com/boxicons@2.1.1/dist/boxicons.js"></script>
 
         <title>

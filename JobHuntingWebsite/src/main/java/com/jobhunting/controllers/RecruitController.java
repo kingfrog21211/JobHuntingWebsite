@@ -8,7 +8,7 @@ package com.jobhunting.controllers;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.jobhunting.pojo.RecruitJob;
-import com.jobhunting.pojo.RecruitJob_;
+import com.jobhunting.service.CompanyService;
 import com.jobhunting.service.RecruitJobService;
 import java.io.IOException;
 import java.util.Map;
@@ -27,7 +27,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -38,15 +42,17 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 public class RecruitController {
     @Autowired
     private RecruitJobService recruitJobService;
+    @Autowired
+    private CompanyService companyService;
     
     @ModelAttribute
     public void addAttribute(Model model, HttpSession session){
         model.addAttribute("recruitJob", this.recruitJobService.getRecruitJob());
+        model.addAttribute("companies", this.companyService.getCompany());
     }
     
     @GetMapping("/recruit-RecruitJob")  //chua loc theo RecruitId
     public String listJob(Model model){
-        model.addAttribute("recruitJob", this.recruitJobService.getRecruitJob());
         return "recruit-RecruitJob";
     }
     
@@ -58,13 +64,18 @@ public class RecruitController {
     
     @PostMapping("/recruit-addRecruitJob")
     public String add(Model model, @ModelAttribute(value = "recruitJob") @Valid RecruitJob recruitJob, BindingResult result){
-        
-        if (!result.hasErrors()){
-            if (this.recruitJobService.addOrUpdate(recruitJob)==true)
-                return "redirect:/recruit-RecruitJob";
-            else
-                model.addAttribute("errMsg", "System has something wrong!!!");
+        if (result.hasErrors()) {
+            return "recruit-addRecruitJob";
         }
+        if (this.recruitJobService.addOrUpdate(recruitJob)==true)
+            return "redirect:/recruit-RecruitJob";
+        model.addAttribute("errMsg", "System has something wrong!!!");
         return "recruit-addRecruitJob";
     }
+    
+    @GetMapping("/recruit-RecruitInfo")
+    public String recruitInfo(Model model){
+        return "recruit-RecruitInfo";
+    }
+    
 }

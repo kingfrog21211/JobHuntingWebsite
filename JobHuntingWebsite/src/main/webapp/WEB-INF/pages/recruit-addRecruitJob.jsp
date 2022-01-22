@@ -22,8 +22,17 @@
     </div>
     <div style="margin-left:20%; margin-right:20%">
     <form:form autocomplete="on" method="post" action="${action}" modelAttribute="recruitJob" enctype="multipart/form-data">
+        <!--Recruit ID-->
+        <div class="form-group" style="margin-left: 25%; margin-right: 25%">
+            <label for="company" style="color: red; font-weight: 700">YOUR COMPANY NAME</label>
+            <form:select id="company" path="recruitId" cssClass="form-control">
+                <c:forEach items="${companies}" var="c">
+                    <form:option value="${c.recruitId}">${c.companyName}</form:option>
+                </c:forEach>
+            </form:select>
+        </div>
         <!--title-->
-        <div class="form-group" style="position: relative">
+        <div class="form-group">
             <label for="title">Job Title</label>
             <form:input type="text" id="title" path="title" cssClass="form-control"/>
             <form:errors path="title" cssClass="text-danger" element="div"/>
@@ -64,8 +73,8 @@
             </div>
             <!--salary-->
             <div class="form-group">
-            <label for="salaryId">Salary</label>
-            <form:select path="salaryId" cssClass="form-control">
+            <label for="salary">Salary</label>
+            <form:select id="salary" path="salaryId" cssClass="form-control">
                 <c:forEach items="${salary}" var="s">
                     <form:option value="${s.salaryId}">${s.salaryValue}</form:option>
                 </c:forEach>
@@ -75,8 +84,8 @@
         <div class="form-group" style="column-count: 3">
             <!--experience-->
             <div class="form-group">
-                <label for="experienceId">Experience</label>
-                <form:select path="experienceId" cssClass="form-control">
+                <label for="ex">Experience</label>
+                <form:select id="ex" path="experienceId" cssClass="form-control">
                     <c:forEach items="${experiences}" var="e">
                         <form:option value="${e.experienceId}">${e.experienceValue}</form:option>
                     </c:forEach>
@@ -84,8 +93,8 @@
             </div>
             <!--work type-->
             <div class="form-group">
-                <label for="workTypeId">Work type</label>
-                <form:select path="cityId" cssClass="form-control">
+                <label for="w">Work type</label>
+                <form:select id="w" path="cityId" cssClass="form-control">
                     <c:forEach items="${workTypes}" var="e">
                         <form:option value="${e.workTypeId}">${e.workTypeName}</form:option>
                     </c:forEach>
@@ -93,8 +102,8 @@
             </div>
             <!--profession-->
             <div class="form-group">
-                <label for="professionId">Profession</label>
-                <form:select path="professionId" cssClass="form-control">
+                <label for="pro">Profession</label>
+                <form:select id="pro" path="professionId" cssClass="form-control">
                     <c:forEach items="${professions}" var="e">
                         <form:option value="${e.professionId}">${e.professionName}</form:option>
                     </c:forEach>
@@ -105,7 +114,7 @@
             <!--email-->
             <div class="form-group">
                 <label for="emailContact">Email Contact</label>
-                <form:input type="email" id="emailContact" path="emailContact" cssClass="form-control"/>
+                <form:input type="text" id="emailContact" path="emailContact" cssClass="form-control"/>
                 <form:errors path="emailContact" cssClass="text-danger" element="div"/>
             </div>
             <!--name contact-->
@@ -124,7 +133,7 @@
             <!--city-->
             <div class="form-group">
                 <label for="cityId">City</label>
-                <form:select path="cityId" cssClass="form-control">
+                <form:select id="cityId" path="cityId" cssClass="form-control">
                     <c:forEach items="${cities}" var="e">
                         <form:option value="${e.cityId}">${e.cityName}</form:option>
                     </c:forEach>
@@ -139,10 +148,16 @@
             <!--expiration date-->
             <div class="form-group">
                 <label for="expirationDate">Expiration Date</label>
-                <form:input type="date" id="expirationDate" path="expirationDate" cssClass="form-control"/>
+                <form:input type="text" id="expirationDate" path="expirationDate" cssClass="form-control"/>
                 <form:errors path="expirationDate" cssClass="text-danger" element="div"/>
             </div>
         </div>
+<!--        <div class="form-group" style="column-count: 2">
+            <div class="form-group">
+                <label for="postDate">Post Date</label>
+                <%--<form:input type="text" id="postDate" path="postDate" cssClass="form-control"/>--%>
+            </div>
+        </div>-->
         
         <div class="form-group">
             <input type="submit" value="Add Recruit Job" class="btn" style="background-color: #ff9f01; display: table; clear: both; margin-left: 85%">

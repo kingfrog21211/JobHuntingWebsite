@@ -29,5 +29,4 @@ public class CompanyServiceImpl implements CompanyService{
     public Recruit getCompanyByRecruitId(Integer recruitId) {
         return this.companyRepository.getCompanyByRecruitId(recruitId);
     }
-    
 }

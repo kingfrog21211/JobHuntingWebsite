@@ -5,6 +5,7 @@
  */
 package com.jobhunting.repository;
 
+import com.jobhunting.pojo.Recruit;
 import com.jobhunting.pojo.RecruitJob;
 import java.util.List;
 
@@ -20,4 +21,5 @@ public interface RecruitJobRepository {
     List<RecruitJob> getRecruitJobByRecruitId(Integer recruitId);
     List<RecruitJob> getRecruitJobByKW(String kw);
     boolean addOrUpdate(RecruitJob rj);
+    boolean deleteRecruitJob(RecruitJob r);
 }
