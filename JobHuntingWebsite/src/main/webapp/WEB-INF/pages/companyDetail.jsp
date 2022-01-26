@@ -13,10 +13,10 @@
             <div style="background: linear-gradient(white,#ff9f01,white); display: grid; grid-template-columns: 270px 1fr;height: content-box" >
                 <!--logo-->
                 <div style="background-color: white;width: 250px;height: 250px; border-color: #ff9f01; border-style: outset; margin: 20px">
-                    <c:if test="${companyDetails.logo != null}">
+                    <c:if test="${companyDetails.logo != null && companyDetails.logo.startsWith('https')}">
                         <img style="max-width: 100%" src="${companyDetails.logo}" alt="${companyDetails.companyName}" title="${companyDetails.companyName}"/>
                     </c:if>
-                    <c:if test="${companyDetails.logo == null}">
+                    <c:if test="${companyDetails.logo == null || !companyDetails.startsWith('https')}">
                         <img style="max-width: 100%" src="https://res.cloudinary.com/tcme212/image/upload/v1642397265/icon_eif3gg.png" alt="${companyDetails.companyName}" title="${companyDetails.companyName}" style="height: 65px; width: 65px"/>
                     </c:if>
                 </div>

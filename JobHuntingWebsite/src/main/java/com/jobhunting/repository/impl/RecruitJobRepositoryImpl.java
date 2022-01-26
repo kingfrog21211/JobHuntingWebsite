@@ -297,7 +297,8 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
         try{
             session.save(rj);
             return true;
-        }catch(HibernateException ex){
+        }catch(Exception ex){
+            System.err.println("ERROR: "+ex.getMessage());
             ex.printStackTrace();
         }
         return false;

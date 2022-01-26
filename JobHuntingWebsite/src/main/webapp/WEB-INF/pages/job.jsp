@@ -54,12 +54,12 @@
                                         <c:url value="/companyDetail" var="action">
                                             <c:param name="recruitId" value="${rj[20]}"/>
                                         </c:url>
-                                        <c:if test="${rj[0]!=null}">
+                                        <c:if test="${rj[0].startsWith('https')}">
                                             <a href="${action}" target="_blank">
                                                 <img src="${rj[0]}" alt="${rj[1]}" data-controller="lazyload" class=" ls-is-cached lazyloaded" title="${rj[1]}" style="height: 65px; width: 65px"/>
                                             </a>
                                         </c:if>
-                                        <c:if test="${rj[0] == null}">
+                                        <c:if test="${rj[0] == null || !rj[0].startsWith('https')}">
                                             <a href="${action}" target="_blank">
                                                 <img src="https://res.cloudinary.com/tcme212/image/upload/v1642397265/icon_eif3gg.png" alt="${rj[1]}" data-controller="lazyload" class=" ls-is-cached lazyloaded" title="${rj[1]}" style="height: 65px; width: 65px"/>
                                             </a>

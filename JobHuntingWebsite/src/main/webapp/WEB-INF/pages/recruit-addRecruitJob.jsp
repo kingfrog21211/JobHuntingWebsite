@@ -11,9 +11,7 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:url value="/recruit-addRecruitJob" var="action"/>
-<c:if test="${errMsg!=null}">
-    <div class="alert-danger">${errMsg}</div>
-</c:if>
+
 <section class="job_section layout_padding">
     <div class="container">
         <div class="heading_container">
@@ -76,7 +74,7 @@
             <label for="salary">Salary</label>
             <form:select id="salary" path="salaryId" cssClass="form-control">
                 <c:forEach items="${salary}" var="s">
-                    <form:option value="${s.salaryId}">${s.salaryValue}</form:option>
+                    <option value="${s.salaryId}">${s.salaryValue}</option>
                 </c:forEach>
             </form:select>
             </div>
@@ -87,16 +85,16 @@
                 <label for="ex">Experience</label>
                 <form:select id="ex" path="experienceId" cssClass="form-control">
                     <c:forEach items="${experiences}" var="e">
-                        <form:option value="${e.experienceId}">${e.experienceValue}</form:option>
+                        <option value="${e.experienceId}">${e.experienceValue}</option>
                     </c:forEach>
                 </form:select>
             </div>
             <!--work type-->
             <div class="form-group">
                 <label for="w">Work type</label>
-                <form:select id="w" path="cityId" cssClass="form-control">
+                <form:select id="w" path="workTypeId" cssClass="form-control">
                     <c:forEach items="${workTypes}" var="e">
-                        <form:option value="${e.workTypeId}">${e.workTypeName}</form:option>
+                        <option value="${e.workTypeId}">${e.workTypeName}</option>
                     </c:forEach>
                 </form:select>
             </div>
@@ -105,7 +103,7 @@
                 <label for="pro">Profession</label>
                 <form:select id="pro" path="professionId" cssClass="form-control">
                     <c:forEach items="${professions}" var="e">
-                        <form:option value="${e.professionId}">${e.professionName}</form:option>
+                        <option value="${e.professionId}">${e.professionName}</option>
                     </c:forEach>
                 </form:select>
             </div>
@@ -135,7 +133,7 @@
                 <label for="cityId">City</label>
                 <form:select id="cityId" path="cityId" cssClass="form-control">
                     <c:forEach items="${cities}" var="e">
-                        <form:option value="${e.cityId}">${e.cityName}</form:option>
+                        <option value="${e.cityId}">${e.cityName}</option>
                     </c:forEach>
                 </form:select>
             </div>
@@ -148,19 +146,21 @@
             <!--expiration date-->
             <div class="form-group">
                 <label for="expirationDate">Expiration Date</label>
-                <form:input type="text" id="expirationDate" path="expirationDate" cssClass="form-control"/>
+                <form:input type="date" id="expirationDate" path="expirationDate" cssClass="form-control"/>
                 <form:errors path="expirationDate" cssClass="text-danger" element="div"/>
             </div>
-        </div>
-<!--        <div class="form-group" style="column-count: 2">
+            
             <div class="form-group">
                 <label for="postDate">Post Date</label>
-                <%--<form:input type="text" id="postDate" path="postDate" cssClass="form-control"/>--%>
+                <form:input type="date" id="postDate" path="postDate" cssClass="form-control"/>
+                <form:errors path="postDate" cssClass="text-danger" element="div"/>
             </div>
-        </div>-->
-        
+        </div>
         <div class="form-group">
             <input type="submit" value="Add Recruit Job" class="btn" style="background-color: #ff9f01; display: table; clear: both; margin-left: 85%">
         </div>
     </form:form></div>
+    <c:if test="${errMsg!=null}">
+        <div class="alert alert-danger">${errMsg}</div>
+    </c:if>
 </section>

@@ -91,7 +91,6 @@ public class WebApplicationContextConfig implements WebMvcConfigurer{
         ResourceBundleMessageSource source = new ResourceBundleMessageSource();
         source.setBasename("messages");
         return source;
-        
     }
 
     @Override
@@ -113,7 +112,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer{
         registry.addFormatter(new WorkTypeFormatter());
         registry.addFormatter(new ProfessionFormatter());
         registry.addFormatter(new CityFormatter());
-        registry.addFormatter(new DateFormatter());
+//        registry.addFormatter(new DateFormatter());
         registry.addFormatter(new CompanyFormatter());
     }
     

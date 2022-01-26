@@ -14,20 +14,19 @@ import java.text.SimpleDateFormat;
  *
  * @author Asus
  */
-public class DateFormatter implements Formatter<Object>{
+public class DateFormatter implements Formatter<Date>{
 
     @Override
-    public String print(Object object, Locale locale) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String print(Date object, Locale locale) {
+        return String.valueOf(object.getDate());
     }
 
     @Override
-    public Object parse(String text, Locale locale) throws ParseException {
-//        long miliseconds = System.currentTimeMillis();
+    public Date parse(String text, Locale locale) throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date d = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         d = simpleDateFormat.parse(text);
         return d;
-    }
+    } 
     
 }

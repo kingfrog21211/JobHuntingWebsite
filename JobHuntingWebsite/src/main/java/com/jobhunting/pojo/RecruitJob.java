@@ -101,15 +101,17 @@ public class RecruitJob implements Serializable {
     @Column(name = "benefit")
     private String benefit;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{recruitJob.nullErr}")
     @Column(name = "postDate")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date postDate;
     @Basic(optional = false)
     @NotNull(message = "{recruitJob.nullErr}")
     @Column(name = "expirationDate")
     @Temporal(TemporalType.DATE)
-    @FutureOrPresent
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @FutureOrPresent
     private Date expirationDate;
     @Basic(optional = false)
     @NotNull(message = "{recruitJob.nullErr}")
@@ -123,13 +125,13 @@ public class RecruitJob implements Serializable {
     @Basic(optional = false)
     @NotNull(message = "{recruitJob.phoneContact.digitsErr}")
     @Size(min = 1, max = 15)
-    @Digits(fraction = 1,integer = 15)
+//    @Digits(fraction = 1,integer = 15)
     @Column(name = "phoneContact")
 //    @Phone(message = "{recruitJob.phoneContact.digitsErr}")
     private String phoneContact;
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "status")
+//    @NotNull
+    @Column(name = "status", columnDefinition="BIT")
     private boolean status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recruitJobId")
     private Set<SaveJob> saveJobSet;

@@ -7,6 +7,7 @@ package com.jobhunting.service.impl;
 
 import com.jobhunting.pojo.Recruit;
 import com.jobhunting.pojo.RecruitJob;
+import com.jobhunting.repository.CompanyRepository;
 import com.jobhunting.repository.RecruitJobRepository;
 import com.jobhunting.service.RecruitJobService;
 import java.text.ParseException;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 import java.text.SimpleDateFormat; 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang3.BooleanUtils;
 
 /**
  *
@@ -29,6 +31,8 @@ import java.util.logging.Logger;
 public class RecruitJobServiceImpl implements RecruitJobService{
     @Autowired
     public RecruitJobRepository recruitJobRepository;
+    @Autowired
+    public CompanyRepository companyRepository;
 //    @Autowired
 //    private Cloudinary cloudinary;
     
@@ -65,24 +69,27 @@ public class RecruitJobServiceImpl implements RecruitJobService{
     @Override
     public boolean addOrUpdate(RecruitJob rj) {
 //        long miliseconds = System.currentTimeMillis();
-        Date date = new Date();  
+//        Date date = new Date();  
 //        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        rj.setPostDate(date);
+//        rj.setPostDate(date);
 //        try {
 //            rj.setExpirationDate(simpleDateFormat.parse("21/2/2022"));
 //        } catch (ParseException ex) {
 //            Logger.getLogger(RecruitJobServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        rj.setStatus(true);
-//        try {
+        
+        try {
 //            Map r = this.cloudinary.uploader().upload(recruitJob.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
-//            Product.setImage((String) r.get("secure_url"));
-              return this.recruitJobRepository.addOrUpdate(rj);
-//        } catch (Exception ex) {
-//            System.err.println("==ADD RECRUIT JOB ERROR== "+ ex.getMessage());
-//            ex.printStackTrace();
-//        }
-//        return false;
+//            product.setImage((String) r.get("secure_url"));
+//            rj.setStatus(true);
+//            Recruit r = this.companyRepository.getCompanyByRecruitId(2);
+//            rj.setRecruitId(r);
+            return this.recruitJobRepository.addOrUpdate(rj);
+        } catch (Exception ex) {
+            System.err.println("==ADD RECRUIT JOB ERROR== "+ ex.getMessage());
+            ex.printStackTrace();
+        }
+        return false;
     }
 
     @Override
