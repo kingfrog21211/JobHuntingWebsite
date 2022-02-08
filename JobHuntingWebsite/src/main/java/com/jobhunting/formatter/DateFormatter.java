@@ -9,6 +9,8 @@ import java.util.Locale;
 import org.springframework.format.Formatter;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,14 +20,21 @@ public class DateFormatter implements Formatter<Date>{
 
     @Override
     public String print(Date object, Locale locale) {
-        return String.valueOf(object.getDate());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = object;
+        try {
+            date = simpleDateFormat.parse(String.valueOf(object));
+            return String.valueOf(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(DateFormatter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return String.valueOf(date);
     }
 
     @Override
     public Date parse(String text, Locale locale) throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date d = new Date();
-        d = simpleDateFormat.parse(text);
+        Date d = simpleDateFormat.parse(text);
         return d;
     } 
     

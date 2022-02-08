@@ -6,41 +6,23 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <head>
-        <!-- Basic -->
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <!-- Mobile Metas -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <!-- Site Metas -->
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <!-- bootstrap core css -->
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-        <!-- fonts style -->
-        <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Roboto:400,700&display=swap" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="css/style.css" rel="stylesheet" />
-        <!-- responsive style -->
-        <link href="css/responsive.css" rel="stylesheet" />
-        <!-- popup form -->
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
-        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
-        <link rel="stylesheet" href="css/login-style.css">
-        <link rel="stylesheet" href="css/login-demo.css">
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.js"></script>
-        <script src="https://unpkg.com/boxicons@2.1.1/dist/boxicons.js"></script>
-    </head>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
+    <c:if test="${addCvMsg != null}">
+        <div id="toast">
+            <h3 class="toast_title">THÔNG BÁO!</h3>
+            <div class="toast_message">${addCvMsg}</div>
+        </div>
+        <div class="text text-center text-danger">
+            <h3>THÔNG BÁO!</h3>
+            <div>${addCvMsg}</div>
+        </div>
+    </c:if>
+<div class="container">
     <div style="padding-left: 15px; padding-top: 15px; position: relative">
         <h1 class="job-details__title" style="color: #ff9f01"><strong>${jobDetails[7]}</strong></h1>
         <div class="job-details__sub-title" style="font-weight: bold; font-size: 25px"><strong>${jobDetails[1]}</strong></div><br>
-            <div class="job-details__apply">
-                <div class="btn-box" >
-                    <button style="font-size: 25px; background-color: #ff9f01;position: absolute;top: 80px;right: 30px;cursor: pointer; z-index: 2" target="_blank" href="">Apply Now</button>
-                </div>
-            </div>
+        
             <div class="svg-icon svg-icon--rounded" style="">
                 <box-icon name='dollar-circle'></box-icon>
                 <div class="svg-icon__text">${jobDetails[2]}</div>        
@@ -78,4 +60,23 @@
                 <span>Phone: ${jobDetails[18]}</span>
             </div>
         </div>
+            <br>
+        <!--button apply-->   
+        <security:authorize access="hasRole('ROLE_CANDIDATE')">
+        <div class="job-details__apply">
+            <div class="btn-box" >
+                <c:if test="${pageContext.request.userPrincipal.name == null}">
+                    <button onclick="location.href='<c:url value="/login"/>'">Apply Now</button>
+                </c:if>
+                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                    <button onclick="addCV(${jobDetails[6]})">
+                        Apply Now
+                    </button>
+                </c:if>
+            </div>
+        </div>
+        </security:authorize>
+        <!--end button apply-->
+    </div>
 </div>
+            <br><br>

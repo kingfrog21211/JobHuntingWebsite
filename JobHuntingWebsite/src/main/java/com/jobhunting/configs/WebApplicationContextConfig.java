@@ -5,7 +5,6 @@
  */
 package com.jobhunting.configs;
 
-import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.jobhunting.formatter.CityFormatter;
 import com.jobhunting.formatter.CompanyFormatter;
@@ -30,6 +29,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.MultipartResolver;
 
 /**
  *
@@ -76,17 +76,6 @@ public class WebApplicationContextConfig implements WebMvcConfigurer{
     }
     
     @Bean
-    public Cloudinary cloudinary(){
-        Cloudinary c = new Cloudinary(ObjectUtils.asMap(    //ObjectUtils de parse thanh dang bam
-                "cloud_name", "tcme212", 
-                "api_key", "353316144828625", 
-                "api_secret", "FIm3qyJNV1GUmfYsJgG4xd1w4-s", 
-                "secure",true
-        ));
-        return c;
-    }
-    
-    @Bean
     public MessageSource messageSource(){
         ResourceBundleMessageSource source = new ResourceBundleMessageSource();
         source.setBasename("messages");
@@ -116,5 +105,12 @@ public class WebApplicationContextConfig implements WebMvcConfigurer{
         registry.addFormatter(new CompanyFormatter());
     }
     
-    
+    @Bean(name = "multipartResolver")
+    public MultipartResolver getMultipartResolver() {
+        CommonsMultipartResolver resover = new CommonsMultipartResolver();
+        // 1MB
+        resover.setMaxUploadSize(1 * 1024 * 1024);
+
+        return resover;
+    }
 }

@@ -69,9 +69,9 @@ public class RecruitJobServiceImpl implements RecruitJobService{
     @Override
     public boolean addOrUpdate(RecruitJob rj) {
 //        long miliseconds = System.currentTimeMillis();
-//        Date date = new Date();  
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-//        rj.setPostDate(date);
+        Date date = new Date();  
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        
 //        try {
 //            rj.setExpirationDate(simpleDateFormat.parse("21/2/2022"));
 //        } catch (ParseException ex) {
@@ -84,6 +84,7 @@ public class RecruitJobServiceImpl implements RecruitJobService{
 //            rj.setStatus(true);
 //            Recruit r = this.companyRepository.getCompanyByRecruitId(2);
 //            rj.setRecruitId(r);
+            rj.setPostDate(date);
             return this.recruitJobRepository.addOrUpdate(rj);
         } catch (Exception ex) {
             System.err.println("==ADD RECRUIT JOB ERROR== "+ ex.getMessage());

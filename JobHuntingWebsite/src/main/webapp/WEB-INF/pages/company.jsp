@@ -8,7 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section class="job_section layout_padding-bottom">
-    <div class="container">
+    <div class="heading_container">
         <br><br>
         <div class="heading_container">
             <h2>Recommended companies <br>
@@ -17,16 +17,16 @@
             </h2>
         </div>
 
-        <div class="tab-content" id="myTabContent">
-            <div class="job_board tab-pane fade show active" id="jb-1" role="tabpanel" aria-labelledby="jb-1-tab">
-                <div class="content-box">
-                    <div class="content layout_padding2-top">
+        <div class="container" id="myTabContent">
+            <div class="" id="jb-1" role="tabpanel" aria-labelledby="jb-1-tab">
+                <div class="">
+                    <div class="">
                         <!-- career -->
                         <c:forEach items="${companies}" var="c">
                             <c:url value="/companyDetail" var="action">
                                 <c:param name="recruitId" value="${c.recruitId}"/>
                             </c:url>
-                            <div class="box">
+                            <div class="">
                                 <h3>${c.companyName}</h3>
                                 <a href="${action}">See information</a>
                             </div>

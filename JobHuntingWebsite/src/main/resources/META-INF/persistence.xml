@@ -25,6 +25,9 @@
     <class>com.jobhunting.pojo.CandidatePostResume</class>
     <class>com.jobhunting.pojo.RecruitJob</class>
     <class>com.jobhunting.pojo.SaveJob</class>
+    <class>com.jobhunting.pojo.City_1</class>
+    <class>com.jobhunting.pojo.Profession_1</class>
+    <class>com.jobhunting.pojo.User_1</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jobhunting?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

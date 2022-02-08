@@ -39,7 +39,7 @@
 </c:if>
 <section style="margin-top: 70px; margin-left: 10px; margin-right: 10px">
     <!--<div class="container">-->
-        <!--tieu de-->
+        <!--title-->
         <div class="heading_container">
             <h2 class="title"><strong>MANAGE RECRUIT JOB</strong></h2>
         </div>
@@ -102,8 +102,12 @@
 
                                 <!--button modify, delete-->
                                 <td>
+                                    <c:url value="/recruit-updateRecruitJob" var="action">
+                                        <c:param name="recruitJobId" value="${c[6]}"/>
+                                    </c:url>
                                     <input type="button"
                                            value="Modify" 
+                                           onclick="location.href='${action}'"
                                            style="background-color: black; color: white; width: 80px"/>
                                     <input type="button" 
                                            onclick="deleteRecruitJob(${c[6]})"

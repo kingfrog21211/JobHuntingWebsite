@@ -40,7 +40,7 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
     public List<RecruitJob> getRecruitJob() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Object> query = builder.createQuery(Object.class);
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
         Root root = query.from(RecruitJob.class);
         
         Root rootSalary = query.from(Salary.class);
@@ -75,7 +75,7 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
     public List<RecruitJob> getRecruitJobBySearching(Integer cityId, Integer professionId, Integer workTypeId, Integer salaryId) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Object> query = builder.createQuery(Object.class);
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
         Root root = query.from(RecruitJob.class);
         
         Root rootSalary = query.from(Salary.class);
@@ -187,7 +187,7 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
     public Object getJobDetail(Integer id){
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Object> query = builder.createQuery(Object.class);
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
         Root root = query.from(RecruitJob.class);
         
         Root rootSalary = query.from(Salary.class);
@@ -223,7 +223,7 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
     public List<RecruitJob> getRecruitJobByRecruitId(Integer recruitId) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Object> query = builder.createQuery(Object.class);
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
         Root root = query.from(RecruitJob.class);
         
         Root rootSalary = query.from(Salary.class);
@@ -259,7 +259,7 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
     public List<RecruitJob> getRecruitJobByKW(String kw) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Object> query = builder.createQuery(Object.class);
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
         Root root = query.from(RecruitJob.class);
         
         Root rootSalary = query.from(Salary.class);
@@ -275,7 +275,10 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
         Predicate preExp = builder.equal(rootExp.get("experienceId"), root.get("experienceId"));
         Predicate preWorkType = builder.equal(rootWorkType.get("workTypeId"), root.get("workTypeId"));
         Predicate preProfession = builder.equal(rootProfession.get("professionId"), root.get("professionId"));
-        Predicate p = builder.like(root.get("title").as(String.class), String.format("%%%s%%", kw));
+        Predicate p1 = builder.like(root.get("title").as(String.class), String.format("%%%s%%", kw));
+        Predicate p2 = builder.like(rootRecruit.get("companyName").as(String.class), String.format("%%%s%%", kw));
+        
+        Predicate p = builder.or(p1,p2);
         
         query.multiselect(rootRecruit.get("logo"), 
                             rootRecruit.get("companyName"), 

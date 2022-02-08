@@ -48,6 +48,8 @@ public class Experience implements Serializable {
     @Column(name = "experienceValue")
     private String experienceValue;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "experienceId")
+    private Set<Candidate> candidateSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "experienceId")
     private Set<RecruitJob> recruitJobSet;
 
     public Experience() {
@@ -76,6 +78,15 @@ public class Experience implements Serializable {
 
     public void setExperienceValue(String experienceValue) {
         this.experienceValue = experienceValue;
+    }
+
+    @XmlTransient
+    public Set<Candidate> getCandidateSet() {
+        return candidateSet;
+    }
+
+    public void setCandidateSet(Set<Candidate> candidateSet) {
+        this.candidateSet = candidateSet;
     }
 
     @XmlTransient

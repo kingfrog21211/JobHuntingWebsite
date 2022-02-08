@@ -1,0 +1,169 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 2, 2022, 3:53:47 PM
+    Author     : ASUS
+
+*/
+@media (min-width: 768px)
+.search-job .container {
+    min-width: 750px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 96%;
+}
+
+@media (min-width: 768px)
+.search-job .container, .search-job .container-md, .search-job .container-sm {
+    max-width: 720px;
+}
+.search-job .list-job {
+    background: #fff 0 0 no-repeat padding-box;
+    border-radius: 3px;
+    padding: 20px 0;
+}
+.search-job .list-job .job-header {
+    border-bottom: 1px solid #eee;
+    padding: 0 16px 20px;
+}
+.search-job .list-job .show-important {
+    border-bottom: 1px solid #eee;
+    display: flex;
+    padding: 20px 16px;
+}
+.search-job .list-job .job-body {
+    padding: 16px 16px 0;
+}
+
+.search-job .row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+@media (min-width: 768px)
+.search-job .col-md-9 {
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+.search-job .row>* {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    margin-top: var(--bs-gutter-y);
+    max-width: 100%;
+    padding-left: calc(var(--bs-gutter-x)*.5);
+    padding-right: calc(var(--bs-gutter-x)*.5);
+    width: 100%;
+}
+.search-job .list-job .job-body .job-item {
+    background: #fff 0 0 no-repeat padding-box;
+    border: 1px solid #f4f4f4;
+    border-radius: 5px;
+    display: flex;
+    padding: 16px;
+}
+.box-job, .job-item {
+    box-shadow: 0 5px 20px 0 transparent;
+    transition: box-shadow .3s;
+}
+.search-job .row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(var(--bs-gutter-x)*-.5);
+    margin-right: calc(var(--bs-gutter-x)*-.5);
+    margin-top: calc(var(--bs-gutter-y)*-1);
+}
+.job-body .job-item.bg-highlight {
+    background-color: #f2fbf6!important;
+}
+.job-body .job-item {
+    background: #fff 0 0 no-repeat padding-box;
+    border: 1px solid #f4f4f4;
+    border-radius: 5px;
+    display: flex;
+    margin: auto auto 16px;
+    padding: 16px;
+}
+.box-job, .job-item {
+    box-shadow: 0 5px 20px 0 transparent;
+    transition: box-shadow .3s;
+}
+.list-job .job-body {
+    padding: 20px 16px;
+}
+.job-body .job-item .avatar {
+    height: 80px;
+    width: 80px;
+}
+.job-body .job-item .body {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    width: 100%;
+}
+.job-body .job-item .body .content {
+    display: flex;
+    width: 100%;
+}
+.job-body .job-item .ml-auto {
+    margin-right: auto;
+}
+.job-body .job-item .text-right {
+    min-width: 180px;
+    text-align: right;
+}
+.search-job .list-job .job-body .job-item .body .title {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.h3, h3 {
+    font-size: 24px;
+}
+.job-body .job-item .mr-auto {
+    margin-left: auto;
+}
+.search-job .list-job .job-body .job-item .body .label-content label {
+    background: #edeef0 0 0 no-repeat padding-box !important ;
+    border-radius: 3px !important;
+    color: #636d78 !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    padding: 2px 8px !important;
+}
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.search-job .d-flex {
+    display: flex!important;
+}
+.search-job .list-job .job-body .job-item .ml-auto {
+    margin-right: auto;
+}
+.search-job .list-job .job-body .job-item .body .title a {
+    color: #212f3f !important;
+    font-size: 16px !important;
+    margin-bottom: 6px !important;
+    text-decoration: none !important;
+    vertical-align: top !important;
+}
+
+.badge{
+    border-radius: 3px;
+}
+.search-job .list-job .job-body .job-item .avatar img {
+    border-radius: 5px;
+    height: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+    width: 80px;
+}

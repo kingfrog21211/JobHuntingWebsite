@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
@@ -56,6 +58,7 @@ public class HomeController {
         model.addAttribute("workTypes", this.workTypeService.getWorkType());
         model.addAttribute("salary", this.salaryService.getSalary());
         model.addAttribute("experiences", this.experienceService.getExperiences());
+        model.addAttribute("currentUser", session.getAttribute("currentUser"));
     }
     
     @RequestMapping("/")

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//function updateRecruitJob(id, obj){
+function updateRecruitJob(id, obj){
 //    event.preventDefault();
 //    
 //    fetch("/JobHuntingWebsite/recruit-RecruitJob/", {
@@ -27,7 +27,7 @@
 //    }).catch(function(err){
 //        console.error(err);
 //    });
-//}
+}
 
 function deleteRecruitJob(id) {
     event.preventDefault();
@@ -45,4 +45,39 @@ function deleteRecruitJob(id) {
         })
     }
 }
+// ADD LIKE TO RECRUITMENT
+function addReLike(recruitJobId) {
+    fetch(`/jobhunting/api/save-job/${recruitJobId}`, {
+        method: "get",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {
 
+        return res.json();
+    }).then(function (data) {
+
+        if (data === 1) {
+            $('#like-section').css('background-color', '#87817f');
+            $('#like-section').css('color', '#000');
+        } else
+            alert("Error!!");
+
+    })
+}
+// ADD CV TO RECRUITMENT
+function addCV(recruitJobId) {
+    if (confirm("Do you want to apply your CV for this job?") === true) {
+        fetch(`/jobhunting/api/apply/${recruitJobId}`, {
+            method: "get",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => {
+            if (res.status === 200) {
+                location.reload();
+            } else
+                alert("Error!!");
+        })
+    }
+}

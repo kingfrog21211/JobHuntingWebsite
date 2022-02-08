@@ -1,10 +1,9 @@
 <%-- 
-    Document   : base
-    Created on : Dec 18, 2021, 9:46:57 AM
+    Document   : base-recruiter
+    Created on : Jan 28, 2022, 2:36:31 AM
     Author     : Asus
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!DOCTYPE html>
@@ -24,15 +23,17 @@
         <!-- fonts style -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Roboto:400,700&display=swap" rel="stylesheet">
         <!-- Custom styles for this template -->
-        <link href="css/main.css" rel="stylesheet" />
+        <link href="css/style-recruiter.css" rel="stylesheet" />
         <!-- responsive style -->
         <link href="css/responsive.css" rel="stylesheet" />
-        <link href='css/search-result.css' rel='stylesheet'>
+        <!-- popup form -->
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
+        <link rel="stylesheet" href="css/login-style.css">
+        <link rel="stylesheet" href="css/login-demo.css">
         <script src="js/jquery-3.4.1.min.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/main.js"></script>
-        <script src="https://unpkg.com/boxicons@2.1.1/dist/boxicons.js"></script>
-        <link href="css/job-detail.min.css" rel="stylesheet" />
         <script src="https://unpkg.com/boxicons@2.1.1/dist/boxicons.js"></script>
 
         <title>
@@ -40,11 +41,15 @@
         </title>
     </head>
     <body>
-        <!-- HEADER -->
-        <tiles:insertAttribute name="header" />
-        <!-- CONTENT -->
-        <tiles:insertAttribute name="content"/>
-        <!-- FOOTER -->
-        <tiles:insertAttribute name="footer"/>
+        <div class="hero_area">
+            <!-- HEADER -->
+            <tiles:insertAttribute name="header"/>
+        </div>
+            <!-- CONTENT -->
+            <tiles:insertAttribute name="content"/>
+
+            <!-- FOOTER -->
+            <tiles:insertAttribute name="footer"/>
     </body>
 </html>
+

@@ -7,15 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-<style>
-    iframe:focus {
-        outline: none;
-    }
-    iframe[seamless] {
-        display: block;
-    }
-</style>
+
     <!-- job section -->
     <section class="job_section layout_padding">
         <div class="container">
@@ -33,95 +25,63 @@
                 </div>
             </c:if>
                 
-            <noscript>
-                <iframe height='0' src='//www.googletagmanager.com/ns.html?id=GTM-5DSLL8' style='display:none;visibility:hidden' width='0'></iframe>
-            </noscript>
-
-            <div style="margin: 20px auto 0; display: grid; grid-template-columns: 500px 1fr" id="search-results">
-                
+            <div id="search-results">
                 <div class="tab-content" id="myTabContent" style="border-right: 1px; overflow: scroll; position: sticky; top: 60px; height: calc(100vh - 60px);">
-                    <div class="job_board tab-pane fade show active"  id="jb-1" role="tabpanel" aria-labelledby="jb-1-tab">
-                    <c:forEach items="${recruitJobs}" var="rj">
-                        
-                        <div onclick="" class="job job--selected" style="background-color: #252525;" >
-                            <div class="job_content" style="position: relative">
-                                <span style="font-size: 25px;color:#ffffff;position: absolute;top: 20px;right: 20px;cursor: pointer; z-index: 2;">
-                                    <i class='bx bx-heart' id="heart"></i>
-                                </span>
-                                <!-- logo -->
-                                <div class="logo">
-                                    <div class="logo-wrapper" data-controller="tooltip" title="" data-bs-original-title="">
-                                        <c:url value="/companyDetail" var="action">
-                                            <c:param name="recruitId" value="${rj[20]}"/>
-                                        </c:url>
-                                        <c:if test="${rj[0].startsWith('https')}">
-                                            <a href="${action}" target="_blank">
-                                                <img src="${rj[0]}" alt="${rj[1]}" data-controller="lazyload" class=" ls-is-cached lazyloaded" title="${rj[1]}" style="height: 65px; width: 65px"/>
+                    <div class="list-job">
+                        <div class="job-body row">
+                            <div class="lists">
+                                <c:forEach items="${recruitJobs}" var="rj">
+                                    <div class="job-item  job-ta result-job-hover" data-job-id="595575" data-job-position="1" data-box="BoxSearchResult">
+                                        <div class="avatar">
+                                            <a target="_blank" href="https://www.topcv.vn/viec-lam/thuc-tap-sinh-kinh-doanh/595575.html?ta_source=JobSearchList" class="company-logo" rel="nooppener noreferrer">
+                                                <img src="https://cdn.topcv.vn/80/company_logos/bt4aHjAUuUaPFunAcyJ3S9YtWgeoxHmw_1643255468____6e5c15c6d4ef07464482cfdc75fe2865.jpeg" class="w-100" alt="CÔNG TY TNHH CHUBB LIFE Việt Nam" title="Thực Tập Sinh Kinh Doanh">
                                             </a>
-                                        </c:if>
-                                        <c:if test="${rj[0] == null || !rj[0].startsWith('https')}">
-                                            <a href="${action}" target="_blank">
-                                                <img src="https://res.cloudinary.com/tcme212/image/upload/v1642397265/icon_eif3gg.png" alt="${rj[1]}" data-controller="lazyload" class=" ls-is-cached lazyloaded" title="${rj[1]}" style="height: 65px; width: 65px"/>
-                                            </a>
-                                        </c:if>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- job description -->
-                                <div class="job__description">
-                                    <!-- job title -->
-                                    <div class="job__body">
-                                        <div class="details">
-                                            <!-- job -->
-                                            <h3 class="title">
-                                                <c:url value="/jobDetail" var="action">
-                                                    <c:param name="recruitJobId" value="${rj[6]}"/>
-                                                </c:url>
-                                                <a style="color: #ff9f01" href="${action}" target="iframe_jobDetail">
-                                                    <strong >${rj[7]}</strong>
-                                                </a>
-                                            </h3>
-                                            <!-- company -->
-                                            <h4>
-                                                <c:url value="/companyDetail" var="action">
-                                                    <c:param name="recruitId" value="${rj[20]}"/>
-                                                </c:url>
-                                                <a href="${action}" target="_blank" style="color: #fff">${rj[1]} </a>
-                                            </h4>
-                                            <!-- salary -->
-                                            <div class="svg-icon svg-icon--rounded">
-                                                <box-icon name='dollar-circle' color='#6bf400' ></box-icon>
-                                                <div class="svg-icon__text" style="color: #6bf400">${rj[2]}</div>        
-                                            </div>
-                                            <!-- city -->
-                                            <div class="">
-                                                <div class="city" style="color: #fff">${rj[3]}</div>
+                                        </div>
+                                        <div class="body">
+                                            <div class="content">
+                                                <div class="ml-auto">
+                                                    <h3 class="title">
+                                                        <c:url value="/jobDetail" var="action">
+                                                            <c:param name="recruitJobId" value="${rj[6]}"/>
+                                                        </c:url>
+                                                        <a class="underline-box-job"  href="${action}">
+                                                            <span class="bold transform-job-title" data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="${rj[7]}">${rj[7]}</span>
+                                                        </a>
+                                                    </h3>
+                                                    <p class="company underline-box-job">
+                                                        <c:url value="/companyDetail" var="action">
+                                                            <c:param name="recruitId" value="${rj[20]}"/>
+                                                        </c:url>
+                                                        <a href="${action}" data-toggle="tooltip" data-placement="top" data-container="body" rel="nooppener noreferrer" data-original-title="${rj[1]}">${rj[1]}</a>
+                                                    </p>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="label-content ml-auto" >
+                                                        <a href="" class="badge badge-info">${rj[2]}</a>
+                                                        <a href="" data-original-title="${rj[3]}" class="badge badge-info">${rj[3]}</a>
+                                                        <a href="" class="badge badge-info">${rj[14]}</a>
+                                                        <a href="" class="badge badge-info">${rj[15]}</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- update time -->
-                                    <div class="job-bottom">
-                                        <div class="tag-list" style="color: #fff">
-                                            <span>Post date: ${rj[14]}</span> &emsp;
-                                            <span>Expiration Date: ${rj[15]}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- job description -->
+                                </c:forEach>
                             </div>
                         </div>
-                        <br>
-                    </c:forEach>
-                </div>
-            </div>
-            
-                <div style="position: relative; background-color: transparent">
-                    <div style="padding: 0 30px;">
-                        <div style="word-break: break-word;">
-                            <iframe name="iframe_jobDetail" src="" title="description" style="width: 600px; height: 700px;"> </iframe>
-                        </div>
                     </div>
-                </div>
+                    </div>
+                    
+<!--                    <noscript>
+                        <iframe height='0' src='//www.googletagmanager.com/ns.html?id=GTM-5DSLL8' style='display:none;visibility:hidden' width='0'></iframe>
+                    </noscript>
+                    <div style="position: relative; background-color: transparent">
+                        <div style="padding: 0 30px;">
+                            <div style="word-break: break-word;">
+                                <iframe name="iframe_jobDetail" src="" title="description" style="width: 600px; height: 700px; margin-top: 15px"> </iframe>
+                            </div>
+                        </div>
+                    </div>-->
                 
             </div>
         </div>

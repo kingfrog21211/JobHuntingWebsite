@@ -14,11 +14,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -30,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "user")
 @XmlRootElement
+//@Inheritance(strategy=InheritanceType.JOINED)
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
@@ -40,6 +45,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole")})
 public class User implements Serializable {
+    
+    public static final String ADMIN = "ROLE_ADMIN";
+    public static final String CANDIDATE = "ROLE_CANDIDATE";
+    public static final String RECRUIT = "ROLE_RECRUIT";
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,7 +56,7 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "userId")
     private Integer userId;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -82,6 +91,13 @@ public class User implements Serializable {
     private Set<Candidate> candidateSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<Recruit> recruitSet;
+    
+    @Transient 
+    private String confirmPassword;
+    
+    {
+        userRole= CANDIDATE;
+    }
 
     public User() {
     }
@@ -197,6 +213,20 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.jobhunting.pojo.User[ userId=" + userId + " ]";
+    }
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
     
 }

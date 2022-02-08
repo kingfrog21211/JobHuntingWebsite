@@ -40,25 +40,25 @@
                                 <c:url value="/admin/stats-quarter" var="action">
                                     <c:param name="q" value="q1"/>
                                 </c:url>
-                                <a href="${action}" target="iframe_content">Q1 - 2022</a>
+                                <a href="${action}" target="_blank">Q1 - 2022</a>
                             </li>
                             <li>
                                 <c:url value="/admin/stats-quarter" var="action">
                                     <c:param name="q" value="q2"/>
                                 </c:url>
-                                <a href="${action}" target="iframe_content">Q2 - 2022</a>
+                                <a href="${action}" target="_blank">Q2 - 2022</a>
                             </li>
                             <li>
                                 <c:url value="/admin/stats-quarter" var="action">
                                     <c:param name="q" value="q3"/>
                                 </c:url>
-                                <a href="${action}" target="iframe_content">Q3 - 2022</a>
+                                <a href="${action}" target="_blank">Q3 - 2022</a>
                             </li>
                             <li>
                                 <c:url value="/admin/stats-quarter" var="action">
                                     <c:param name="q" value="q4"/>
                                 </c:url>
-                                <a href="${action}" target="iframe_content">Q4 - 2022</a>
+                                <a href="${action}" target="_blank">Q4 - 2022</a>
                             </li>
                         </ul>
                     </div>
@@ -71,30 +71,34 @@
                                 <c:url value="/admin/stats-year" var="action">
                                     <c:param name="year" value="2019"/>
                                 </c:url>
-                                <a href="${action}" target="iframe_content">2019</a>
+                                <a href="${action}" target="_blank">2019</a>
                             </li>
                             <li>
                                 <c:url value="/admin/stats-year" var="action">
                                     <c:param name="year" value="2020"/>
                                 </c:url>
-                                <a href="${action}" target="iframe_content">2020</a>
+                                <a href="${action}" target="_blank">2020</a>
                                 
                             </li>
                             <li>
                                 <c:url value="/admin/stats-year" var="action">
                                     <c:param name="year" value="2021"/>
                                 </c:url>
-                                <a href="${action}" target="iframe_content">2021</a>
+                                <a href="${action}" target="_blank">2021</a>
                             </li>
                             <li>
                                 <c:url value="/admin/stats-year" var="action">
                                     <c:param name="year" value="2022"/>
                                 </c:url>
-                                <a href="${action}" target="iframe_content">2020</a>
+                                <a href="${action}" target="_blank">2022</a>
                             </li>
                         </ul>
                     </div>
                 </div>
+                            
+                <noscript>
+                    <iframe height='0' src='//www.googletagmanager.com/ns.html?id=GTM-5DSLL8' style='display:none;visibility:hidden' width='0'></iframe>
+                </noscript>
                 <div class="">
                     <iframe name="iframe_content" src="" title="statistic" style="width: 100%; height: 650px"> </iframe>
                 </div>

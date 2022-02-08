@@ -24,17 +24,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.persistence.Transient;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -82,18 +76,18 @@ public class RecruitJob implements Serializable {
     @Basic(optional = false)
     @NotNull(message = "{recruitJob.nullErr}")
     @Lob
-    @Size(min = 1, max = 65535)
+    @Size(min = 1, max = 2147483647)
     @Column(name = "require")
     private String require;
     @Basic(optional = false)
     @NotNull(message = "{recruitJob.nullErr}")
     @Lob
-    @Size(min = 1, max = 65535)
+    @Size(min = 1, max = 2147483647)
     @Column(name = "description")
     private String description;
     @Basic(optional = false)
     @NotNull(message = "{recruitJob.nullErr}")
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 255)
     @Column(name = "workPlace")
     private String workPlace;
     @Lob
@@ -101,23 +95,19 @@ public class RecruitJob implements Serializable {
     @Column(name = "benefit")
     private String benefit;
     @Basic(optional = false)
-    @NotNull(message = "{recruitJob.nullErr}")
+    @NotNull
     @Column(name = "postDate")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date postDate;
     @Basic(optional = false)
     @NotNull(message = "{recruitJob.nullErr}")
     @Column(name = "expirationDate")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @FutureOrPresent
     private Date expirationDate;
     @Basic(optional = false)
     @NotNull(message = "{recruitJob.nullErr}")
     @Size(min = 1, max = 50, message = "{recruitJob.emailErr}")
     @Column(name = "emailContact")
-    @Email
     private String emailContact;
     @Size(max = 45)
     @Column(name = "nameContact")
@@ -125,14 +115,10 @@ public class RecruitJob implements Serializable {
     @Basic(optional = false)
     @NotNull(message = "{recruitJob.phoneContact.digitsErr}")
     @Size(min = 1, max = 15)
-//    @Digits(fraction = 1,integer = 15)
     @Column(name = "phoneContact")
-//    @Phone(message = "{recruitJob.phoneContact.digitsErr}")
     private String phoneContact;
-    @Basic(optional = false)
-//    @NotNull
-    @Column(name = "status", columnDefinition="BIT")
-    private boolean status;
+    @Column(name = "status")
+    private Boolean status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recruitJobId")
     private Set<SaveJob> saveJobSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recruitJobId")
@@ -163,7 +149,7 @@ public class RecruitJob implements Serializable {
         this.recruitJobId = recruitJobId;
     }
 
-    public RecruitJob(Integer recruitJobId, String title, String position, int amount, String require, String description, String workPlace, Date postDate, Date expirationDate, String emailContact, String phoneContact, boolean status) {
+    public RecruitJob(Integer recruitJobId, String title, String position, int amount, String require, String description, String workPlace, Date postDate, Date expirationDate, String emailContact, String phoneContact) {
         this.recruitJobId = recruitJobId;
         this.title = title;
         this.position = position;
@@ -175,7 +161,6 @@ public class RecruitJob implements Serializable {
         this.expirationDate = expirationDate;
         this.emailContact = emailContact;
         this.phoneContact = phoneContact;
-        this.status = status;
     }
 
     public Integer getRecruitJobId() {
@@ -282,11 +267,11 @@ public class RecruitJob implements Serializable {
         this.phoneContact = phoneContact;
     }
 
-    public boolean getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

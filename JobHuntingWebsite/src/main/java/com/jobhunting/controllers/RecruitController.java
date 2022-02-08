@@ -9,6 +9,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.jobhunting.pojo.RecruitJob;
 import com.jobhunting.service.CompanyService;
+import com.jobhunting.service.ProfessionService;
 import com.jobhunting.service.RecruitJobService;
 import java.io.IOException;
 import java.util.Map;
@@ -29,43 +30,54 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
  * @author Asus
  */
 @Controller
-//@ControllerAdvice
+@RequestMapping("/recruit")
 public class RecruitController {
     @Autowired
     private RecruitJobService recruitJobService;
     @Autowired
     private CompanyService companyService;
+    @Autowired
+    private ProfessionService professionService;
+
+    @GetMapping("/recruiter")
+    public String recruitHome(Model model, @RequestParam(value = "recruitId", required = false) Integer recruitId){
+        
+        return "index-recruiter";
+    }
     
-//    @ModelAttribute
-//    public void addAttribute(Model model, HttpSession session){
-//        model.addAttribute("recruitJob", this.recruitJobService.getRecruitJob());
-//        model.addAttribute("companies", this.companyService.getCompany());
-//    }
-    
-    @GetMapping("/recruit-RecruitJob")  //chua loc theo RecruitId
-    public String listJob(Model model){
-        model.addAttribute("recruitJob", this.recruitJobService.getRecruitJob());
-        model.addAttribute("companies", this.companyService.getCompany());
+    @GetMapping("/recruit-RecruitJob")
+    public String listJob(Model model, @RequestParam(value = "recruitId") Integer recruitId){
+        if (recruitId!=null){
+            model.addAttribute("recruitJob", this.recruitJobService.getRecruitJobByRecruitId(recruitId));
+            model.addAttribute("companies", this.companyService.getCompanyByRecruitId(recruitId));
+        }
+        else{
+            model.addAttribute("recruitJob", this.recruitJobService.getRecruitJob());
+            model.addAttribute("companies", this.companyService.getCompany());
+        }
         return "recruit-RecruitJob";
     }
     
     @GetMapping("/recruit-addRecruitJob")
-    public String list(Model model){
+    public String list(Model model, @RequestParam(value = "recruitId") Integer recruitId){
         model.addAttribute("recruitJob", new RecruitJob());
         return "recruit-addRecruitJob";
     }
     
     @PostMapping("/recruit-addRecruitJob")
-    public String addOrUpdateRecruitJob(Model model, @ModelAttribute(value = "recruitJob") @Valid RecruitJob recruitJob, BindingResult result){
+    public String addRecruitJob(Model model, @ModelAttribute(value = "recruitJob") @Valid RecruitJob recruitJob, BindingResult result){
         if (!result.hasErrors()) {
             try {
                 if (this.recruitJobService.addOrUpdate(recruitJob)==true)
@@ -73,18 +85,21 @@ public class RecruitController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-//            if (this.recruitJobService.addOrUpdate(recruitJob)==true)
-//                return "redirect:/recruit-RecruitJob";
-//            else
-//                model.addAttribute("errMsg", "System has something wrong!!!");
         }
         return "recruit-addRecruitJob";
     }
     
     @GetMapping("/recruit-RecruitInfo")
-    public String recruitInfo(Model model){
-        model.addAttribute("companies", this.companyService.getCompany());
+    public String recruitInfo(Model model, @RequestParam(value = "recruitId") Integer id){
+        model.addAttribute("companies", this.companyService.getCompanyByRecruitId(id));
         return "recruit-RecruitInfo";
+    }
+    
+    @GetMapping("/recruit-updateRecruitJob")
+    public String recruitJobInfo(Model model, @RequestParam(value = "recruitJobId") Integer id){
+        model.addAttribute("recruitJob", this.recruitJobService.getRecruitJobById(id));
+        model.addAttribute("professions", this.professionService.getProfessions());
+        return "recruit-updateRecruitJob";
     }
     
 }

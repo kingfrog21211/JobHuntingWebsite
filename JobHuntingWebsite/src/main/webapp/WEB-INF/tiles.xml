@@ -11,6 +11,7 @@ and open the template in the editor.
          "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
          
 <tiles-definitions>
+    <!--candidate-->
     <definition name="baseLayout" template="/WEB-INF/layout/base.jsp">
         <put-attribute name="title" value="..." />
         <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
@@ -25,6 +26,10 @@ and open the template in the editor.
         <put-attribute name="title" value="Jobs - JOB HUNTING" />
         <put-attribute name="content" value="/WEB-INF/pages/job.jsp" />
     </definition>
+    <definition name="jobDetail" extends="baseLayout">
+        <put-attribute name="title" value="Job Detail - JOB HUNTING" />
+        <put-attribute name="content" value="/WEB-INF/pages/jobDetail.jsp" />
+    </definition>
     <definition name="company" extends="baseLayout">
         <put-attribute name="title" value="Company - JOB HUNTING" />
         <put-attribute name="content" value="/WEB-INF/pages/company.jsp" />
@@ -33,20 +38,47 @@ and open the template in the editor.
         <put-attribute name="title" value="Profession - JOB HUNTING" />
         <put-attribute name="content" value="/WEB-INF/pages/profession.jsp" />
     </definition>
-    <definition name="recruit-RecruitJob" extends="baseLayout">
-        <put-attribute name="title" value="Recruiter Admin - Recruit Jobs" />
-        <put-attribute name="content" value="/WEB-INF/pages/recruit-RecruitJob.jsp" />
-    </definition>
-    <definition name="recruit-addRecruitJob" extends="baseLayout">
-        <put-attribute name="title" value="Recruiter Admin - Add Recruit Jobs" />
-        <put-attribute name="content" value="/WEB-INF/pages/recruit-addRecruitJob.jsp" />
-    </definition>
-    <definition name="recruit-RecruitInfo" extends="baseLayout">
-        <put-attribute name="title" value="Recruiter Admin - Recruiter Info" />
-        <put-attribute name="content" value="/WEB-INF/pages/recruit-RecruitInfo.jsp" />
-    </definition>
     <definition name="companyDetail" extends="baseLayout">
         <put-attribute name="title" value="Company Details - JOB HUNTING" />
         <put-attribute name="content" value="/WEB-INF/pages/companyDetail.jsp" />
+    </definition>
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="title" value="Login - JOB HUNTING" />
+        <put-attribute name="content" value="/WEB-INF/pages/login.jsp" />
+    </definition>
+    <definition name="register" extends="baseLayout">
+        <put-attribute name="title" value="Register - JOB HUNTING" />
+        <put-attribute name="content" value="/WEB-INF/pages/register.jsp" />
+    </definition>
+    <definition name="userProfile" extends="baseLayout">
+        <put-attribute name="title" value="User Profile - JOB HUNTING" />
+        <put-attribute name="content" value="/WEB-INF/pages/userProfile.jsp" />
+    </definition>
+    <!--recruiter-->
+    <definition name="baseRecruitLayout" template="/WEB-INF/layout/base-recruiter.jsp">
+        <put-attribute name="title" value="..." />
+        <put-attribute name="header" value="/WEB-INF/layout/header-recruiter.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+        <put-attribute name="content" value="..." />
+    </definition>
+    <definition name="index-recruiter" extends="baseRecruitLayout">
+        <put-attribute name="title" value="Recruiter Admin - Recruit Jobs" />
+        <put-attribute name="content" value="/WEB-INF/pages/index-recruiter.jsp" />
+    </definition>
+    <definition name="recruit-RecruitJob" extends="baseRecruitLayout">
+        <put-attribute name="title" value="Recruiter Admin - Recruit Jobs" />
+        <put-attribute name="content" value="/WEB-INF/pages/recruit-RecruitJob.jsp" />
+    </definition>
+    <definition name="recruit-addRecruitJob" extends="baseRecruitLayout">
+        <put-attribute name="title" value="Recruiter Admin - Add Recruit Jobs" />
+        <put-attribute name="content" value="/WEB-INF/pages/recruit-addRecruitJob.jsp" />
+    </definition>
+    <definition name="recruit-RecruitInfo" extends="baseRecruitLayout">
+        <put-attribute name="title" value="Recruiter Admin - Recruiter Info" />
+        <put-attribute name="content" value="/WEB-INF/pages/recruit-RecruitInfo.jsp" />
+    </definition>
+    <definition name="recruit-updateRecruitJob" extends="baseRecruitLayout">
+        <put-attribute name="title" value="Recruiter Admin - Update Recruit Jobs" />
+        <put-attribute name="content" value="/WEB-INF/pages/recruit-updateRecruitJob.jsp" />
     </definition>
 </tiles-definitions>

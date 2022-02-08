@@ -5,6 +5,7 @@
  */
 package com.jobhunting.controllers;
 
+import com.jobhunting.service.CandidateService;
 import com.jobhunting.service.StatsService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
  *
@@ -27,6 +29,13 @@ import java.util.logging.Logger;
 public class AdminController {
     @Autowired
     private StatsService statsService;
+    @Autowired
+    private CandidateService candidateService;
+     
+//    @GetMapping(value="/admin-base")
+//    public String adminBase(Model model) {
+//        return "admin-base";
+//    }
     
     @GetMapping("/stats")
     public String statsQuarter(){

@@ -45,6 +45,8 @@ public class CandidatePostResume implements Serializable {
     @Basic(optional = false)
     @Column(name = "candidatePostResumeId")
     private Integer candidatePostResumeId;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "postDate")
     @Temporal(TemporalType.DATE)
     private Date postDate;
@@ -72,8 +74,9 @@ public class CandidatePostResume implements Serializable {
         this.candidatePostResumeId = candidatePostResumeId;
     }
 
-    public CandidatePostResume(Integer candidatePostResumeId, boolean status, String pathFileCV) {
+    public CandidatePostResume(Integer candidatePostResumeId, Date postDate, boolean status, String pathFileCV) {
         this.candidatePostResumeId = candidatePostResumeId;
+        this.postDate = postDate;
         this.status = status;
         this.pathFileCV = pathFileCV;
     }

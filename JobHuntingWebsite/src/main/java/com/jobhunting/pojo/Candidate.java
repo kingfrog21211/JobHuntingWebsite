@@ -43,7 +43,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Candidate.findByFullName", query = "SELECT c FROM Candidate c WHERE c.fullName = :fullName"),
     @NamedQuery(name = "Candidate.findByGender", query = "SELECT c FROM Candidate c WHERE c.gender = :gender"),
     @NamedQuery(name = "Candidate.findByAddress", query = "SELECT c FROM Candidate c WHERE c.address = :address"),
-    @NamedQuery(name = "Candidate.findByStatus", query = "SELECT c FROM Candidate c WHERE c.status = :status"),
     @NamedQuery(name = "Candidate.findByPhone", query = "SELECT c FROM Candidate c WHERE c.phone = :phone"),
     @NamedQuery(name = "Candidate.findByEmail", query = "SELECT c FROM Candidate c WHERE c.email = :email"),
     @NamedQuery(name = "Candidate.findByDateOfBirth", query = "SELECT c FROM Candidate c WHERE c.dateOfBirth = :dateOfBirth")})
@@ -77,14 +76,6 @@ public class Candidate implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "address")
     private String address;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "experience")
-    private String experience;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "status")
-    private boolean status;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -117,6 +108,9 @@ public class Candidate implements Serializable {
     @JoinColumn(name = "cityId", referencedColumnName = "cityId")
     @ManyToOne(optional = false)
     private City cityId;
+    @JoinColumn(name = "experienceId", referencedColumnName = "experienceId")
+    @ManyToOne(optional = false)
+    private Experience experienceId;
     @JoinColumn(name = "professionId", referencedColumnName = "professionId")
     @ManyToOne(optional = false)
     private Profession professionId;
@@ -133,12 +127,11 @@ public class Candidate implements Serializable {
         this.candidateId = candidateId;
     }
 
-    public Candidate(Integer candidateId, String fullName, String gender, String address, boolean status, String phone, String email, Date dateOfBirth) {
+    public Candidate(Integer candidateId, String fullName, String gender, String address, String phone, String email, Date dateOfBirth) {
         this.candidateId = candidateId;
         this.fullName = fullName;
         this.gender = gender;
         this.address = address;
-        this.status = status;
         this.phone = phone;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
@@ -190,22 +183,6 @@ public class Candidate implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getExperience() {
-        return experience;
-    }
-
-    public void setExperience(String experience) {
-        this.experience = experience;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 
     public String getPhone() {
@@ -272,6 +249,14 @@ public class Candidate implements Serializable {
 
     public void setCityId(City cityId) {
         this.cityId = cityId;
+    }
+
+    public Experience getExperienceId() {
+        return experienceId;
+    }
+
+    public void setExperienceId(Experience experienceId) {
+        this.experienceId = experienceId;
     }
 
     public Profession getProfessionId() {
