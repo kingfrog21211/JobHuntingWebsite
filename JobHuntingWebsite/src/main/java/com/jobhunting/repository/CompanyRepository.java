@@ -15,4 +15,5 @@ import com.jobhunting.pojo.Recruit;
 public interface CompanyRepository {
     List<Recruit> getCompany();
     Recruit getCompanyByRecruitId(Integer recruitId);
+    Recruit getRecruitByUserId(Integer userId);
 }

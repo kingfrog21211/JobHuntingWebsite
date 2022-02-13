@@ -14,4 +14,5 @@ import java.util.List;
  */
 public interface StatsRepository {
     List<Object[]> statsQuarter(Date fromDate, Date toDate);
+    List<Object[]> professionStats();
 }

@@ -48,10 +48,9 @@
                 <ul class="list-group list-group-flush rounded-3">
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                         <a>
-                            <i class="fas fa-globe fa-lg text-warning"></i>
+                            <i class="fas fa-globe"></i>
                             <p class="mb-0">Ho So Cong Ty</p>
                         </a>
-                    
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                         <a>
@@ -81,22 +80,24 @@
             <div class="card mb-4">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-3">
-                    <p class="mb-0">Full Name</p>
-                    <li>Role:
-                        <ul>
-                            <c:forEach items="${userDetails.authorities}" var="auth">
-                                <li>${auth.authority }</li>
-                            </c:forEach>
-                        </ul>
-                    </li>
-                  </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">	
-                        <span >${userDetailsService.FirstName}</span>&nbsp;
-                        <span >${userDetailsService.LastName}</span>
-                    </p>
-                  </div>
+                    <div class="col-sm-3">
+                        <p class="mb-0">Full Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <strong>	
+                            <span>${user.firstName}</span>&nbsp;
+                            <span>${user.lastName}</span>
+                        </strong>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Role</p>
+                    </div>
+                    <div class="col-sm-9">
+                            <p class="text-muted mb-0">${user.userRole}</p>
+                    </div>
                 </div>
                 <hr>
                 <div class="row">
@@ -104,7 +105,7 @@
                     <p class="mb-0">Email</p>
                   </div>
                   <div class="col-sm-9">
-                    <p class="text-muted mb-0">${userDetailsService.Email}</p>
+                    <p class="text-muted mb-0">${user.email}</p>
                   </div>
                 </div>
                 <hr>

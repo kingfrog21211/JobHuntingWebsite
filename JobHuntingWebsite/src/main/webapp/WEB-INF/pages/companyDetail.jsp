@@ -10,7 +10,7 @@
 <section class="job_section" style="margin: 80px 100px 80px 150px; display: flex; flex-direction: row-reverse">
     <div class="container">
         <div style="border-color: #000; border-style: outset; border-width: 3px">
-            <div style="background: linear-gradient(white,#ff9f01,white); display: grid; grid-template-columns: 270px 1fr;height: content-box" >
+            <div style="background: linear-gradient(white,royalblue,white); display: grid; grid-template-columns: 270px 1fr;height: content-box" >
                 <!--logo-->
                 <div style="background-color: white;width: 250px;height: 250px; border-color: #ff9f01; border-style: outset; margin: 20px">
                     <c:if test="${companyDetails.logo != null && companyDetails.logo.startsWith('https')}">
@@ -42,7 +42,7 @@
             </c:url>
             <a style="color: #000; font-weight: bold; " href="${action}">
                 <i style="size: 50px" class='bx bxs-chevrons-right bx-tada bx-rotate-180' ></i>
-                SEE RECRUIT JOB OF <span style="color: #ff9f01">${companyDetails.companyName}</span>
+                SEE RECRUIT JOB OF <span style="color: royalblue">${companyDetails.companyName}</span>
             </a>
         </div>
     </div>

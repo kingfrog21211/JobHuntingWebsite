@@ -22,4 +22,5 @@ public interface RecruitJobRepository {
     List<RecruitJob> getRecruitJobByKW(String kw);
     boolean addOrUpdate(RecruitJob rj);
     boolean deleteRecruitJob(RecruitJob r);
+    List<RecruitJob> getTop5RecruitJob();
 }

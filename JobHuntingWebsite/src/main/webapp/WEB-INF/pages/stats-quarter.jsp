@@ -10,29 +10,32 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-<!--title-->
-<h1>QUARTER-2022 STATISTIC</h1>
-
-<!--chart-->
-<div style="margin-left: 100px; margin-right: 100px; margin-top: 20px; margin-bottom: 10px">
-  <canvas id="myStatsChart"></canvas>
+<h1 class="text-center text-danger">QUARTER STATISTIC - <span style="text-transform: uppercase">${q}</span></h1>
+<br>
+<br>
+<hr>
+<div class="row">
+    <div class="col">
+        <canvas id="myStatsChart"></canvas>
+    </div>
+    <div class="col">
+        <h3 class="text-center "><span class="badge badge-success">Stats table</span></h3>
+        <table class="table">
+            <tr>
+                <th><span class="badge badge-info">PROFESSION ID</span></th>
+                <th><span class="badge badge-info">PROFESSION NAME</span></th>
+                <th><span class="badge badge-info">CANDIDATES</span></th>
+            </tr>
+            <c:forEach items="${stats}" var="p">
+                <tr>
+                    <td>${p[0]}</td>
+                    <td>${p[1]}</td>
+                    <td>${p[2]}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
 </div>
-
-<!--data-->
-<table class="table">
-    <tr>
-        <th>Profession Id</th>
-        <th>Profession Name</th>
-        <th>Candidate Amount</th>
-    </tr>
-    <c:forEach items="${stats}" var="c">
-        <tr>
-            <td>${c[0]}</td>
-            <td>${c[1]}</td>
-            <td>${c[2]}</td>
-        </tr>
-    </c:forEach>
-</table>
         
 <script>
     function myChart(id, quarterLabels=[], quarterInfo=[]){

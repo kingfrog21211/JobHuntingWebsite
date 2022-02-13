@@ -98,5 +98,10 @@ public class RecruitJobServiceImpl implements RecruitJobService{
         RecruitJob r = this.recruitJobRepository.getRecruitJobById(id);
         return this.recruitJobRepository.deleteRecruitJob(r);
     }
+
+    @Override
+    public List<RecruitJob> getTop5RecruitJob() {
+        return this.recruitJobRepository.getTop5RecruitJob();
+    }
     
 }

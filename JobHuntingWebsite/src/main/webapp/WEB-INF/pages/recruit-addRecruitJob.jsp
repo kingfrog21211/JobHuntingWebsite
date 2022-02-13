@@ -10,7 +10,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:url value="/recruit-addRecruitJob" var="action"/>
+<c:url value="/recruit/recruit-addRecruitJob" var="action"/>
 
 <section class="job_section layout_padding">
     <div class="container">

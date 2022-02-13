@@ -7,6 +7,7 @@ package com.jobhunting.repository.impl;
 
 import com.jobhunting.pojo.User;
 import com.jobhunting.repository.UserRepository;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -74,5 +75,11 @@ public class UserRepositoryImpl implements UserRepository{
         
         Query q = session.createQuery(query);
         return q.getResultList();
+    }
+
+    @Override
+    public List<User> findAll() {
+        List<User> users = new ArrayList<User>();
+        return users;
     }
 }

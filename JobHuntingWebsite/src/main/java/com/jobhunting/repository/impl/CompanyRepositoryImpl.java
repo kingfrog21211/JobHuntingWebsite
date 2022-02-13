@@ -38,4 +38,9 @@ public class CompanyRepositoryImpl implements CompanyRepository{
     public Recruit getCompanyByRecruitId(Integer recruitId) {
         return this.sessionFactory.getObject().getCurrentSession().get(Recruit.class, recruitId);
     }
+
+    @Override
+    public Recruit getRecruitByUserId(Integer userId) {
+        return this.sessionFactory.getObject().getCurrentSession().get(Recruit.class, userId);
+    }
 }

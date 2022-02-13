@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<head>
-
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet" />
@@ -17,8 +16,9 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   
-  
-<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=xuj9Mh1702DL5f-BY178nr9MZLjknqBcohwQJ6EYXOnGzD3HSbERzpX0FLvo4LsLS4fU5hs9Lz9sfLXC7xOzMg" charset="UTF-8"></script><style>
+
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=xuj9Mh1702DL5f-BY178nr9MZLjknqBcohwQJ6EYXOnGzD3HSbERzpX0FLvo4LsLS4fU5hs9Lz9sfLXC7xOzMg" charset="UTF-8"></script>
+<style>
 html,body {
   height:100%;
 }
@@ -348,6 +348,7 @@ width: 100%;
       </a>
     </div><!-- Carousel END -->
     
+<security:authorize access="!hasRole('ROLE_RECRUIT')">
     <!--search-->
     <div class="s002">
         <form>
@@ -426,60 +427,208 @@ width: 100%;
     <div class="container">
         <br><br>
         <div class="heading_container">
-            <h2>Recommended jobs <br>
-                <c:if test="${recruitJobs.size()==1}"><span>1 Job Available For you</span></c:if>
-                <c:if test="${recruitJobs.size()!=1}"><span>${recruitJobs.size()} Jobs Available For you</span></c:if>
-                <c:if test="${recruitJobs.size()==0}"><span>0 Job Available now</span></c:if>
-            </h2>
+                <h2>Recently added Jobs</h2>
         </div>
 
-        <div class="tab-content" id="myTabContent">
-            <div class="job_board tab-pane fade show active" id="jb-1" role="tabpanel" aria-labelledby="jb-1-tab">
-                <div class="content-box">
-                    <div class="content layout_padding2-top">
-                        <!-- career -->
-                        <c:forEach items="${careers}" var="c">
-                            <c:url value="/profession" var="action">
-                                <c:param name="careerId" value="${c.careerId}"/>
-                            </c:url>
-                            <div class="box">
-                                <h3>${c.careerName}</h3>
-                                <a href="${action}">See more</a>
+        <div id="search-results">
+                    <div class="list-job">
+                        <div class="job-body row" style="text-align: -webkit-center;">
+                            <div class="lists">
+                                <c:forEach items="${top5RecruitJob}" var="rj">
+                                    <div class="job-item  job-ta result-job-hover" data-job-id="595575" data-job-position="1" data-box="BoxSearchResult">
+                                        <div class="avatar">
+                                            <a target="_blank" href="https://www.topcv.vn/viec-lam/thuc-tap-sinh-kinh-doanh/595575.html?ta_source=JobSearchList" class="company-logo" rel="nooppener noreferrer">
+                                                <img src="https://cdn.topcv.vn/80/company_logos/bt4aHjAUuUaPFunAcyJ3S9YtWgeoxHmw_1643255468____6e5c15c6d4ef07464482cfdc75fe2865.jpeg" class="w-100" alt="CÔNG TY TNHH CHUBB LIFE Việt Nam" title="Thực Tập Sinh Kinh Doanh">
+                                            </a>
+                                        </div>
+                                        <div class="body">
+                                            <div class="content">
+                                                <div class="ml-auto" style="">
+                                                    <h3 class="title">
+                                                        <c:url value="/detail" var="action">
+                                                            <c:param name="recruitJobId" value="${rj[6]}"/>
+                                                        </c:url>
+                                                        <a class="underline-box-job"  href="${action}">
+                                                            <span class="bold transform-job-title" data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="${rj[7]}">${rj[7]}</span>
+                                                        </a>
+                                                    </h3>
+                                                    <p class="company underline-box-job">
+                                                        <c:url value="/companyDetail" var="action">
+                                                            <c:param name="recruitId" value="${rj[20]}"/>
+                                                        </c:url>
+                                                        <a href="${action}" data-toggle="tooltip" data-placement="top" data-container="body" rel="nooppener noreferrer" data-original-title="${rj[1]}">${rj[1]}</a>
+                                                    </p>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="label-content ml-auto" >
+                                                        <a class="badge badge-info">${rj[2]}</a>
+                                                        <a data-original-title="${rj[3]}" class="badge badge-info">${rj[3]}</a>
+                                                        <a class="badge badge-info">${rj[14]}</a>
+                                                        <a class="badge badge-info">${rj[15]}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
                             </div>
-                        </c:forEach>
-                        <!-- career -->
+                        </div>
                     </div>
-                </div>
             </div>
-        </div>
     </div>
   </section>
   <!-- end job section -->
+  </security:authorize>
+  
+  <!--role-recruit-->    
+<security:authorize access="hasRole('ROLE_RECRUIT')">
+        <div class="s002">
+        <form>
+            <div class="inner-form">
+              <div class="input-field fouth-wrap">
+                <div class="icon-wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                    </svg>
+                </div>
+                <select data-trigger="" name="professionId" path="professionId">
+                    <option placeholder="">Profession</option>
+                    <c:forEach items="${professions}" var="c">
+                        <option value="${c.professionId}">${c.professionName}</option>
+                    </c:forEach>
+                </select>
+              </div>
+              <div class="input-field fouth-wrap">
+                <div class="icon-wrap">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                  </svg>
+                </div>
+                <select data-trigger="" name="cityId" path="cityId">
+                    <option value="">City</option>
+                    <c:forEach items="${cities}" var="c">
+                        <option value="${c.cityId}">${c.cityName}</option>
+                    </c:forEach>
+                </select>
+              </div>
 
-  <!-- feature section -->
-<!--  <section class="feature_section">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-5 offset-md-1">
-          <div class="detail-box">
-            <h2>Featured job</h2>
-            <p>
-              It is a long established fact that a reader will be distracted by the readable content of a page when
-              looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
-              letters, as opposed to using Content here, content here', making it look
-            </p>
-            <a href="">Read More</a>
-          </div>
-        </div>
-        <div class="col-md-6 px-0">
-          <div class="img-box">
-            <img src="images/feature-img.jpg" alt="">
-          </div>
-        </div>
-      </div>
+                <div class="input-field fouth-wrap">
+                    <div class="icon-wrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
+                        </svg>
+                    </div>
+                    <select data-trigger="" name="experienceId" path="experienceId">
+                        <option value="">Experience</option>
+                        <c:forEach items="${experiences}" var="c">
+                            <option value="${c.experienceId}">${c.experienceValue}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                
+                <div class="input-field fifth-wrap">
+                    <c:url value="/" var="action">
+                        <c:param name="professionId" value="professionId"/>
+                        <c:param name="cityId" value="cityId"/>
+                        <c:param name="experienceId" value="experienceId"/>
+                    </c:url>
+                    <button class="btn-search" formaction="${action}" type="submit">Find candidate</button>
+                </div>
+            </div>
+        </form>
     </div>
-  </section>-->
-  <!-- end feature section -->
+
+<section class="job_section layout_padding">
+    <div class="container">
+        <!--available candidate amount-->
+        <div class="heading_container">
+            <h2>Recommended candidate <br>
+                <c:if test="${candidates.size()==1}"><span>1 Candidate is available now</span></c:if>
+                <c:if test="${candidates.size()>1}"><span>${candidates.size()} Candidates are available now</span></c:if>
+                <c:if test="${candidates.size()==0}"><span>0 Candidate Available now</span></c:if>
+            </h2>
+        </div>
+        <c:if test="${candidates.size()==0}">
+            <div class="text text-center text-danger">
+                We can't find any suitable candidates for you!!!
+            </div>
+        </c:if>
+        
+            <!--preview-->
+<div id="search-results">
+    <div class="list-job">
+        <div class="job-body row" style="display: block">
+                <div class="lists" style="text-align: -webkit-center;">
+                    <c:forEach items="${candidates}" var="c">
+                        <div class="job job--selected" style="background-color: #252525; width: 70%" >
+                            <div class="job_content" style="position: relative">
+                                <!--icon heart-->
+                                
+                                <!-- avatar -->
+                                <div class="job-item  job-ta result-job-hover" data-job-id="595575" data-job-position="1" data-box="BoxSearchResult" style="width: 90%; border: solid">
+                                        <div class="avatar">
+                                            <c:url value="/candidateDetail" var="action">
+                                                <c:param name="candidateId" value="${c[0]}"/>
+                                            </c:url>
+                                            <c:if test="${c[3].startsWith('https')}">
+                                                <img src="${c[3]}" alt="${c[4]}" data-controller="lazyload" class=" ls-is-cached lazyloaded" title="${c[4]}" style="height: 65px; width: 65px"/>
+                                            </c:if>
+                                            <c:if test="${c[3] == null || !c[3].startsWith('https')}">
+                                                <c:if test="${!c[5].startsWith('fe')}">
+                                                    <img src="https://res.cloudinary.com/tcme212/image/upload/v1643375117/img_avatar_ibm8zt.png" alt="${c[4]}" data-controller="lazyload" class=" ls-is-cached lazyloaded" title="${c[4]}" style="height: 65px; width: 65px"/>
+                                                </c:if>
+                                                <c:if test="${c[5].startsWith('fe')}">
+                                                    <img src="https://res.cloudinary.com/tcme212/image/upload/v1643375117/img_avatar2_egfjqi.png" alt="${c[4]}" data-controller="lazyload" class=" ls-is-cached lazyloaded" title="${c[4]}" style="height: 65px; width: 65px"/>
+                                                </c:if>
+                                            </c:if>
+                                        </div>
+                                    <div class="clearfix"></div>
+                                <!--end avatar-->
+                                    
+                                <!--candidate preview-->                                
+                                <div class="body">
+                                    <div class="content">
+                                        <div class="ml-auto">
+                                            <h3 class="title">
+                                                <c:url value="/candidateDetail" var="action">
+                                                    <c:param name="candidateId" value="${c[0]}"/>
+                                                </c:url>
+                                                <a style="color: #ff9f01" href="${action}">
+                                                    <strong >${c[4]}</strong>
+                                                </a>
+                                            </h3>
+                                            <p class="company underline-box-job">${c[16]}</p>
+                                            <div class="ml-auto" style="align-items: center">
+                                                <a class="badge badge-info">DoB: ${c[12]}</a><br>
+                                                <a class="badge badge-info">Gender: ${c[5]}</a><br>
+                                                <a class="badge badge-info">Profession: ${c[15]}</a><br>
+                                                <a class="badge badge-info">Experience: ${c[17]}</a>
+                                            </div>
+                                        </div>
+                                        <div style="display: block">
+                                            <p><strong>Description: </strong>${c[6]}</p><br>
+                                            <p><strong>Address: </strong>${c[8]}</p><br>
+                                            <p><strong>Phone: </strong>${c[10]}</p><br>
+                                            <p><strong>Email: </strong>${c[11]}</p><br>
+                                            <a class="badge badge-info">CV</a>
+                                        </div>
+                                            <div class=" d-md-table-row" style="margin-left: 25px">
+                                                <button style=" background-color: #00b14f; align-content: center; font-weight: 700;">
+                                                    Save</button>
+                                            </div>
+                                    </div>
+                                </div>
+                                <!--end candidate preview-->
+                            </div>
+                        </div>                                    
+                        </div>
+                    </c:forEach>
+                </div>
+        </div>
+    </div></div>
+</section>
+</security:authorize>
+  
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js'></script>
 <script src="https://colorlib.com/etc/searchf/colorlib-search-2/js/extention/choices.js"></script>
@@ -516,3 +665,4 @@ $(window).resize(function ()
 });
 //# sourceURL=pen.js
     </script>
+

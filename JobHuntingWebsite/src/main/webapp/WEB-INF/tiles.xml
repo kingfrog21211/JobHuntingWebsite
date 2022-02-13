@@ -16,6 +16,7 @@ and open the template in the editor.
         <put-attribute name="title" value="..." />
         <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+        <put-attribute name="left" value="" />
         <put-attribute name="content" value="..." />
     </definition>
     <definition name="index" extends="baseLayout">
@@ -26,9 +27,9 @@ and open the template in the editor.
         <put-attribute name="title" value="Jobs - JOB HUNTING" />
         <put-attribute name="content" value="/WEB-INF/pages/job.jsp" />
     </definition>
-    <definition name="jobDetail" extends="baseLayout">
+    <definition name="detail" extends="baseLayout">
         <put-attribute name="title" value="Job Detail - JOB HUNTING" />
-        <put-attribute name="content" value="/WEB-INF/pages/jobDetail.jsp" />
+        <put-attribute name="content" value="/WEB-INF/pages/detail.jsp" />
     </definition>
     <definition name="company" extends="baseLayout">
         <put-attribute name="title" value="Company - JOB HUNTING" />
@@ -55,30 +56,53 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/pages/userProfile.jsp" />
     </definition>
     <!--recruiter-->
-    <definition name="baseRecruitLayout" template="/WEB-INF/layout/base-recruiter.jsp">
+<!--    <definition name="baseRecruitLayout" template="/WEB-INF/layout/base-recruiter.jsp">
         <put-attribute name="title" value="..." />
         <put-attribute name="header" value="/WEB-INF/layout/header-recruiter.jsp" />
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
         <put-attribute name="content" value="..." />
-    </definition>
-    <definition name="index-recruiter" extends="baseRecruitLayout">
+    </definition>-->
+    <definition name="index-recruiter" extends="baseLayout">
         <put-attribute name="title" value="Recruiter Admin - Recruit Jobs" />
         <put-attribute name="content" value="/WEB-INF/pages/index-recruiter.jsp" />
     </definition>
-    <definition name="recruit-RecruitJob" extends="baseRecruitLayout">
+    <definition name="recruit-RecruitJob" extends="baseLayout">
         <put-attribute name="title" value="Recruiter Admin - Recruit Jobs" />
         <put-attribute name="content" value="/WEB-INF/pages/recruit-RecruitJob.jsp" />
     </definition>
-    <definition name="recruit-addRecruitJob" extends="baseRecruitLayout">
+    <definition name="recruit-addRecruitJob" extends="baseLayout">
         <put-attribute name="title" value="Recruiter Admin - Add Recruit Jobs" />
         <put-attribute name="content" value="/WEB-INF/pages/recruit-addRecruitJob.jsp" />
     </definition>
-    <definition name="recruit-RecruitInfo" extends="baseRecruitLayout">
+    <definition name="recruit-RecruitInfo" extends="baseLayout">
         <put-attribute name="title" value="Recruiter Admin - Recruiter Info" />
         <put-attribute name="content" value="/WEB-INF/pages/recruit-RecruitInfo.jsp" />
     </definition>
-    <definition name="recruit-updateRecruitJob" extends="baseRecruitLayout">
+    <definition name="recruit-updateRecruitJob" extends="baseLayout">
         <put-attribute name="title" value="Recruiter Admin - Update Recruit Jobs" />
         <put-attribute name="content" value="/WEB-INF/pages/recruit-updateRecruitJob.jsp" />
+    </definition>
+    <!--admin-->
+    <definition name="baseAdminLayout" template="/WEB-INF/layout/base-admin.jsp">
+        <put-attribute name="title" value="Quan tri he thong" />
+        <put-attribute name="header" value="/WEB-INF/layout/admin-header.jsp" />
+        <put-attribute name="left" value="/WEB-INF/layout/admin-left.jsp" />
+        <put-attribute name="content" value="..." />
+    </definition>
+    <definition name="admin-base" extends="baseAdminLayout">
+        <put-attribute name="title" value="ADMIN" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin-base.jsp" />
+    </definition> 
+    <definition name="profession-stats" extends="baseAdminLayout">
+        <put-attribute name="title" value="Candidate - Profession" />
+        <put-attribute name="content" value="/WEB-INF/pages/profession-stats.jsp" />
+    </definition> 
+    <definition name="stats-year" extends="baseAdminLayout">
+        <put-attribute name="title" value="CandidatePostResume-Year" />
+        <put-attribute name="content" value="/WEB-INF/pages/stats-year.jsp" />
+    </definition> 
+    <definition name="stats-quarter" extends="baseAdminLayout">
+        <put-attribute name="title" value="CandidatePostResume-Quarter" />
+        <put-attribute name="content" value="/WEB-INF/pages/stats-quarter.jsp" />
     </definition>
 </tiles-definitions>

@@ -32,7 +32,7 @@
       color: #000;
     }
 </style>
-<c:url value="/recruit-RecruitJob" var="action"/>
+<c:url value="/recruit/recruit-RecruitJob" var="action"/>
 <!--error them that bai-->
 <c:if test="${errMsg!=null}">
     <div class="alert-danger">${errMsg}</div>
@@ -121,7 +121,7 @@
         </div><br>
         <!--button-->
         <div class="form-group">
-            <input onclick="location.href='<c:url value="/recruit-addRecruitJob"/>'" type="submit" value="Add new Job" class="title" style="background-color: chartreuse; display: table; clear: both; margin-left: 41%; margin-right: 50% ">
+            <input onclick="location.href='<c:url value="/recruit/recruit-addRecruitJob"/>'" type="submit" value="Add new Job" class="title" style="background-color: chartreuse; display: table; clear: both; margin-left: 41%; margin-right: 50% ">
             <br>
         </div>
     <!--</div>-->

@@ -7,10 +7,13 @@ package com.jobhunting.controllers;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.jobhunting.pojo.Recruit;
 import com.jobhunting.pojo.RecruitJob;
+import com.jobhunting.pojo.User;
 import com.jobhunting.service.CompanyService;
 import com.jobhunting.service.ProfessionService;
 import com.jobhunting.service.RecruitJobService;
+import com.jobhunting.service.UserService;
 import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Level;
@@ -31,6 +34,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,23 +55,19 @@ public class RecruitController {
     private CompanyService companyService;
     @Autowired
     private ProfessionService professionService;
-
-    @GetMapping("/recruiter")
-    public String recruitHome(Model model, @RequestParam(value = "recruitId", required = false) Integer recruitId){
-        
-        return "index-recruiter";
-    }
+    @Autowired
+    private UserService userDetailsService;
     
     @GetMapping("/recruit-RecruitJob")
-    public String listJob(Model model, @RequestParam(value = "recruitId") Integer recruitId){
-        if (recruitId!=null){
-            model.addAttribute("recruitJob", this.recruitJobService.getRecruitJobByRecruitId(recruitId));
-            model.addAttribute("companies", this.companyService.getCompanyByRecruitId(recruitId));
-        }
-        else{
-            model.addAttribute("recruitJob", this.recruitJobService.getRecruitJob());
-            model.addAttribute("companies", this.companyService.getCompany());
-        }
+    public String listJob(Model model){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User u = this.userService.getUserByUsername(userDetails.getUsername());
+        
+        User u = this.userDetailsService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        Recruit r = this.companyService.getRecruitByUserId(u.getUserId());
+        Integer recruitId = r.getRecruitId();
+        model.addAttribute("recruitJob", this.recruitJobService.getRecruitJobByRecruitId(recruitId));
+        model.addAttribute("companies", this.companyService.getCompanyByRecruitId(recruitId));
         return "recruit-RecruitJob";
     }
     
@@ -99,6 +100,7 @@ public class RecruitController {
     public String recruitJobInfo(Model model, @RequestParam(value = "recruitJobId") Integer id){
         model.addAttribute("recruitJob", this.recruitJobService.getRecruitJobById(id));
         model.addAttribute("professions", this.professionService.getProfessions());
+        
         return "recruit-updateRecruitJob";
     }
     

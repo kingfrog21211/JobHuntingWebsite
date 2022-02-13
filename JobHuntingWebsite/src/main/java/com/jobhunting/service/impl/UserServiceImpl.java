@@ -9,14 +9,13 @@ import com.jobhunting.pojo.User;
 import com.jobhunting.repository.UserRepository;
 import com.jobhunting.service.UserService;
 import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -60,5 +59,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> getUsers(String username) {
         return this.userRepository.getUsers(username);
+    }
+
+    @Override
+    public List<User> findAll() {
+        List<User> users = new ArrayList<User>();
+        return users;
     }
 }

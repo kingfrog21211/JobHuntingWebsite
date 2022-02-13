@@ -321,7 +321,7 @@ iframe:focus {
                     <div class="header-text hidden-xs">
                         <div class="col-md-12 text-center">
                             <h2>
-                              <span>The Easiest Way to Get Your New Job</span>
+                              <span>The Easiest Way to Get Your New Employee</span>
                             </h2>
                             <br>
                             <div class="">

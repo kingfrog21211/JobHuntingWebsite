@@ -6,7 +6,16 @@
 package com.jobhunting.controllers;
 
 import com.jobhunting.service.CandidateService;
+import com.jobhunting.service.CareerService;
+import com.jobhunting.service.CityService;
+import com.jobhunting.service.CompanyService;
+import com.jobhunting.service.ExperienceService;
+import com.jobhunting.service.ProfessionService;
+import com.jobhunting.service.RecruitJobService;
+import com.jobhunting.service.SalaryService;
 import com.jobhunting.service.StatsService;
+import com.jobhunting.service.UserService;
+import com.jobhunting.service.WorkTypeService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.springframework.stereotype.Controller;
@@ -30,21 +39,44 @@ public class AdminController {
     @Autowired
     private StatsService statsService;
     @Autowired
+    private UserService userService;
+    @Autowired
+    private  CareerService careerService;
+    @Autowired
+    private  RecruitJobService recruitJobService;
+    @Autowired
+    private  CompanyService companyService;
+    @Autowired
     private CandidateService candidateService;
      
-//    @GetMapping(value="/admin-base")
-//    public String adminBase(Model model) {
-//        return "admin-base";
-//    }
+    @GetMapping(value="/admin-base")
+    public String adminBase(Model model) {
+        model.addAttribute("careers", this.careerService.getCareers());
+        model.addAttribute("recruitJobs", this.recruitJobService.getRecruitJob());
+        model.addAttribute("companies", this.companyService.getCompany());
+        model.addAttribute("candidates", this.candidateService.getCandidate());
+        return "admin-base";
+    }
     
     @GetMapping("/stats")
     public String statsQuarter(){
         return "stats";
     }
     
+    @GetMapping("/profession-stats")
+    public String professionStats(Model model){
+        model.addAttribute("professionStats", this.statsService.professionStats());
+        return "profession-stats";
+    }
+    
+    @GetMapping("/job-stats")
+    public String jobStats(Model model){
+        return "job-stats";
+    }
+    
     @RequestMapping("/stats-quarter")
     public String statsQuarter(Model model, @RequestParam(value = "q", required = false) String q){
-        
+        model.addAttribute("q", q);
         if (q.equals("q1")){
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fd = new Date();
@@ -114,6 +146,7 @@ public class AdminController {
     
     @RequestMapping("/stats-year")
     public String statsYear(Model model, @RequestParam(value = "year", required = false) String year){
+        model.addAttribute("year", year);
         if (year.equals("2019")){
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fd = new Date();

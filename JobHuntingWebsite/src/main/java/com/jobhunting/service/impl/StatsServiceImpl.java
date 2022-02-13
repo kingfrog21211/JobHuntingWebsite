@@ -25,5 +25,10 @@ public class StatsServiceImpl implements StatsService{
     public List<Object[]> statsQuarter(Date fromDate, Date toDate) {
         return this.statsRepository.statsQuarter(fromDate, toDate);
     }
+
+    @Override
+    public List<Object[]> professionStats() {
+        return this.statsRepository.professionStats();
+    }
     
 }

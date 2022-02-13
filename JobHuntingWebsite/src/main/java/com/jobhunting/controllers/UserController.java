@@ -58,12 +58,13 @@ public class UserController {
     }
     
     @RequestMapping(value = { "/userProfile" }, method = RequestMethod.GET)
-    public String userProfile(Model model) {
+    public String userProfile(Model model ) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User u = this.userDetailsService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         System.out.println(userDetails.getPassword());
         System.out.println(userDetails.getUsername());
         System.out.println(userDetails.isEnabled());
-        
+        model.addAttribute("user", this.userDetailsService.getUserByUsername(u.getUsername()));
         model.addAttribute("userDetails", userDetails);
         return "userProfile";
     }

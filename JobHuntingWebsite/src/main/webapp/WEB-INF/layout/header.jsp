@@ -2,13 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<!--role CANDIDATE or Guest-->
-<security:authorize access="!hasRole('ROLE_ADMIN')||!hasRole('ROLE_RECRUIT')">
+
+<!--role CANDIDATE or RECRUIT-->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
     <div class="hero_area">
     <!-- header section strats -->
         <header class="header_section">
@@ -22,7 +23,7 @@
               </button>
               <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                 <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
-                    <security:authorize access="!hasRole('ROLE_ADMIN')&&!hasRole('ROLE_RECRUIT')">
+                    <security:authorize access="!hasRole('ROLE_RECRUIT')">
                         <ul style="margin-right: 10px" class="navbar-nav">
                             <li class="nav-item active">
                                 <a style="margin-top: 10px" class="nav-link" href="<c:url value="/"/>"> Home <span class="sr-only">(current)</span></a>
@@ -36,7 +37,7 @@
 
                             <c:url value="/job" var="action"/>
                             <form class="form-inline" action="${action}">
-                                <input class="form-control mr-sm-2" style="margin-right: 4px" type="text" name="kw" placeholder="Search for job title">
+                                <input class="form-control mr-sm-2" style="margin-right: 4px; width: 600px" type="text" name="kw" placeholder="Search for Job Title or Company name...">
                                 <button type="submit"><i class='bx bx-search'></i></button>
                             </form>
                         </ul>
@@ -45,13 +46,10 @@
                     <security:authorize access="hasRole('ROLE_RECRUIT')">
                         <ul style="margin-right: 20px" class="navbar-nav">
                             <li class="nav-item active">
-                                <a style="margin-top: 10px" class="nav-link" href="<c:url value="/recruit/recruiter"/>"> Home <span class="sr-only">(current)</span></a>
+                                <a style="margin-top: 10px" class="nav-link" href="<c:url value="/"/>"> Home <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
                                 <a style="margin-top: 10px" class="nav-link" href="<c:url value="/recruit/recruit-RecruitJob"/>"> Manage Recruit Jobs </a>
-                            </li>
-                            <li class="nav-item">
-                                <a style="margin-top: 10px" class="nav-link" href="<c:url value="/recruit/recruit-RecruitInfo"/>"/> Company Detail </a>
                             </li>
                             <li class="nav-item">
                                 <a style="margin-top: 10px" class="nav-link" href="<c:url value="/recruit/recruit-saveCandidate"/>"/> Save Candidate </a>
@@ -75,10 +73,18 @@
                         </c:if>
                         <c:if test="${pageContext.request.userPrincipal.name != null}">
                             <li class="nav-item dropdown show">
-                                <a href="<c:url value="/userProfile" />" class="nav-link text-success">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    ${pageContext.request.userPrincipal.name}
-                                </a>
+                                <security:authorize access="!hasRole('ROLE_ADMIN')">
+                                    <a href="<c:url value="/userProfile" />" class="nav-link text-success">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        ${pageContext.request.userPrincipal.name}
+                                    </a>
+                                </security:authorize>
+                                <security:authorize access="hasRole('ROLE_ADMIN')">
+                                    <a href="<c:url value="/admin/admin-base" />" class="nav-link text-success">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        ${pageContext.request.userPrincipal.name}
+                                    </a>
+                                </security:authorize>
                             </li>
                             <li class="nav-item">
                                 <a href="<c:url value="/logout" />" class="nav-link text-success">Logout</a>
@@ -93,4 +99,4 @@
         </header>
         <!-- end header section -->
     </div>
-</security:authorize>
+

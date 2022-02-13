@@ -15,4 +15,5 @@ import java.util.List;
 public interface CompanyService {
     List<Recruit> getCompany();
     Recruit getCompanyByRecruitId(Integer recruitId);
+    Recruit getRecruitByUserId(Integer userId);
 }

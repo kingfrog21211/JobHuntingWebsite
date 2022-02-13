@@ -64,7 +64,7 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
                             rootWorkType.get("workTypeName"),
                             rootProfession.get("professionId"),
                             root.get("recruitJobId"), root.get("title"),root.get("position"), root.get("amount"), root.get("require"), root.get("description"), root.get("workPlace"), root.get("benefit"), root.get("postDate"), root.get("expirationDate"), root.get("emailContact"), root.get("nameContact"), root.get("phoneContact"), root.get("status"),
-                            rootRecruit.get("recruitId"), rootExp.get("experienceId"));
+                            rootRecruit.get("recruitId"), rootExp.get("experienceValue"));
         query = query.where(builder.and(preCity,preRecruit,preSalary, preExp,preWorkType,preProfession));
         query.orderBy(builder.desc(root.get("recruitJobId")));
         Query q = session.createQuery(query);
@@ -99,7 +99,7 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
                             rootWorkType.get("workTypeName"),
                             rootProfession.get("professionId"),
                             root.get("recruitJobId"), root.get("title"),root.get("position"), root.get("amount"), root.get("require"), root.get("description"), root.get("workPlace"), root.get("benefit"), root.get("postDate"), root.get("expirationDate"), root.get("emailContact"), root.get("nameContact"), root.get("phoneContact"), root.get("status"),
-                            rootRecruit.get("recruitId"), rootExp.get("experienceId"));
+                            rootRecruit.get("recruitId"), rootExp.get("experienceValue"));
         
         if (cityId!=null && professionId==null && workTypeId==null && salaryId==null) {
             Predicate p2 = builder.equal(root.get("cityId"), cityId);
@@ -212,7 +212,7 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
                             rootWorkType.get("workTypeName"),
                             rootProfession.get("professionId"),
                             root.get("recruitJobId"), root.get("title"),root.get("position"), root.get("amount"), root.get("require"), root.get("description"), root.get("workPlace"), root.get("benefit"), root.get("postDate"), root.get("expirationDate"), root.get("emailContact"), root.get("nameContact"), root.get("phoneContact"), root.get("status"),
-                            rootRecruit.get("recruitId"), rootExp.get("experienceId"));
+                            rootRecruit.get("recruitId"), rootExp.get("experienceValue"));
         query = query.where(builder.and(pre, preCity,preRecruit,preSalary, preExp,preWorkType,preProfession));
         
         Object o = session.createQuery(query).uniqueResult();
@@ -248,7 +248,7 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
                             rootWorkType.get("workTypeName"),
                             rootProfession.get("professionId"),
                             root.get("recruitJobId"), root.get("title"),root.get("position"), root.get("amount"), root.get("require"), root.get("description"), root.get("workPlace"), root.get("benefit"), root.get("postDate"), root.get("expirationDate"), root.get("emailContact"), root.get("nameContact"), root.get("phoneContact"), root.get("status"),
-                            rootRecruit.get("recruitId"), rootExp.get("experienceId"));
+                            rootRecruit.get("recruitId"), rootExp.get("experienceValue"));
         query = query.where(builder.and(p,preCity,preRecruit,preSalary, preExp,preWorkType,preProfession));
         query.orderBy(builder.desc(root.get("recruitJobId")));
         Query q = session.createQuery(query);
@@ -287,7 +287,7 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
                             rootWorkType.get("workTypeName"),
                             rootProfession.get("professionId"),
                             root.get("recruitJobId"), root.get("title"),root.get("position"), root.get("amount"), root.get("require"), root.get("description"), root.get("workPlace"), root.get("benefit"), root.get("postDate"), root.get("expirationDate"), root.get("emailContact"), root.get("nameContact"), root.get("phoneContact"), root.get("status"),
-                            rootRecruit.get("recruitId"), rootExp.get("experienceId"));
+                            rootRecruit.get("recruitId"), rootExp.get("experienceValue"));
         query = query.where(builder.and(p,preCity,preRecruit,preSalary, preExp,preWorkType,preProfession));
         query.orderBy(builder.desc(root.get("recruitJobId")));
         Query q = session.createQuery(query);
@@ -317,6 +317,42 @@ public class RecruitJobRepositoryImpl implements RecruitJobRepository{
             System.err.println("MESSAGE: " + ex.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public List<RecruitJob> getTop5RecruitJob() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+        Root root = query.from(RecruitJob.class);
+        
+        Root rootSalary = query.from(Salary.class);
+        Root rootCity = query.from(City.class);
+        Root rootRecruit = query.from(Recruit.class);
+        Root rootExp = query.from(Experience.class);
+        Root rootWorkType = query.from(WorkType.class);
+        Root rootProfession = query.from(Profession.class);
+        
+        Predicate preSalary = builder.equal(rootSalary.get("salaryId"), root.get("salaryId"));
+        Predicate preCity = builder.equal(rootCity.get("cityId"), root.get("cityId"));
+        Predicate preRecruit = builder.equal(rootRecruit.get("recruitId"), root.get("recruitId"));
+        Predicate preExp = builder.equal(rootExp.get("experienceId"), root.get("experienceId"));
+        Predicate preWorkType = builder.equal(rootWorkType.get("workTypeId"), root.get("workTypeId"));
+        Predicate preProfession = builder.equal(rootProfession.get("professionId"), root.get("professionId"));
+        
+        query.multiselect(rootRecruit.get("logo"), 
+                            rootRecruit.get("companyName"), 
+                            rootSalary.get("salaryValue"), 
+                            rootCity.get("cityName"),
+                            rootWorkType.get("workTypeName"),
+                            rootProfession.get("professionId"),
+                            root.get("recruitJobId"), root.get("title"),root.get("position"), root.get("amount"), root.get("require"), root.get("description"), root.get("workPlace"), root.get("benefit"), root.get("postDate"), root.get("expirationDate"), root.get("emailContact"), root.get("nameContact"), root.get("phoneContact"), root.get("status"),
+                            rootRecruit.get("recruitId"), rootExp.get("experienceValue"));
+        query = query.where(builder.and(preCity,preRecruit,preSalary, preExp,preWorkType,preProfession));
+        query.orderBy(builder.desc(root.get("recruitJobId")));
+        Query q = session.createQuery(query);
+        q.setMaxResults(5);
+        return q.getResultList();
     }
     
 }

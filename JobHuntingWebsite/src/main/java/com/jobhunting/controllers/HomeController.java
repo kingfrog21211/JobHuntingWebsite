@@ -5,6 +5,7 @@
  */
 package com.jobhunting.controllers;
 
+import com.jobhunting.service.CandidateService;
 import com.jobhunting.service.CareerService;
 import com.jobhunting.service.CityService;
 import com.jobhunting.service.CompanyService;
@@ -47,6 +48,8 @@ public class HomeController {
     private SalaryService salaryService;
     @Autowired
     private ExperienceService experienceService;
+    @Autowired
+    private CandidateService candidateService;
     
     @ModelAttribute
     public void addAttribute(Model model, HttpSession session){
@@ -59,10 +62,12 @@ public class HomeController {
         model.addAttribute("salary", this.salaryService.getSalary());
         model.addAttribute("experiences", this.experienceService.getExperiences());
         model.addAttribute("currentUser", session.getAttribute("currentUser"));
+        model.addAttribute("candidates", this.candidateService.getCandidate());
     }
     
     @RequestMapping("/")
     public String index(Model model){
+        model.addAttribute("top5RecruitJob", recruitJobService.getTop5RecruitJob());
         return "index";
     }
     
@@ -87,10 +92,10 @@ public class HomeController {
         }
         return "job";
     }
-    @RequestMapping("/jobDetail")
+    @RequestMapping("/detail")
     public String jobDetail(Model model, @RequestParam(value = "recruitJobId") Integer recruitJobId){
         model.addAttribute("jobDetails", this.recruitJobService.getJobDetail(recruitJobId));
-        return "jobDetail";
+        return "detail";
     }
     
     @RequestMapping("/companyDetail")
@@ -122,5 +127,10 @@ public class HomeController {
     @RequestMapping("/register")
     public String register(Model model){
         return "register";
+    }
+    
+    @RequestMapping("/result")
+    public String result(Model model){
+        return "searchResult";
     }
 }

@@ -60,5 +60,32 @@ public class StatsRepositoryImpl implements StatsRepository{
         return q.getResultList();
         
     }
+
+    public long countTotalCandidate() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        String countQ = "Select count (c.candidateId) from Candidate c";
+        Query countQuery = session.createQuery(countQ);
+        return (Long) countQuery.uniqueResult();
+    }
+
+    @Override
+    public List<Object[]> professionStats() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+        
+        Root rootCandidate = query.from(Candidate.class);
+        Root rootProfession = query.from(Profession.class);
+        
+        query.where(builder.equal(rootProfession.get("professionId"), rootCandidate.get("professionId")));
+        query.multiselect(rootProfession.get("professionId"), rootProfession.get("professionName"),
+                builder.count(rootCandidate.get("candidateId"))
+        );
+        query.groupBy(rootProfession.get("professionId"));
+        
+        Query q = session.createQuery(query);
+        
+        return q.getResultList();
+    }
     
 }

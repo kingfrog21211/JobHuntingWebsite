@@ -26,9 +26,9 @@
             </c:if>
                 
             <div id="search-results">
-                <div class="tab-content" id="myTabContent" style="border-right: 1px; overflow: scroll; position: sticky; top: 60px; height: calc(100vh - 60px);">
+                <div class="tab-content" id="myTabContent" style="border-right: 1px; overflow-y: scroll; position: sticky; top: 60px; height: calc(100vh - 60px);">
                     <div class="list-job">
-                        <div class="job-body row">
+                        <div class="job-body">
                             <div class="lists">
                                 <c:forEach items="${recruitJobs}" var="rj">
                                     <div class="job-item  job-ta result-job-hover" data-job-id="595575" data-job-position="1" data-box="BoxSearchResult">
@@ -37,11 +37,11 @@
                                                 <img src="https://cdn.topcv.vn/80/company_logos/bt4aHjAUuUaPFunAcyJ3S9YtWgeoxHmw_1643255468____6e5c15c6d4ef07464482cfdc75fe2865.jpeg" class="w-100" alt="CÔNG TY TNHH CHUBB LIFE Việt Nam" title="Thực Tập Sinh Kinh Doanh">
                                             </a>
                                         </div>
-                                        <div class="body">
+                                        <div class="body" style="width: auto">
                                             <div class="content">
                                                 <div class="ml-auto">
                                                     <h3 class="title">
-                                                        <c:url value="/jobDetail" var="action">
+                                                        <c:url value="/detail" var="action">
                                                             <c:param name="recruitJobId" value="${rj[6]}"/>
                                                         </c:url>
                                                         <a class="underline-box-job"  href="${action}">
@@ -70,18 +70,7 @@
                             </div>
                         </div>
                     </div>
-                    </div>
-                    
-<!--                    <noscript>
-                        <iframe height='0' src='//www.googletagmanager.com/ns.html?id=GTM-5DSLL8' style='display:none;visibility:hidden' width='0'></iframe>
-                    </noscript>
-                    <div style="position: relative; background-color: transparent">
-                        <div style="padding: 0 30px;">
-                            <div style="word-break: break-word;">
-                                <iframe name="iframe_jobDetail" src="" title="description" style="width: 600px; height: 700px; margin-top: 15px"> </iframe>
-                            </div>
-                        </div>
-                    </div>-->
+                </div>
                 
             </div>
         </div>
