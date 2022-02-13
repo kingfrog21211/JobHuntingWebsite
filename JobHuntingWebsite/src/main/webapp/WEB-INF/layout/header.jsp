@@ -37,7 +37,7 @@
 
                             <c:url value="/job" var="action"/>
                             <form class="form-inline" action="${action}">
-                                <input class="form-control mr-sm-2" style="margin-right: 4px; width: 600px" type="text" name="kw" placeholder="Search for Job Title or Company name...">
+                                <input class="form-control mr-sm-2" style="margin-right: 4px; width: 500px" type="text" name="kw" placeholder="Search for Job Title or Company name...">
                                 <button type="submit"><i class='bx bx-search'></i></button>
                             </form>
                         </ul>
