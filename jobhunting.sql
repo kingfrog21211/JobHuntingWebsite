@@ -32,8 +32,7 @@ CREATE TABLE `candidate` (
   `description` text,
   `cityId` int NOT NULL,
   `address` varchar(200) NOT NULL,
-  `experience` text,
-  `status` bit(1) NOT NULL,
+  `experienceId` int NOT NULL,
   `phone` varchar(15) NOT NULL,
   `email` varchar(200) NOT NULL,
   `dateOfBirth` date NOT NULL,
@@ -43,7 +42,9 @@ CREATE TABLE `candidate` (
   KEY `id_candidate_user_id` (`userId`),
   KEY `id_candidate_city_id` (`cityId`),
   KEY `id_candidate_profession_id` (`professionId`),
+  KEY `id_candidate_experience_idx` (`experienceId`),
   CONSTRAINT `id_candidate_city` FOREIGN KEY (`cityId`) REFERENCES `city` (`cityId`),
+  CONSTRAINT `id_candidate_experience` FOREIGN KEY (`experienceId`) REFERENCES `experience` (`experienceId`),
   CONSTRAINT `id_candidate_profession` FOREIGN KEY (`professionId`) REFERENCES `profession` (`professionId`),
   CONSTRAINT `id_candidate_user` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -55,7 +56,7 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,2,7,NULL,'Tran Cam My','female',NULL,1,'Quan Go Vap',NULL,_binary '','0399933589','trancammy2102@gmail.com','2000-02-21',NULL,NULL);
+INSERT INTO `candidate` VALUES (1,2,7,NULL,'Tran Cam My','female',NULL,1,'Quan Go Vap',1,'0399933589','trancammy2102@gmail.com','2000-02-21','path demo',NULL),(2,5,22,NULL,'My My','female',NULL,1,'Binh Thanh',3,'0123456789','my@gmail.com','2000-02-02','path demo',NULL),(3,16,7,NULL,'Tran Tu','male','Đây là mô tả ứng viên',1,'Tân Bình',2,'0123456789','tu@gmail.com','2001-01-01','path demo',NULL);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +71,7 @@ CREATE TABLE `candidate_post_resume` (
   `candidatePostResumeId` int NOT NULL AUTO_INCREMENT,
   `candidateId` int NOT NULL,
   `recruitJobId` int NOT NULL,
-  `postDate` date DEFAULT NULL,
+  `postDate` date NOT NULL,
   `status` bit(1) NOT NULL,
   `pathFileCV` text NOT NULL,
   PRIMARY KEY (`candidatePostResumeId`),
@@ -78,7 +79,7 @@ CREATE TABLE `candidate_post_resume` (
   KEY `id_candidatePostResume_recruitJob_id` (`recruitJobId`),
   CONSTRAINT `id_candidatePostResume_candidate` FOREIGN KEY (`candidateId`) REFERENCES `candidate` (`candidateId`),
   CONSTRAINT `id_candidatePostResume_recruitJob` FOREIGN KEY (`recruitJobId`) REFERENCES `recruit_job` (`recruitJobId`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,6 +88,7 @@ CREATE TABLE `candidate_post_resume` (
 
 LOCK TABLES `candidate_post_resume` WRITE;
 /*!40000 ALTER TABLE `candidate_post_resume` DISABLE KEYS */;
+INSERT INTO `candidate_post_resume` VALUES (1,1,16,'2022-01-25',_binary '','path demo'),(2,1,11,'2022-05-25',_binary '','path demo'),(3,2,11,'2022-10-10',_binary '','path demo'),(4,2,1,'2022-11-01',_binary '','path demo'),(5,2,11,'2022-12-15',_binary '','path demo'),(6,2,1,'2022-01-17',_binary '','path demo');
 /*!40000 ALTER TABLE `candidate_post_resume` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,7 +225,7 @@ CREATE TABLE `recruit` (
 
 LOCK TABLES `recruit` WRITE;
 /*!40000 ALTER TABLE `recruit` DISABLE KEYS */;
-INSERT INTO `recruit` VALUES (1,3,1,'Quận 1','tuyendung@gmail.com','Công ty Tuyển Dụng','Công ty chuyên thiết kế phần mềm cho các doanh nghiệp trong và ngoài nước. Với chuyên môn cao và đội ngũ chuyên nghiệp, chúng tôi tin rằng chúng tôi sẽ thay đổi đất nước trong thời gian sớm nhất',NULL,NULL,'tuyendungcompany.com',_binary '',2000);
+INSERT INTO `recruit` VALUES (1,18,1,'Quận 1','tuyendung@gmail.com','Công ty Tuyển Dụng','Công ty chuyên thiết kế phần mềm cho các doanh nghiệp trong và ngoài nước. Với chuyên môn cao và đội ngũ chuyên nghiệp, chúng tôi tin rằng chúng tôi sẽ thay đổi đất nước trong thời gian sớm nhất',NULL,NULL,'tuyendungcompany.com',_binary '',2000),(2,4,2,'Quận Ba Đinh','hr@gmail.com','Công ty IT','As a brand of Harvey Nash Group, NashTech has committed to deliver the very best talents, IT solutions and Business Process Services to our international clients in the UK, Europe, Asia Pacific & the US.',NULL,NULL,'itcompany.com',_binary '',2001);
 /*!40000 ALTER TABLE `recruit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,16 +241,16 @@ CREATE TABLE `recruit_job` (
   `title` varchar(45) NOT NULL,
   `position` varchar(45) NOT NULL,
   `amount` int NOT NULL,
-  `require` text NOT NULL,
-  `description` text NOT NULL,
-  `workPlace` varchar(100) NOT NULL,
+  `require` longtext NOT NULL,
+  `description` longtext NOT NULL,
+  `workPlace` varchar(255) NOT NULL,
   `benefit` text,
-  `postDate` date NOT NULL,
-  `expirationDate` date NOT NULL,
+  `postDate` varchar(10) NOT NULL,
+  `expirationDate` varchar(10) NOT NULL,
   `emailContact` varchar(50) NOT NULL,
   `nameContact` varchar(45) DEFAULT NULL,
   `phoneContact` varchar(15) NOT NULL,
-  `status` bit(1) NOT NULL,
+  `status` bit(1) DEFAULT NULL,
   `salaryId` int NOT NULL,
   `experienceId` int NOT NULL,
   `recruitId` int NOT NULL,
@@ -268,7 +270,7 @@ CREATE TABLE `recruit_job` (
   CONSTRAINT `id_recruitJob_recruit` FOREIGN KEY (`recruitId`) REFERENCES `recruit` (`recruitId`),
   CONSTRAINT `id_recruitJob_salary` FOREIGN KEY (`salaryId`) REFERENCES `salary` (`salaryId`),
   CONSTRAINT `id_recruitJob_workType` FOREIGN KEY (`workTypeId`) REFERENCES `work_type` (`workTypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +279,7 @@ CREATE TABLE `recruit_job` (
 
 LOCK TABLES `recruit_job` WRITE;
 /*!40000 ALTER TABLE `recruit_job` DISABLE KEYS */;
-INSERT INTO `recruit_job` VALUES (1,'Tuyển nhân viên SEO','Nhân viên',2,'Đây là yêu cầu công việc','Đây là mô tả công việc nhân viên SEO','Tòa nhà chung cư báo nhân dân',NULL,'2020-01-27','2020-02-05','tuyendung@gmail.com',NULL,'0123456789',_binary '',6,3,1,1,1,22),(3,'Tuyển nhân viên thời vụ','Nhân viên',2,'Đây là yêu cầu công việc','Đây là mô tả công việc nhân viên thời vụ','Tòa nhà chung cư báo nhân dân',NULL,'2020-01-26','2020-02-05','tuyendung@gmail.com',NULL,'0123456789',_binary '',6,3,1,1,2,22),(11,'Tuyển nhân viên SEO','Nhân viên',2,'Đây là yêu cầu công việc','Đây là mô tả công việc SEO','Tòa nhà chung cư báo nhân dân',NULL,'2020-01-26','2020-02-05','tuyendung@gmail.com',NULL,'0123456789',_binary '',6,3,1,1,1,22);
+INSERT INTO `recruit_job` VALUES (1,'Tuyển nhân viên SEO','Nhân viên',2,'Đây là yêu cầu công việc','Đây là mô tả công việc nhân viên SEO','Tòa nhà chung cư báo nhân dân',NULL,'2020-01-27','2020-02-05','tuyendung@gmail.com',NULL,'0123456789',_binary '',6,3,1,1,1,22),(3,'Tuyển nhân viên thời vụ','Nhân viên',2,'Đây là yêu cầu công việc','Đây là mô tả công việc nhân viên thời vụ','Tòa nhà chung cư báo nhân dân',NULL,'2020-01-26','2020-02-05','tuyendung@gmail.com',NULL,'0123456789',_binary '',6,3,1,1,2,22),(11,'Tuyển nhân viên SEO','Nhân viên',2,'Đây là yêu cầu công việc','Đây là mô tả công việc SEO','Tòa nhà chung cư báo nhân dân',NULL,'2020-01-26','2020-02-05','tuyendung@gmail.com',NULL,'0123456789',_binary '',6,3,1,1,1,22),(16,'DevOps Engineer ','Nhân viên',1,'The Senior DevOps Engineer is responsible to design, build and maintain the CI/CD solutions for dedicated/ hybrid cloud environments. The Senior DevOps Engineer works with software developers and other production IT staff to oversee code releases.','The Senior DevOps Engineer is responsible to design, build and maintain the CI/CD solutions for dedicated/ hybrid cloud environments. The Senior DevOps Engineer works with software developers and other production IT staff to oversee code releases.',' Xuan Thuy, Hanoi, Vietnam, Cau Giay, Ha Noi','13 month salary per year','2021-01-17','2021-02-17','hr@gmail.com','Mr.An','0123456789',_binary '',7,2,2,2,1,7);
 /*!40000 ALTER TABLE `recruit_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -378,7 +380,7 @@ CREATE TABLE `user` (
   `lastName` varchar(45) NOT NULL,
   `userRole` varchar(45) NOT NULL,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -387,7 +389,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'trancammy212@gmail.com','my','my','Tran','My','role_admin'),(2,'trancammy2102@gmail.com','mycandidate','1','My','My My','role_candidate'),(3,'1854050060my@ou.edu.vn','myrecruiter','1','Tran','Frog','role_recruiter');
+INSERT INTO `user` VALUES (1,'trancammy212@gmail.com','my1','$2a$10$vIdHOL1y7ncVvIib5eK5SOCnAtQosGCLxNFzP9DWKrgY.R9zWgugS','Tran','My','ROLE_ADMIN'),(2,'trancammy2102@gmail.com','mycandidate','1','My','My My','ROLE_CANDIDATE'),(3,'mymy@gmail.com','myrecruiter','1','Tran','Frog','ROLE_RECRUIT'),(4,'tranmy@gmail.com','itrecruiter','1','Cam','My','ROLE_RECRUIT'),(5,'my@gmail.com','candidate','1','My','My','ROLE_CANDIDATE'),(16,'my@gmail.com','my','$2a$10$Dc9SOwMsm.ohb18gtauvlOkdlz1Ya5/YoF4KBmCDIUzhEZct.4QM2','Trần','My','ROLE_CANDIDATE'),(17,'frog@gmail.com','frog','$2a$10$cUB380biVspE2pTkPtXMx.Lzmr2.SPSj/yVw07PVe.faJSOOCM8xi','Trần Thị','My','ROLE_CANDIDATE'),(18,'mytuyendung@gmail.com','mytuyendung','$2a$10$fUIAHqZR7QMIhCx5E5XL5.nsrj5i.qZno/Zu/.O9gA5jvJquY2Ar2','Mỳ','My','ROLE_RECRUIT'),(19,'admin@gmail.com','admin','$2a$10$uXOoYtbTIm5Ogzpeu..qhux4eg1kQX7M2AN/5raFLfocO0U/fpRaa','Quan Tri','Vien','ROLE_ADMIN'),(20,'my@gmail.com','myyy','$2a$10$sCCgXjD9tF78IAqbM7eaSO7YgYwKvuz7n7Ra5.NOQwsyEczGfS2j2','Trần Thị','My','ROLE_RECRUIT');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,4 +426,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-15 21:13:39
+-- Dump completed on 2022-02-15 14:57:00
