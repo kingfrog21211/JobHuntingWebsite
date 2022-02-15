@@ -63,23 +63,23 @@ and open the template in the editor.
         <put-attribute name="content" value="..." />
     </definition>-->
     <definition name="index-recruiter" extends="baseLayout">
-        <put-attribute name="title" value="Recruiter Admin - Recruit Jobs" />
+        <put-attribute name="title" value="Recruiter - Recruit Jobs" />
         <put-attribute name="content" value="/WEB-INF/pages/index-recruiter.jsp" />
     </definition>
     <definition name="recruit-RecruitJob" extends="baseLayout">
-        <put-attribute name="title" value="Recruiter Admin - Recruit Jobs" />
+        <put-attribute name="title" value="Recruiter - Recruit Jobs" />
         <put-attribute name="content" value="/WEB-INF/pages/recruit-RecruitJob.jsp" />
     </definition>
     <definition name="recruit-addRecruitJob" extends="baseLayout">
-        <put-attribute name="title" value="Recruiter Admin - Add Recruit Jobs" />
+        <put-attribute name="title" value="Recruiter - Add Recruit Jobs" />
         <put-attribute name="content" value="/WEB-INF/pages/recruit-addRecruitJob.jsp" />
     </definition>
     <definition name="recruit-RecruitInfo" extends="baseLayout">
-        <put-attribute name="title" value="Recruiter Admin - Recruiter Info" />
+        <put-attribute name="title" value="Recruiter - Recruiter Info" />
         <put-attribute name="content" value="/WEB-INF/pages/recruit-RecruitInfo.jsp" />
     </definition>
     <definition name="recruit-updateRecruitJob" extends="baseLayout">
-        <put-attribute name="title" value="Recruiter Admin - Update Recruit Jobs" />
+        <put-attribute name="title" value="Recruiter - Update Recruit Jobs" />
         <put-attribute name="content" value="/WEB-INF/pages/recruit-updateRecruitJob.jsp" />
     </definition>
     <!--admin-->

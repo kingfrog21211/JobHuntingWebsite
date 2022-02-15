@@ -19,5 +19,4 @@ public interface CandidateService {
     List<Candidate> getCandidateBySearching(Integer candidateId, Integer professionId, Integer userId);
     Candidate getCandidateById(Integer id);
     Object getCandidateDetail(Integer id);
-    List<Candidate> getCandidateByKW(String kw);
 }

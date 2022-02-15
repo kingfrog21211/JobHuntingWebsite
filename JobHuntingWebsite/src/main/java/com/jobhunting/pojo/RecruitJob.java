@@ -29,6 +29,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -97,13 +98,15 @@ public class RecruitJob implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "postDate")
-    @Temporal(TemporalType.DATE)
-    private Date postDate;
+//    @Temporal(TemporalType.DATE)
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String postDate;
     @Basic(optional = false)
     @NotNull(message = "{recruitJob.nullErr}")
     @Column(name = "expirationDate")
-    @Temporal(TemporalType.DATE)
-    private Date expirationDate;
+//    @Temporal(TemporalType.DATE)
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String expirationDate;
     @Basic(optional = false)
     @NotNull(message = "{recruitJob.nullErr}")
     @Size(min = 1, max = 50, message = "{recruitJob.emailErr}")
@@ -149,7 +152,7 @@ public class RecruitJob implements Serializable {
         this.recruitJobId = recruitJobId;
     }
 
-    public RecruitJob(Integer recruitJobId, String title, String position, int amount, String require, String description, String workPlace, Date postDate, Date expirationDate, String emailContact, String phoneContact) {
+    public RecruitJob(Integer recruitJobId, String title, String position, int amount, String require, String description, String workPlace, String postDate, String expirationDate, String emailContact, String phoneContact) {
         this.recruitJobId = recruitJobId;
         this.title = title;
         this.position = position;
@@ -227,19 +230,19 @@ public class RecruitJob implements Serializable {
         this.benefit = benefit;
     }
 
-    public Date getPostDate() {
+    public String getPostDate() {
         return postDate;
     }
 
-    public void setPostDate(Date postDate) {
+    public void setPostDate(String postDate) {
         this.postDate = postDate;
     }
 
-    public Date getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 

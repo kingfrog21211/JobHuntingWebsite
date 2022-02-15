@@ -66,8 +66,13 @@ public class HomeController {
     }
     
     @RequestMapping("/")
-    public String index(Model model){
+    public String index(Model model, @RequestParam(value = "professionId", required = false) Integer professionId,
+                                    @RequestParam(value = "experienceId", required = false) Integer experienceId,
+                                    @RequestParam(value = "cityId", required = false) Integer cityId){
         model.addAttribute("top5RecruitJob", recruitJobService.getTop5RecruitJob());
+        if (cityId!=null || professionId!=null || experienceId!=null) {
+            model.addAttribute("candidates", this.candidateService.getCandidateBySearching(professionId, experienceId, cityId));
+        }
         return "index";
     }
     

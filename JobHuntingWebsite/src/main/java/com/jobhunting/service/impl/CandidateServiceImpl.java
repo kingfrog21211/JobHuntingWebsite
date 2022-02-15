@@ -33,8 +33,8 @@ public class CandidateServiceImpl implements CandidateService{
     }
 
     @Override
-    public List<Candidate> getCandidateBySearching(Integer candidateId, Integer professionId, Integer userId) {
-        return this.candidateRepository.getCandidateBySearching(candidateId, professionId, userId);
+    public List<Candidate> getCandidateBySearching(Integer professionId, Integer experienceId, Integer cityId) {
+        return this.candidateRepository.getCandidateBySearching(professionId, experienceId, cityId);
     }
 
     @Override
@@ -45,11 +45,6 @@ public class CandidateServiceImpl implements CandidateService{
     @Override
     public Object getCandidateDetail(Integer id) {
         return this.candidateRepository.getCandidateDetail(id);
-    }
-
-    @Override
-    public List<Candidate> getCandidateByKW(String kw) {
-        return this.candidateRepository.getCandidateByKW(kw);
     }
     
 }

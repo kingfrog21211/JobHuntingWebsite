@@ -61,18 +61,22 @@ public class RecruitController {
     @GetMapping("/recruit-RecruitJob")
     public String listJob(Model model){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User u = this.userService.getUserByUsername(userDetails.getUsername());
         
         User u = this.userDetailsService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         Recruit r = this.companyService.getRecruitByUserId(u.getUserId());
-        Integer recruitId = r.getRecruitId();
-        model.addAttribute("recruitJob", this.recruitJobService.getRecruitJobByRecruitId(recruitId));
-        model.addAttribute("companies", this.companyService.getCompanyByRecruitId(recruitId));
+//        if (r!=null) {ew2
+            Integer recruitId = r.getRecruitId();
+            model.addAttribute("recruitJob", this.recruitJobService.getRecruitJobByRecruitId(recruitId));
+            model.addAttribute("companies", this.companyService.getCompanyByRecruitId(recruitId));
+//        }
         return "recruit-RecruitJob";
     }
     
     @GetMapping("/recruit-addRecruitJob")
-    public String list(Model model, @RequestParam(value = "recruitId") Integer recruitId){
+    public String list(Model model){
+        User u = this.userDetailsService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        Recruit r = this.companyService.getRecruitByUserId(u.getUserId());
+        model.addAttribute("recruitId", r.getRecruitId());
         model.addAttribute("recruitJob", new RecruitJob());
         return "recruit-addRecruitJob";
     }
@@ -80,20 +84,11 @@ public class RecruitController {
     @PostMapping("/recruit-addRecruitJob")
     public String addRecruitJob(Model model, @ModelAttribute(value = "recruitJob") @Valid RecruitJob recruitJob, BindingResult result){
         if (!result.hasErrors()) {
-            try {
-                if (this.recruitJobService.addOrUpdate(recruitJob)==true)
-                return "redirect:/recruit-RecruitJob";
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            if (this.recruitJobService.addOrUpdate(recruitJob)==true)
+                return "redirect:/recruit/recruit-RecruitJob";
+            else model.addAttribute("errMsg", "Something wrong!!!");
         }
         return "recruit-addRecruitJob";
-    }
-    
-    @GetMapping("/recruit-RecruitInfo")
-    public String recruitInfo(Model model, @RequestParam(value = "recruitId") Integer id){
-        model.addAttribute("companies", this.companyService.getCompanyByRecruitId(id));
-        return "recruit-RecruitInfo";
     }
     
     @GetMapping("/recruit-updateRecruitJob")

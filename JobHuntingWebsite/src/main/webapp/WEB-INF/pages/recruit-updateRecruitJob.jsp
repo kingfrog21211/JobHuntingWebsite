@@ -1,6 +1,6 @@
 <%-- 
-    Document   : addRecruitJob
-    Created on : Jan 16, 2022, 5:38:46 PM
+    Document   : recruit-updateRecruitJob
+    Created on : Feb 15, 2022, 12:00:28 PM
     Author     : Asus
 --%>
 
@@ -8,24 +8,25 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:url value="/recruit/recruit-addRecruitJob" var="action"/>
-<c:if test="${errMsg!=null}">
-    <div class="alert alert-danger">${errMsg}</div>
+<c:url value="/recruit/recruit-updateRecruitJob" var="action" />
+
+<c:if test="${message != null}">
+    <h3>THÔNG BÁO!</h3>
+    <div class="alert alert-danger">${message}</div>
 </c:if>
-<section class="job_section layout_padding">
+    
+<div class="job_section layout_padding">
     <div class="container">
         <div class="heading_container">
-            <h2 class="title"><strong>ADD NEW RECRUIT JOB</strong></h2>
+            <h2 class="title"><strong>UPDATE RECRUIT JOB</strong></h2>
         </div>
     </div>
     <div style="margin-left:20%; margin-right:20%">
         <form:form method="post" action="${action}" modelAttribute="recruitJob" enctype="multipart/form-data"><div class="personal-form">
             <!--Recruit ID-->
             <div class="form-group" style="margin-left: 25%; margin-right: 25%">
-                <label for="company" style="color: red; font-weight: 700">YOUR COMPANY ID</label>
-                ${recruitId}
+                <label for="company" style="color: red; font-weight: 700">YOUR COMPANY ID: </label>${recruitId}
                 <form:input id="company" path="recruitId" cssClass="form-control"/>
             </div>
             <!--title-->
@@ -144,6 +145,12 @@
                 </div>
             </div>
             <div class="grid-item form-group" style="column-count: 2">
+                <!--post date-->
+                <div class=" grid-item form-group">
+                    <label for="postDate">Post Date</label>
+                    <form:input type="text" id="postDate" path="postDate" cssClass="form-control"/>
+                    <form:errors path="postDate" cssClass="text-danger" element="div"/>
+                </div>  
                 <!--expiration date-->
                 <div class=" grid-item form-group">
                     <label for="expirationDate">Expiration Date</label>
@@ -152,9 +159,8 @@
                 </div>               
             </div>
             <div class="form-group">
-                <input type="submit" value="Add Recruit Job" class="btn" style="background-color: #ff9f01; display: table; clear: both; margin-left: 85%">
+                <input type="submit" value="Save change" class="btn" style="background-color: #ff9f01; display: table; clear: both; margin-left: 85%">
             </div></div>
         </form:form>
     </div>
-    
-</section>
+</div>

@@ -6,13 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <style>
     #tb {
       font-family: Arial;
       border-collapse: collapse;
       width: 100%;
+      font-size: small;
     }
 
     #tb td, #tb th {
@@ -28,7 +27,7 @@
       padding-top: 12px;
       padding-bottom: 12px;
       text-align: left;
-      background-color: #ff9f01;
+      background-color: royalblue;
       color: #000;
     }
 </style>
@@ -37,11 +36,11 @@
 <c:if test="${errMsg!=null}">
     <div class="alert-danger">${errMsg}</div>
 </c:if>
-<section style="margin-top: 70px; margin-left: 10px; margin-right: 10px">
+<div style="margin-top: 70px; margin-left: 10px; margin-right: 10px">
     <!--<div class="container">-->
         <!--title-->
         <div class="heading_container">
-            <h2 class="title"><strong>MANAGE RECRUIT JOB</strong></h2>
+            <h2 class="text-center"><strong>MANAGE RECRUIT JOB</strong></h2>
         </div>
         <div style="display: flex; flex-direction: column-reverse; overflow: scroll">
             <!--content-->            
@@ -102,17 +101,17 @@
 
                                 <!--button modify, delete-->
                                 <td>
-                                    <c:url value="/recruit-updateRecruitJob" var="action">
+                                    <c:url value="/recruit/recruit-updateRecruitJob" var="action">
                                         <c:param name="recruitJobId" value="${c[6]}"/>
                                     </c:url>
                                     <input type="button"
                                            value="Modify" 
                                            onclick="location.href='${action}'"
-                                           style="background-color: black; color: white; width: 80px"/>
+                                           style="background-color: limegreen; width: 80px; border-radius: 3px"/>
                                     <input type="button" 
                                            onclick="deleteRecruitJob(${c[6]})"
                                            value="Delete" 
-                                           style="background-color: #ff9f01; color: black; width: 80px; margin-top: 5px"/>
+                                           style="background-color: red; width: 80px; margin-top: 5px; ; border-radius: 3px"/>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -120,9 +119,7 @@
                 </c:if>
         </div><br>
         <!--button-->
-        <div class="form-group">
-            <input onclick="location.href='<c:url value="/recruit/recruit-addRecruitJob"/>'" type="submit" value="Add new Job" class="title" style="background-color: chartreuse; display: table; clear: both; margin-left: 41%; margin-right: 50% ">
-            <br>
-        </div>
+        <button onclick="location.href='<c:url value="/recruit/recruit-addRecruitJob"/>'" style="background-color: royalblue; margin-right: 10% ">Add new Job</button>
+        <br>
     <!--</div>-->
-</section>
+</div>

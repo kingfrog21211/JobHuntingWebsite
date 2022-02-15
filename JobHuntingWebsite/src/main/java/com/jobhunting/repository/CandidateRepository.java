@@ -16,8 +16,7 @@ public interface CandidateRepository {
     Candidate getCandidateByUserId(Integer id);
     
     List<Candidate> getCandidate();
-    List<Candidate> getCandidateBySearching(Integer candidateId, Integer professionId, Integer userId);
+    List<Candidate> getCandidateBySearching(Integer professionId, Integer experienceId, Integer cityId);
     Candidate getCandidateById(Integer id);
     Object getCandidateDetail(Integer id);
-    List<Candidate> getCandidateByKW(String kw);
 }

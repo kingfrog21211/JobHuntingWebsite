@@ -5,10 +5,20 @@
  */
 package com.jobhunting.repository.impl;
 
+import com.jobhunting.pojo.City;
+import com.jobhunting.pojo.Experience;
+import com.jobhunting.pojo.Profession;
 import com.jobhunting.pojo.Recruit;
+import com.jobhunting.pojo.RecruitJob;
+import com.jobhunting.pojo.Salary;
+import com.jobhunting.pojo.WorkType;
 import com.jobhunting.repository.CompanyRepository;
 import java.util.List;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +51,13 @@ public class CompanyRepositoryImpl implements CompanyRepository{
 
     @Override
     public Recruit getRecruitByUserId(Integer userId) {
-        return this.sessionFactory.getObject().getCurrentSession().get(Recruit.class, userId);
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Recruit> query = builder.createQuery(Recruit.class);
+        Root root = query.from(Recruit.class);
+        query = query.where(builder.equal(root.get("userId"), userId));
+        query.orderBy(builder.desc(root.get("recruitId")));
+        Query q = session.createQuery(query);
+        return (Recruit) q.getSingleResult();
     }
 }
