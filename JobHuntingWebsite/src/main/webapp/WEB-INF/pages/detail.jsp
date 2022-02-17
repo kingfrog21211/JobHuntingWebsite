@@ -6,6 +6,7 @@ Author     : ASUS
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <style>
     .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
@@ -75,33 +76,36 @@ Author     : ASUS
                 Hạn nộp hồ sơ: ${jobDetails[15]}
             </div>
         </div>
-        <div class="apply-area" style="margin-left: 50px">
-            <div class="text-center">
-                <button style="background-color: royalblue">
-                    <span href="#" class="btn btn-topcv-primary btn-primary-hover btn-apply open-apply-modal" data-target="#modal-apply-cv" data-toggle="modal">
-                        ỨNG TUYỂN NGAY</span>
-                </button>
-                <button style="background-color: limegreen; margin-left: 20px">
-                    <span href="#" class="btn btn-topcv-primary btn-primary-hover btn-apply open-apply-modal" data-target="#modal-save-job" data-toggle="modal">
-                        LƯU TIN</span>
-                </button>
+        <security:authorize access="hasRole('ROLE_CANDIDATE')">
+            <div class="apply-area" style="margin-left: 50px">
+                <div class="text-center">
+                    <button style="background-color: royalblue" onclick="apply(jobDetails[6])">
+                            APPLY NOW
+                    </button>
+                    <button style="background-color: limegreen; margin-left: 20px" onclick="">
+                        <i class="fas fa-heart"></i> SAVE
+                    </button>
+                </div>
             </div>
-        </div>
+        </security:authorize>
+        <security:authorize access="!isAuthenticated()">
+            <div class="apply-area" style="margin-left: 50px"><a href="<c:url value="/login"/>">
+                    <b style="text-decoration: red; color: red "><i class="fas fa-arrow-right"></i> Login to apply for this job</b></a></div>
+        </security:authorize>
     </div>
 </div>
 <div class="container " id="tab-info" style="min-width: 750px;padding-left: 0;padding-right: 0; width: 96%;">
     <div class="box-info-job box-white" style="border-radius: 3px;padding: 16px;word-break: break-word;background-color: #fff">
-        <h2 class="box-title" style="color: #333;font-size: 22px;font-weight: 700;margin: 0 0 16px;">
-            Chi tiết tin tuyển dụng</h2>
+        
         <div class="row" style="margin-right: -15px;margin-left: -15px;">
             <div class="col-md-8">
                 <div class="box-info">
-                    <b><u>Thông tin chung</u></b><br><br>
+                    <b><u>JOB DETAIL</u></b><br><br>
                 <div class="box-main">
                     <div class="box-item">
                         <img src="https://www.topcv.vn/v4/image/job-detail/icon/1.svg" alt="">
                         <div>
-                        <strong>Mức lương </strong> <br>
+                        <strong>Salary </strong> <br>
                         <span>
                         ${jobDetails[2]}
                         </span>
@@ -110,42 +114,28 @@ Author     : ASUS
                     <div class="box-item">
                         <img src="https://www.topcv.vn/v4/image/job-detail/icon/5.svg" alt="">
                         <div>
-                        <strong>Số lượng tuyển </strong> <br>
+                        <strong>Recruit Amount </strong> <br>
                         <span>${jobDetails[9]}</span>
-                        </div>
-                    </div>
-                    <div class="box-item">
-                        <img src="https://www.topcv.vn/v4/image/job-detail/icon/2.svg" alt="">
-                        <div>
-                        <strong>Hình thức làm việc </strong> <br>
-                        <span>Toàn thời gian</span>
                         </div>
                     </div>
                     <div class="box-item">
                         <img src="https://www.topcv.vn/v4/image/job-detail/icon/6.svg" alt="">
                         <div>
-                            <strong>Cấp bậc </strong> <br>
+                            <strong>Work Type </strong> <br>
                             <span>${jobDetails[4]}</span>
-                        </div>
-                    </div>
-                    <div class="box-item">
-                        <img src="https://www.topcv.vn/v4/image/job-detail/icon/3.svg" alt="">
-                        <div>
-                            <strong>Giới tính </strong> <br>
-                            <span>Không yêu cầu</span>
                         </div>
                     </div>
                     <div class="box-item">
                         <img src="https://www.topcv.vn/v4/image/job-detail/icon/7.svg" alt="">
                         <div>
-                            <strong>Kinh nghiệm </strong> <br>
+                            <strong>Experience </strong> <br>
                             <span>${jobDetails[21]}</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="box-address">
-                <b>Địa điểm làm việc</b>
+                <b>Work place</b>
                 <div>
                     <div class="text-dark-gray">${jobDetails[12]}</div>
                     <div class="text-dark-gray" style="margin-bottom: 10px;">
@@ -154,18 +144,18 @@ Author     : ASUS
                 </div>
             </div>
             <div class="job-data">
-                <h3 style="font-weight: bold">Mô tả công việc</h3>
+                <h3 style="font-weight: bold">Description</h3>
                 <div class="content-tab"><p>${jobDetails[11]}</p></div>
-                <h3 style="font-weight: bold">Yêu cầu ứng viên</h3>
+                <h3 style="font-weight: bold">Requirement</h3>
                 <div class="content-tab"><p>${jobDetails[10]}</p></div>
-                <h3 style="font-weight: bold">Quyền lợi</h3>
+                <h3 style="font-weight: bold">Benefit</h3>
                 <div class="content-tab"><p>${jobDetails[13]}</p></div>
                 
             </div>
         </div>
             <div class="col-md-4 col-box-right">
                 <div class="box-keyword-job">
-                    <h3>Ngành nghề</h3>
+                    <h3>Profession</h3>
                     <div class="keyword">
                         <c:forEach items="${professions}" var="c">
                             <c:url value="/job" var="action">
@@ -177,7 +167,7 @@ Author     : ASUS
                         </c:forEach>
                     </div>
                     <br>
-                    <h3>Khu vực</h3>
+                    <h3>City</h3>
                     <div class="area">
                         <c:forEach items="${cities}" var="c">
                             <c:url value="/job" var="action">

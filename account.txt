@@ -1,0 +1,4 @@
+		username	password
+ADMIN		admin		123
+CANDIDATE	frog		123
+RECRUITER	mytuyendung	123

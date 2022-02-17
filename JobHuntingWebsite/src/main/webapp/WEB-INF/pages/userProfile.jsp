@@ -14,18 +14,6 @@
     <section style="background-color: #eee;">
       <div class="container py-5">
         <div class="row">
-          <div class="col">
-            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-              <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">User</a></li>
-                <li class="breadcrumb-item active" aria-current="page">User Profile</li>
-              </ol>
-            </nav>
-          </div>
-        </div>
-
-        <div class="row">
           <div class="col-lg-4">
             <div class="card mb-4">
               <div class="card-body text-center">
@@ -34,8 +22,7 @@
                         align-items: center;
                         text-align: center;
                         display: grid;
-                        justify-content: space-around;
-                    ">
+                        justify-content: space-around;">
                     <input type="file" name="fileUpload" size="150" />
                 </form>
                 <h5 class="my-3">${pageContext.request.userPrincipal.name}</h5>
@@ -48,26 +35,26 @@
                 <ul class="list-group list-group-flush rounded-3">
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                         <a>
-                            <i class="fas fa-globe"></i>
+                            <i class="fas fa-building"></i>
                             <p class="mb-0">Ho So Cong Ty</p>
                         </a>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                         <a>
-                            <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                            <i class="fas fa-suitcase"></i>
                             <p class="mb-0">Quan Ly Cong Viec</p>
                         </a>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <a>
-                            <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                            <i class="fas fa-lock"></i>
                             <p class="mb-0">Doi Mat Khau</p>
                       </a>
                     
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <a>
-                            <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                            <i class="fas fa-sign-out-alt"></i>
                             <p class="mb-0">Dang Xuat</p>
                       </a>
                     
@@ -133,62 +120,6 @@
                   </div>
                   <div class="col-sm-9">
                     <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="card mb-4 mb-md-0">
-                    <div class="card-body">
-                        <p class="mb-4"><span class="text-primary font-italic me-1">Task</span> Project Status</p>
-                        <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                        <div class="progress rounded mb-2" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="card mb-4 mb-md-0">
-                  <div class="card-body">
-                    <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status</p>
-                    <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                    <div class="progress rounded" style="height: 5px;">
-                      <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                    <div class="progress rounded" style="height: 5px;">
-                      <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                    <div class="progress rounded" style="height: 5px;">
-                      <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                    <div class="progress rounded" style="height: 5px;">
-                      <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                    <div class="progress rounded mb-2" style="height: 5px;">
-                      <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
                   </div>
                 </div>
               </div>

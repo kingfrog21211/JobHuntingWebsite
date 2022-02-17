@@ -43,10 +43,10 @@ CREATE TABLE `candidate` (
   KEY `id_candidate_city_id` (`cityId`),
   KEY `id_candidate_profession_id` (`professionId`),
   KEY `id_candidate_experience_idx` (`experienceId`),
-  CONSTRAINT `id_candidate_city` FOREIGN KEY (`cityId`) REFERENCES `city` (`cityId`),
-  CONSTRAINT `id_candidate_experience` FOREIGN KEY (`experienceId`) REFERENCES `experience` (`experienceId`),
-  CONSTRAINT `id_candidate_profession` FOREIGN KEY (`professionId`) REFERENCES `profession` (`professionId`),
-  CONSTRAINT `id_candidate_user` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`)
+  CONSTRAINT `id_candidate_city` FOREIGN KEY (`cityId`) REFERENCES `city` (`cityId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_candidate_experience` FOREIGN KEY (`experienceId`) REFERENCES `experience` (`experienceId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_candidate_profession` FOREIGN KEY (`professionId`) REFERENCES `profession` (`professionId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_candidate_user` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -56,7 +56,7 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,2,7,NULL,'Tran Cam My','female',NULL,1,'Quan Go Vap',1,'0399933589','trancammy2102@gmail.com','2000-02-21','path demo',NULL),(2,5,22,NULL,'My My','female',NULL,1,'Binh Thanh',3,'0123456789','my@gmail.com','2000-02-02','path demo',NULL),(3,16,7,NULL,'Tran Tu','male','Đây là mô tả ứng viên',1,'Tân Bình',2,'0123456789','tu@gmail.com','2001-01-01','path demo',NULL);
+INSERT INTO `candidate` VALUES (1,2,7,NULL,'Tran Cam My','female',NULL,1,'Quan Go Vap',1,'0399933589','trancammy2102@gmail.com','2000-02-21','path demo',NULL),(2,5,22,NULL,'My My','female',NULL,1,'Binh Thanh',3,'0123456789','my@gmail.com','2000-02-02','path demo',NULL),(3,16,7,NULL,'Tran Tu','male','Đây là mô tả ứng viên',1,'Tân Bình',2,'0123456789','tu@gmail.com','2001-01-01','path demo',NULL),(4,17,7,NULL,'Tran Thi My','male','Mo ta ung vien .................................................',2,'Quan Cam',2,'0123456789','my@gmail.com','2001-01-05','path demo',NULL);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,7 +77,7 @@ CREATE TABLE `candidate_post_resume` (
   PRIMARY KEY (`candidatePostResumeId`),
   KEY `id_candidatePostResume_candidate_id` (`candidateId`),
   KEY `id_candidatePostResume_recruitJob_id` (`recruitJobId`),
-  CONSTRAINT `id_candidatePostResume_candidate` FOREIGN KEY (`candidateId`) REFERENCES `candidate` (`candidateId`),
+  CONSTRAINT `id_candidatePostResume_candidate` FOREIGN KEY (`candidateId`) REFERENCES `candidate` (`candidateId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `id_candidatePostResume_recruitJob` FOREIGN KEY (`recruitJobId`) REFERENCES `recruit_job` (`recruitJobId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -177,7 +177,7 @@ CREATE TABLE `profession` (
   `careerId` int NOT NULL,
   PRIMARY KEY (`professionId`),
   KEY `id_profession_career_id` (`careerId`),
-  CONSTRAINT `id_profession_career` FOREIGN KEY (`careerId`) REFERENCES `career` (`careerId`)
+  CONSTRAINT `id_profession_career` FOREIGN KEY (`careerId`) REFERENCES `career` (`careerId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -214,8 +214,8 @@ CREATE TABLE `recruit` (
   PRIMARY KEY (`recruitId`),
   KEY `id_recruit_user_id` (`userId`),
   KEY `id_recruit_city_id` (`cityId`),
-  CONSTRAINT `id_recruit_city` FOREIGN KEY (`cityId`) REFERENCES `city` (`cityId`),
-  CONSTRAINT `id_recruit_user` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`)
+  CONSTRAINT `id_recruit_city` FOREIGN KEY (`cityId`) REFERENCES `city` (`cityId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_recruit_user` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -225,7 +225,7 @@ CREATE TABLE `recruit` (
 
 LOCK TABLES `recruit` WRITE;
 /*!40000 ALTER TABLE `recruit` DISABLE KEYS */;
-INSERT INTO `recruit` VALUES (1,18,1,'Quận 1','tuyendung@gmail.com','Công ty Tuyển Dụng','Công ty chuyên thiết kế phần mềm cho các doanh nghiệp trong và ngoài nước. Với chuyên môn cao và đội ngũ chuyên nghiệp, chúng tôi tin rằng chúng tôi sẽ thay đổi đất nước trong thời gian sớm nhất',NULL,NULL,'tuyendungcompany.com',_binary '',2000),(2,4,2,'Quận Ba Đinh','hr@gmail.com','Công ty IT','As a brand of Harvey Nash Group, NashTech has committed to deliver the very best talents, IT solutions and Business Process Services to our international clients in the UK, Europe, Asia Pacific & the US.',NULL,NULL,'itcompany.com',_binary '',2001);
+INSERT INTO `recruit` VALUES (1,18,1,'Quận 1','tuyendung@gmail.com','Công ty Tuyển Dụng','Công ty chuyên thiết kế phần mềm cho các doanh nghiệp trong và ngoài nước. Với chuyên môn cao và đội ngũ chuyên nghiệp, chúng tôi tin rằng chúng tôi sẽ thay đổi đất nước trong thời gian sớm nhất',NULL,NULL,'tuyendungcompany.com',_binary '',2000),(2,20,2,'Quận Ba Đinh','hr@gmail.com','Công ty IT','As a brand of Harvey Nash Group, NashTech has committed to deliver the very best talents, IT solutions and Business Process Services to our international clients in the UK, Europe, Asia Pacific & the US.',NULL,NULL,'itcompany.com',_binary '',2001);
 /*!40000 ALTER TABLE `recruit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,13 +264,13 @@ CREATE TABLE `recruit_job` (
   KEY `id_recruitJob_experience_id` (`experienceId`),
   KEY `id_recruitJob_workType_id` (`workTypeId`),
   KEY `id_recruitJob_profession_id` (`professionId`),
-  CONSTRAINT `id_recruitJob_city` FOREIGN KEY (`cityId`) REFERENCES `city` (`cityId`),
-  CONSTRAINT `id_recruitJob_experience` FOREIGN KEY (`experienceId`) REFERENCES `experience` (`experienceId`),
-  CONSTRAINT `id_recruitJob_profession` FOREIGN KEY (`professionId`) REFERENCES `profession` (`professionId`),
-  CONSTRAINT `id_recruitJob_recruit` FOREIGN KEY (`recruitId`) REFERENCES `recruit` (`recruitId`),
-  CONSTRAINT `id_recruitJob_salary` FOREIGN KEY (`salaryId`) REFERENCES `salary` (`salaryId`),
-  CONSTRAINT `id_recruitJob_workType` FOREIGN KEY (`workTypeId`) REFERENCES `work_type` (`workTypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `id_recruitJob_city` FOREIGN KEY (`cityId`) REFERENCES `city` (`cityId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_recruitJob_experience` FOREIGN KEY (`experienceId`) REFERENCES `experience` (`experienceId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_recruitJob_profession` FOREIGN KEY (`professionId`) REFERENCES `profession` (`professionId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_recruitJob_recruit` FOREIGN KEY (`recruitId`) REFERENCES `recruit` (`recruitId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_recruitJob_salary` FOREIGN KEY (`salaryId`) REFERENCES `salary` (`salaryId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_recruitJob_workType` FOREIGN KEY (`workTypeId`) REFERENCES `work_type` (`workTypeId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,7 +279,7 @@ CREATE TABLE `recruit_job` (
 
 LOCK TABLES `recruit_job` WRITE;
 /*!40000 ALTER TABLE `recruit_job` DISABLE KEYS */;
-INSERT INTO `recruit_job` VALUES (1,'Tuyển nhân viên SEO','Nhân viên',2,'Đây là yêu cầu công việc','Đây là mô tả công việc nhân viên SEO','Tòa nhà chung cư báo nhân dân',NULL,'2020-01-27','2020-02-05','tuyendung@gmail.com',NULL,'0123456789',_binary '',6,3,1,1,1,22),(3,'Tuyển nhân viên thời vụ','Nhân viên',2,'Đây là yêu cầu công việc','Đây là mô tả công việc nhân viên thời vụ','Tòa nhà chung cư báo nhân dân',NULL,'2020-01-26','2020-02-05','tuyendung@gmail.com',NULL,'0123456789',_binary '',6,3,1,1,2,22),(11,'Tuyển nhân viên SEO','Nhân viên',2,'Đây là yêu cầu công việc','Đây là mô tả công việc SEO','Tòa nhà chung cư báo nhân dân',NULL,'2020-01-26','2020-02-05','tuyendung@gmail.com',NULL,'0123456789',_binary '',6,3,1,1,1,22),(16,'DevOps Engineer ','Nhân viên',1,'The Senior DevOps Engineer is responsible to design, build and maintain the CI/CD solutions for dedicated/ hybrid cloud environments. The Senior DevOps Engineer works with software developers and other production IT staff to oversee code releases.','The Senior DevOps Engineer is responsible to design, build and maintain the CI/CD solutions for dedicated/ hybrid cloud environments. The Senior DevOps Engineer works with software developers and other production IT staff to oversee code releases.',' Xuan Thuy, Hanoi, Vietnam, Cau Giay, Ha Noi','13 month salary per year','2021-01-17','2021-02-17','hr@gmail.com','Mr.An','0123456789',_binary '',7,2,2,2,1,7);
+INSERT INTO `recruit_job` VALUES (1,'Tuyển nhân viên SEO','Nhân viên',2,'Đây là yêu cầu công việc','Đây là mô tả công việc nhân viên SEO','Tòa nhà chung cư báo nhân dân',NULL,'2020-01-27','2020-02-05','tuyendung@gmail.com',NULL,'0123456789',_binary '',6,3,1,1,1,22),(3,'Tuyển nhân viên thời vụ','Nhân viên',2,'Đây là yêu cầu công việc','Đây là mô tả công việc nhân viên thời vụ','Tòa nhà chung cư báo nhân dân',NULL,'2020-01-26','2020-02-05','tuyendung@gmail.com',NULL,'0123456789',_binary '',6,3,1,1,2,22),(11,'Tuyển nhân viên SEO','Nhân viên',2,'Đây là yêu cầu công việc','Đây là mô tả công việc SEO','Tòa nhà chung cư báo nhân dân',NULL,'2020-01-26','2020-02-05','tuyendung@gmail.com',NULL,'0123456789',_binary '',6,3,1,1,1,22),(16,'DevOps Engineer ','Nhân viên',1,'The Senior DevOps Engineer is responsible to design, build and maintain the CI/CD solutions for dedicated/ hybrid cloud environments. The Senior DevOps Engineer works with software developers and other production IT staff to oversee code releases.','The Senior DevOps Engineer is responsible to design, build and maintain the CI/CD solutions for dedicated/ hybrid cloud environments. The Senior DevOps Engineer works with software developers and other production IT staff to oversee code releases.',' Xuan Thuy, Hanoi, Vietnam, Cau Giay, Ha Noi','13 month salary per year','2021-01-17','2021-02-17','hr@gmail.com','Mr.An','0123456789',_binary '',7,2,2,2,1,7),(17,'Dev Java','Nhân viên',2,'this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement ','this is job description this is job description this is job description this is job description this is job description this is job description this is job description this is job description this is job description this is job description this is job description ','123 Hoang Van Thu, Tan Binh, Tp.HCM','Benefit $$$$$$$$$$$$$','2021-01-20','2021-02-20','hr@gmail.com','Ms.My','0123456789',_binary '',7,2,2,2,1,7),(18,'HR Manager','Quản lý',1,'this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement this is job requirement ','this is job description this is job description this is job description this is job description this is job description this is job description this is job description this is job description this is job description this is job description this is job description ','123 Hoang Van Thu, Tan Binh, Tp.HCM','Benefit $$$$$$$$$$$$$','2021-01-20','2021-02-20','hr@gmail.com','Ms.My','0123456789',_binary '',7,2,2,2,1,34);
 /*!40000 ALTER TABLE `recruit_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,8 +321,8 @@ CREATE TABLE `save_candidate` (
   PRIMARY KEY (`saveCandidateId`),
   KEY `id_saveCandidate_candidate_id` (`candidateId`),
   KEY `id_saveCandidate_recruit_id` (`recruitId`),
-  CONSTRAINT `id_saveCandidate_candidate` FOREIGN KEY (`candidateId`) REFERENCES `candidate` (`candidateId`),
-  CONSTRAINT `id_saveCandidate_recruit` FOREIGN KEY (`recruitId`) REFERENCES `recruit` (`recruitId`)
+  CONSTRAINT `id_saveCandidate_candidate` FOREIGN KEY (`candidateId`) REFERENCES `candidate` (`candidateId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_saveCandidate_recruit` FOREIGN KEY (`recruitId`) REFERENCES `recruit` (`recruitId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -349,8 +349,8 @@ CREATE TABLE `save_job` (
   PRIMARY KEY (`saveJobId`),
   KEY `id_saveJob_candidate_id` (`candidateId`),
   KEY `id_saveJob_recruitJob_id` (`recruitJobId`),
-  CONSTRAINT `id_saveJob_candidate` FOREIGN KEY (`candidateId`) REFERENCES `candidate` (`candidateId`),
-  CONSTRAINT `id_saveJob_recruitJob` FOREIGN KEY (`recruitJobId`) REFERENCES `recruit_job` (`recruitJobId`)
+  CONSTRAINT `id_saveJob_candidate` FOREIGN KEY (`candidateId`) REFERENCES `candidate` (`candidateId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_saveJob_recruitJob` FOREIGN KEY (`recruitJobId`) REFERENCES `recruit_job` (`recruitJobId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -426,4 +426,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-15 14:57:00
+-- Dump completed on 2022-02-17 21:42:29
