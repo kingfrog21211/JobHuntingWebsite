@@ -35,60 +35,49 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "recruit")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Recruit.findAll", query = "SELECT r FROM Recruit r"),
-    @NamedQuery(name = "Recruit.findByRecruitId", query = "SELECT r FROM Recruit r WHERE r.recruitId = :recruitId"),
-    @NamedQuery(name = "Recruit.findByAddress", query = "SELECT r FROM Recruit r WHERE r.address = :address"),
-    @NamedQuery(name = "Recruit.findByEmail", query = "SELECT r FROM Recruit r WHERE r.email = :email"),
-    @NamedQuery(name = "Recruit.findByCompanyName", query = "SELECT r FROM Recruit r WHERE r.companyName = :companyName"),
-    @NamedQuery(name = "Recruit.findByLogo", query = "SELECT r FROM Recruit r WHERE r.logo = :logo"),
-    @NamedQuery(name = "Recruit.findByCoverImg", query = "SELECT r FROM Recruit r WHERE r.coverImg = :coverImg"),
-    @NamedQuery(name = "Recruit.findByActive", query = "SELECT r FROM Recruit r WHERE r.active = :active"),
-    @NamedQuery(name = "Recruit.findByFoundedYear", query = "SELECT r FROM Recruit r WHERE r.foundedYear = :foundedYear")})
 public class Recruit implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+//    @Basic(optional = false)
     @Column(name = "recruitId")
     private Integer recruitId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
+//    @Basic(optional = false)
+//    @NotNull
+//    @Size(min = 1, max = 200)
     @Column(name = "address")
     private String address;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+//    @Basic(optional = false)
+//    @NotNull
+//    @Size(min = 1, max = 100)
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 500)
+//    @Basic(optional = false)
+//    @NotNull
+//    @Size(min = 1, max = 500)
     @Column(name = "CompanyName")
     private String companyName;
-    @Basic(optional = false)
-    @NotNull
-    @Lob
-    @Size(min = 1, max = 65535)
+//    @Basic(optional = false)
+//    @NotNull
+//    @Lob
+//    @Size(min = 1, max = 65535)
     @Column(name = "About")
     private String about;
-    @Size(max = 100)
+//    @Size(max = 100)
     @Column(name = "logo")
     private String logo;
-    @Size(max = 100)
+//    @Size(max = 100)
     @Column(name = "CoverImg")
     private String coverImg;
-    @Basic(optional = false)
-    @NotNull
-    @Lob
-    @Size(min = 1, max = 65535)
+//    @Basic(optional = false)
+//    @NotNull
+//    @Lob
+//    @Size(min = 1, max = 65535)
     @Column(name = "website")
     private String website;
-    @Basic(optional = false)
+//    @Basic(optional = false)
     @NotNull
     @Column(name = "active")
     private boolean active;

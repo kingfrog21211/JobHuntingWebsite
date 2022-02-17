@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,7 +34,7 @@
         <link rel="stylesheet" href="css/login-demo.css">
         <script src="js/jquery-3.4.1.min.js"></script>
         <script src="js/bootstrap.js"></script>
-        <script src="js/main.js"></script>
+        <script src="<c:url value="/js/main.js"/>"></script>
         <script src="https://unpkg.com/boxicons@2.1.1/dist/boxicons.js"></script>
 
         <title>

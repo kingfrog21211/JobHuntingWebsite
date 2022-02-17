@@ -29,10 +29,10 @@ function updateRecruitJob(id, obj){
 //    });
 }
 
-function deleteRecruitJob(id) {
+function deleteRecruitJob(recruitJobId) {
     event.preventDefault();
     if (confirm("Confirm Delete?") === true) {
-        fetch("/JobHuntingWebsite/api/delete-recruitJob/{id}", {
+        fetch(`/JobHuntingWebsite/api/delete-recruitJob/${recruitJobId}`, {
             method: 'delete',
             headers: {
                 "Content-Type": "application/json"

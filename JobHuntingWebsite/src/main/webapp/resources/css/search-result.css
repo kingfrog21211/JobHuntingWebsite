@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : ASUS
 
 */
-@media (min-width: 768px)
+/*@media (min-width: 768px)
 .search-job .container {
     min-width: 750px;
     padding-left: 0;
@@ -19,7 +19,7 @@ and open the template in the editor.
 @media (min-width: 768px)
 .search-job .container, .search-job .container-md, .search-job .container-sm {
     max-width: 720px;
-}
+}*/
 .search-job .list-job {
     background: #fff 0 0 no-repeat padding-box;
     border-radius: 3px;

@@ -37,87 +37,72 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table(name = "recruit_job")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "RecruitJob.findAll", query = "SELECT r FROM RecruitJob r"),
-    @NamedQuery(name = "RecruitJob.findByRecruitJobId", query = "SELECT r FROM RecruitJob r WHERE r.recruitJobId = :recruitJobId"),
-    @NamedQuery(name = "RecruitJob.findByTitle", query = "SELECT r FROM RecruitJob r WHERE r.title = :title"),
-    @NamedQuery(name = "RecruitJob.findByPosition", query = "SELECT r FROM RecruitJob r WHERE r.position = :position"),
-    @NamedQuery(name = "RecruitJob.findByAmount", query = "SELECT r FROM RecruitJob r WHERE r.amount = :amount"),
-    @NamedQuery(name = "RecruitJob.findByWorkPlace", query = "SELECT r FROM RecruitJob r WHERE r.workPlace = :workPlace"),
-    @NamedQuery(name = "RecruitJob.findByPostDate", query = "SELECT r FROM RecruitJob r WHERE r.postDate = :postDate"),
-    @NamedQuery(name = "RecruitJob.findByExpirationDate", query = "SELECT r FROM RecruitJob r WHERE r.expirationDate = :expirationDate"),
-    @NamedQuery(name = "RecruitJob.findByEmailContact", query = "SELECT r FROM RecruitJob r WHERE r.emailContact = :emailContact"),
-    @NamedQuery(name = "RecruitJob.findByNameContact", query = "SELECT r FROM RecruitJob r WHERE r.nameContact = :nameContact"),
-    @NamedQuery(name = "RecruitJob.findByPhoneContact", query = "SELECT r FROM RecruitJob r WHERE r.phoneContact = :phoneContact"),
-    @NamedQuery(name = "RecruitJob.findByStatus", query = "SELECT r FROM RecruitJob r WHERE r.status = :status")})
-public class RecruitJob implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+public class RecruitJob implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+//    @Basic(optional = false)
     @Column(name = "recruitJobId")
     private Integer recruitJobId;
-    @Basic(optional = false)
-    @NotNull(message = "{recruitJob.nullErr}")
-    @Size(min = 1, max = 45, message = "{recruitJob.title.lengthErr}")
+//    @Basic(optional = false)
+//    @NotNull(message = "{recruitJob.nullErr}")
+//    @Size(min = 1, max = 45, message = "{recruitJob.title.lengthErr}")
     @Column(name = "title")
     private String title;
-    @Basic(optional = false)
-    @NotNull(message = "{recruitJob.nullErr}")
-    @Size(min = 1, max = 45, message = "{recruitJob.position.lengthErr}")
+//    @Basic(optional = false)
+//    @NotNull(message = "{recruitJob.nullErr}")
+//    @Size(min = 1, max = 45, message = "{recruitJob.position.lengthErr}")
     @Column(name = "position")
     private String position;
-    @Basic(optional = false)
-    @NotNull(message = "{recruitJob.nullErr}")
+//    @Basic(optional = false)
+//    @NotNull(message = "{recruitJob.nullErr}")
+//    @Min(value = 1, message = "{recruitJob.amount.minErr}")
     @Column(name = "amount")
-    @Min(value = 1, message = "{recruitJob.amount.minErr}")
     private int amount;
-    @Basic(optional = false)
-    @NotNull(message = "{recruitJob.nullErr}")
-    @Lob
-    @Size(min = 1, max = 2147483647)
+//    @Basic(optional = false)
+//    @NotNull(message = "{recruitJob.nullErr}")
+//    @Lob
+//    @Size(min = 1, max = 2147483647)
     @Column(name = "require")
     private String require;
-    @Basic(optional = false)
-    @NotNull(message = "{recruitJob.nullErr}")
-    @Lob
-    @Size(min = 1, max = 2147483647)
+//    @Basic(optional = false)
+//    @NotNull(message = "{recruitJob.nullErr}")
+//    @Lob
+//    @Size(min = 1, max = 2147483647)
     @Column(name = "description")
     private String description;
-    @Basic(optional = false)
-    @NotNull(message = "{recruitJob.nullErr}")
-    @Size(min = 1, max = 255)
+//    @Basic(optional = false)
+//    @NotNull(message = "{recruitJob.nullErr}")
+//    @Size(min = 1, max = 255)
     @Column(name = "workPlace")
     private String workPlace;
-    @Lob
-    @Size(max = 65535)
+//    @Lob
+//    @Size(max = 65535)
     @Column(name = "benefit")
     private String benefit;
-    @Basic(optional = false)
-    @NotNull
+//    @Basic(optional = false)
+//    @NotNull
     @Column(name = "postDate")
 //    @Temporal(TemporalType.DATE)
 //    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String postDate;
-    @Basic(optional = false)
-    @NotNull(message = "{recruitJob.nullErr}")
+//    @Basic(optional = false)
+//    @NotNull(message = "{recruitJob.nullErr}")
     @Column(name = "expirationDate")
 //    @Temporal(TemporalType.DATE)
 //    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String expirationDate;
-    @Basic(optional = false)
-    @NotNull(message = "{recruitJob.nullErr}")
-    @Size(min = 1, max = 50, message = "{recruitJob.emailErr}")
+//    @Basic(optional = false)
+//    @NotNull(message = "{recruitJob.nullErr}")
+//    @Size(min = 1, max = 50, message = "{recruitJob.emailErr}")
     @Column(name = "emailContact")
     private String emailContact;
-    @Size(max = 45)
+//    @Size(max = 45)
     @Column(name = "nameContact")
     private String nameContact;
-    @Basic(optional = false)
-    @NotNull(message = "{recruitJob.phoneContact.digitsErr}")
-    @Size(min = 1, max = 15)
+//    @Basic(optional = false)
+//    @NotNull(message = "{recruitJob.phoneContact.digitsErr}")
+//    @Size(min = 1, max = 15)
     @Column(name = "phoneContact")
     private String phoneContact;
     @Column(name = "status")

@@ -28,7 +28,7 @@ public class ApiRecruitJobController {
     @Autowired
     private CandidatePostResumeService candidatePostResumeService;
     
-    @DeleteMapping("/delete-recruitJob/{id}")
+    @DeleteMapping("/delete-recruitJob/{recruitJobId}")
     public void deleteRecruitJob(@PathVariable(value = "recruitJobId") Integer id, HttpSession session) {
         String msg;
         if (this.recruitJobService.deleteRecruitJob(id)) {

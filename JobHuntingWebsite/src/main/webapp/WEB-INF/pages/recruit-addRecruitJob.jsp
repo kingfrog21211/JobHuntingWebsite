@@ -32,20 +32,17 @@
             <div class="form-group">
                 <label for="title">Job Title</label>
                 <form:input type="text" id="title" path="title" cssClass="form-control"/>
-                <form:errors path="title" cssClass="text-danger" element="div"/>
             </div>
             <div class="form-group" style="column-count: 2">
                 <!--position-->
                 <div>
                     <label for="position">Position</label>
                     <form:input type="text" id="position" path="position" cssClass="form-control"/>
-                    <form:errors path="position" cssClass="text-danger" element="div"/>
                 </div>
                 <!--amount-->
                 <div>
                     <label for="amount">Amount</label>
                     <form:input type="number" id="amount" path="amount" cssClass="form-control"/>
-                    <form:errors path="amount" cssClass="text-danger" element="div"/>
                 </div>
             </div>
             <div class="form-group" style="column-count: 2">
@@ -53,13 +50,11 @@
                 <div class="grid-item form-group">
                     <label for="description">Job Description</label>
                     <form:textarea id="description" path="description" cssClass="form-control"/>
-                    <form:errors path="description" cssClass="text-danger" element="div"/>
                 </div>
                 <!--require-->
                 <div class="grid-item form-group">
                     <label for="require">Job Requirement</label>
                     <form:textarea id="require" path="require" cssClass="form-control"/>
-                    <%--<form:errors path="require" cssClass="text-danger" element="div"/>--%>
                 </div>
             </div>
             <div class="form-group" style="column-count: 2">
@@ -112,7 +107,6 @@
                 <div class="grid-item form-group">
                     <label for="emailContact">Email Contact</label>
                     <form:input type="text" id="emailContact" path="emailContact" cssClass="form-control"/>
-                    <form:errors path="emailContact" cssClass="text-danger" element="div"/>
                 </div>
                 <!--name contact-->
                 <div class="grid-item form-group">
@@ -140,7 +134,6 @@
                 <div class="grid-item form-group">
                     <label for="workPlace">Work Place</label>
                     <form:input type="text" id="workPlace" path="workPlace" cssClass="form-control"/>
-                    <form:errors path="workPlace" cssClass="text-danger" element="div"/>
                 </div>
             </div>
             <div class="grid-item form-group" style="column-count: 2">
@@ -148,7 +141,6 @@
                 <div class=" grid-item form-group">
                     <label for="expirationDate">Expiration Date</label>
                     <form:input type="text" id="expirationDate" path="expirationDate" cssClass="form-control"/>
-                    <form:errors path="expirationDate" cssClass="text-danger" element="div"/>
                 </div>               
             </div>
             <div class="form-group">
